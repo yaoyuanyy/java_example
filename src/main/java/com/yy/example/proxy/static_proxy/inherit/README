@@ -1,0 +1,17 @@
+这里是通过继承的方式实现静态代理：
+
+TankLogProxy继承真实对象(Tank)，重载真实对象(Tank)的方法，加上代理逻辑，从而实现代理的功能(记录方法执行的日志)；
+之后TankTimeProxy又继承了TankLogProxy，在记录方法日志的基础上有显示方法的执行时间
+运行结果：
+start move...
+Tank is Moving
+end move...
+take time: -1
+
+问题：
+1. 通过继承虽然实现了代理，但是你会发现TankTimeProxy代理了Tank，但是它就不能再代理其他类，不利于扩展
+2. 从运行结果看，代理先显示记录日志，再显示方法执行时间。
+   如果现在的想先显示方法执行时间，再显示记录日志；面对这个需求，恐怕你要修改代码才能完成这个需求
+
+解决办法：
+这个问题更好的解决办法是通过组合的方式，具体请看com.yy.proxy.static_proxy.composite包

@@ -1,0 +1,9 @@
+logging:
+  level: trace
+
+server:
+  port: 8088
+
+
+
+
