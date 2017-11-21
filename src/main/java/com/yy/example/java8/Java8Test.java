@@ -1,6 +1,7 @@
 package com.yy.example.java8;
 
 import java.util.*;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -12,6 +13,7 @@ import java.util.stream.Collectors;
  */
 public class Java8Test {
     public static void main(String[] args) {
+
         System.out.println("Hello!");
         Predicate<String> predicate = (s) -> s.length() > 0;
         System.out.println(predicate.test("lll"));
