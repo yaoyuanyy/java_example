@@ -6,7 +6,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Description:
+ * Description: 参考 http://www.crazyant.net/2124.html
  * <p>探索ThreadPoolExecutor的运行轨迹</p>
  * <pre>
  *     场景一：任务数大于最大线程数+队列长度
