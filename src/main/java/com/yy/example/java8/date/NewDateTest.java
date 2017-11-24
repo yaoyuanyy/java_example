@@ -1,4 +1,4 @@
-package com.yy.example.java8;
+package com.yy.example.java8.date;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +13,13 @@ import java.util.Locale;
  */
 public class NewDateTest {
     public static void main(String[] args) {
+
+
+        Date date = new Date();
+        // date转换instant
+        Instant instant = date.toInstant();
+        // instant转换date
+        Date date2 = Date.from(instant);
         // LocalDate
         LocalDate localDate = LocalDate.now();
         System.out.println("获取日期:"+localDate);
@@ -65,7 +72,6 @@ public class NewDateTest {
         long millis = clock.millis();//
 
 
-        Instant instant = clock.instant();
         Date legacyDate = Date.from(instant);// == java.util.Date
         System.out.println(legacyDate);
     }

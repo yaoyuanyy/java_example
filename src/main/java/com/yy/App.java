@@ -9,7 +9,7 @@ import java.util.Date;
 
 @SpringBootApplication
 //@EnableAsync
-@EnableScheduling
+//@EnableScheduling
 public class App {
 
     public static void main(String[] args) throws Exception {
