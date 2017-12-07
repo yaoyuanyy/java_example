@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 被观察者({@link com.yy.example.pattern_mode.observer.Subject})实现类
- * Created by skyler on 2017/3/4.
+ * Description:被观察者实现类
+ * <pre></pre>
+ * NB.
+ * Created by skyler on 2017/12/7 at 上午11:14
  */
-public class WeatherData implements Subject {
+public class TrafficData implements Subject{
 
     /**
      * <pre>
@@ -15,13 +17,20 @@ public class WeatherData implements Subject {
      * 因为不同的被观察者通知的观察者不一定是相同的，如：
      * WeatherData要通知的是WeatherDisplay，而TrafficData要通知的是TrafficDisplay
      * 所以，被通知者们关联到具体的通知者是恰当的
+     * </pre>
      */
     private List<Observer> observers;
 
-    private Weather weather;
+    private Traffic traffic;
 
-    public WeatherData() {
-        this.observers = new ArrayList<Observer>();
+    public TrafficData(){
+        this.observers = new ArrayList<>();
+        this.traffic = new Traffic();
+    }
+
+    public TrafficData(Traffic traffic) {
+        this.observers = new ArrayList<>();
+        this.traffic = traffic;
     }
 
     @Override
@@ -34,16 +43,13 @@ public class WeatherData implements Subject {
         observers.remove(o);
     }
 
-    @Override
-    public void notifyObservers() {
-        observers.stream().forEach( o ->
-            o.update(weather)
-        );
+    public void setNewData(Traffic traffic){
+        this.traffic = traffic;
+        notifyObservers();
     }
 
-    public void setMeasument(final float temperature, final float humidity,final float pressure) {
-        weather = new Weather(temperature, humidity, pressure);
-
-        this.notifyObservers();
+    @Override
+    public void notifyObservers() {
+        observers.forEach(o -> o.update(traffic));
     }
 }

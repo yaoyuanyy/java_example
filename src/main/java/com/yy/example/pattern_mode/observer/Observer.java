@@ -12,5 +12,5 @@ public interface Observer {
      * @author: skyler
      * @Date: 2017/3/4 11:50
      */
-    void update(float temperature, float humidity, float pressure);
+    void update(Data data);
 }

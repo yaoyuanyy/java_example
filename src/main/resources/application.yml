@@ -1,6 +1,6 @@
 logging:
   level:
-    root: trace
+    root: debug
 
 server:
   port: 8088
