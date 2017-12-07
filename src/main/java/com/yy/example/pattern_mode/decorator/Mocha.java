@@ -17,6 +17,7 @@ public class Mocha extends CondimentDecorator{
 
     @Override
     public String getDescription() {
+        System.out.println("我在这里装饰一下");
         return beverage.getDescription() + "， Mocha ";
     }
 
