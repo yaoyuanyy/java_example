@@ -1,4 +1,4 @@
-package com.yy.example.sort;
+package com.yy.example.data_structure;
 
 import java.util.Arrays;
 
