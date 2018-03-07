@@ -39,16 +39,17 @@ import java.util.concurrent.TimeUnit;
  */
 public class ThreadPoolExecutorTest {
 
-    public static void main(String[] args) {
-        BlockingDeque blockingDeque = new LinkedBlockingDeque(5);
-        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(3,10,60*10, TimeUnit.SECONDS,blockingDeque);
-        for (int i = 1; i <= 15; i++) {
+    public static void main(final String[] args) {
+        final BlockingDeque blockingDeque = new LinkedBlockingDeque(5);
+        final ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(3, 10, 60 * 10, TimeUnit.SECONDS, blockingDeque);
+        for (int i = 1; i <= 16; i++) {
             final int task = i;
             threadPoolExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    try { Thread.sleep(2000);
-                    } catch (InterruptedException e) {
+                    try {
+                        Thread.sleep(2000);
+                    } catch (final InterruptedException e) {
                         e.printStackTrace();
                     }
                     System.out.println(Thread.currentThread().getName() + " for task of " + task);
