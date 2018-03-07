@@ -7,7 +7,9 @@ import java.util.Arrays;
  * <p>
  * 参考：http://blog.csdn.net/zdp072/article/details/44227317
  * </p>
- * <pre></pre>
+ * <pre>
+ *     此代码出自书籍：算法(java)
+ * </pre>
  * NB.
  * Created by skyler on 2017/11/21 at 下午3:17
  */

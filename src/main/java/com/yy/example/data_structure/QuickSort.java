@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Description:快速排序算法分析
  * <p>
- *     参考：：http://www.imooc.com/article/11013
+ * 参考：：http://www.imooc.com/article/11013
  * </p>
  * <pre>
  * 快速排序思想：
@@ -24,46 +24,44 @@ import java.util.Arrays;
 public class QuickSort {
 
     public static void main(final String[] args) {
-        final int[] a = {38,65,97,46,13,27,4};
+        final int[] a = {38, 65, 97, 46, 13, 27, 4};
         System.out.println("排序前：" + Arrays.toString(a));
-        quickSort(a, 0, a.length-1);
+        quickSort(a, 0, a.length - 1);
         System.out.println("排序后：" + Arrays.toString(a));
     }
 
-    private static boolean isEmpty(final int[] n) {
-        return n == null || n.length == 0;
-    }
-
-    public static void quickSort(final int[] n, final int low, final int high) {
-        if (isEmpty(n))
+    public static void quickSort(final int[] a, final int low, final int high) {
+        if (a == null || a.length < 2) {
             return;
+        }
+
         if (low < high) {
-            final int middle = partion(n, low, high);
-            quickSort(n, low, middle - 1);
-            quickSort(n, middle + 1, high);
+            final int middle = partion(a, low, high);
+            quickSort(a, low, middle - 1);
+            quickSort(a, middle + 1, high);
         }
     }
 
-    public static int partion(final int[] a, int low, int high){
-       final int target =  a[low];
+    public static int partion(final int[] a, int low, int high) {
+        final int target = a[low];
+        while (high > low) {
+            while (high > low && a[high] > target) {
+                high--;
+            }
+            if (high > low) {
+                a[low++] = a[high];
+            }
 
-       while (low < high) {
-           while (low < high && a[high] > target ){
-               high--;
-           }
-           if(low < high){
-               a[low++] = a[high];
-           }
+            while (high > low && a[low] < target) {
+                low++;
+            }
+            if (high > low) {
+                a[high--] = a[low];
+            }
 
-           while (low < high && a[low] < target){
-               low++;
-           }
-           if(low < high){
-               a[high--] = a[low];
-           }
-       }
-       a[low] = target;
+            a[low] = target;
+        }
 
-       return low;
+        return low;
     }
 }
