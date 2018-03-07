@@ -20,16 +20,6 @@ public class SingleLinkedListTest {
 
     public void add(final Integer data) {
         final Node<Integer> node = new Node<Integer>(data, null);
-//        if (head == null) {
-//            head = node;
-//            head.next = tail;
-//            tail = node;
-//        } else {
-//            final Node tmp = tail;
-//            tmp.next = node;
-//            tail = node;
-//        }
-
         final Node<Integer> tmp = tail;
         tail = node;
         if (tmp == null) {
@@ -50,7 +40,7 @@ public class SingleLinkedListTest {
      *
      * @param data
      */
-    public void addBySort(final Integer data) {
+    public void addByDataSort(final Integer data) {
         final Node<Integer> node = new Node<Integer>(data, null);
         final Node<Integer> tmp = head;
 
@@ -80,61 +70,6 @@ public class SingleLinkedListTest {
     }
 
     /**
-     * 从head到tail打印输出链表
-     *
-     * @param node
-     */
-    public void out(Node<Integer> node) {
-        while (node != null) {
-            System.out.println(node.data);
-            node = node.next;
-        }
-    }
-
-    public static void main(final String[] args) {
-        final SingleLinkedListTest test = new SingleLinkedListTest();
-//        test.add(1);
-//        test.add(3);
-//        test.add(5);
-//        test.add(4);
-//        test.add(2);
-
-        /**
-         * addBySort方法-测试用例1-----------------
-         */
-        test.addBySort(1);
-        test.addBySort(3);
-        test.addBySort(5);
-        test.addBySort(2);
-        test.addBySort(4);
-
-        /**
-         * addBySort方法-测试用例2-----------------
-         */
-//        test.addBySort(2);
-//        test.addBySort(5);
-//        test.addBySort(1);
-//        test.addBySort(3);
-//        test.addBySort(4);
-
-        /**
-         * addBySort方法-测试用例3-----------------
-         */
-//        test.addBySort(5);
-//        test.addBySort(1);
-//        test.addBySort(2);
-//        test.addBySort(3);
-//        test.addBySort(4);
-
-        //打印
-        test.out(test.getHead());
-
-        System.out.println("head.data:" + test.head.data);
-        System.out.println("tail.data:" + test.tail.data);
-
-    }
-
-    /**
      * TODO
      * 对已有链表进行按data值(假设data是int类型)由小到大排序
      * <p>
@@ -155,6 +90,108 @@ public class SingleLinkedListTest {
         }
 
     }
+
+    /**
+     * 不使用递归
+     * 反转当前链表
+     * <p>
+     * <pre>
+     *
+     * </pre>
+     */
+    public Node reverse(Node<Integer> current) {
+        Node pre = null;
+        while (current != null) {
+            final Node next = current.next;
+            current.next = pre;
+            pre = current;
+            current = next;
+        }
+
+        return pre;
+    }
+
+    /**
+     * 反转当前链表
+     * <p>
+     * 使用递归: 没看懂，我写不出来
+     * <p>
+     * <pre>
+     *
+     * </pre>
+     */
+    public Node reverseWithDIGUI(final Node<Integer> current) {
+        if (current == null || current.next == null) return current;
+        final Node nextNode = current.next;
+        current.next = null;
+        final Node reverseRest = reverse(nextNode);
+        nextNode.next = current;
+        return reverseRest;
+    }
+
+    /**
+     * 从head到tail打印输出链表
+     *
+     * @param node
+     */
+    public void out(Node<Integer> node) {
+        while (node != null) {
+            System.out.println(node.data);
+            node = node.next;
+        }
+    }
+
+    public static void main(final String[] args) {
+        final SingleLinkedListTest test = new SingleLinkedListTest();
+        test.add(1);
+        test.add(3);
+        test.add(5);
+        test.add(4);
+        test.add(2);
+
+        /**
+         * addBySort方法-测试用例1-----------------
+         */
+//        test.addByDataSort(1);
+//        test.addByDataSort(3);
+//        test.addByDataSort(5);
+//        test.addByDataSort(2);
+//        test.addByDataSort(4);
+
+        /**
+         * addBySort方法-测试用例2-----------------
+         */
+//        test.addByDataSort(2);
+//        test.addByDataSort(5);
+//        test.addByDataSort(1);
+//        test.addByDataSort(3);
+//        test.addByDataSort(4);
+
+        /**
+         * addBySort方法-测试用例3-----------------
+         */
+//        test.addByDataSort(5);
+//        test.addByDataSort(1);
+//        test.addByDataSort(2);
+//        test.addByDataSort(3);
+//        test.addByDataSort(4);
+
+        //打印
+        test.out(test.getHead());
+
+        System.out.println("head.data:" + test.head.data);
+        System.out.println("tail.data:" + test.tail.data);
+
+        System.out.println("----------------------------------------------");
+
+        System.out.println("======转换前");
+        test.out(test.getHead());
+        final Node node = test.reverse(test.getHead());
+        System.out.println("======转换后");
+        test.out(node);
+
+    }
+
 
     class Node<T> {
         T data;
