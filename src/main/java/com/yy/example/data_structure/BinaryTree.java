@@ -23,11 +23,11 @@ public class BinaryTree {
     List<Node> childs;
 
     public BinaryTree() {
-        int[] array = {1, 2, 3, 4, 5, 6, 7, 8};
+        final int[] array = {1, 2, 3, 4, 5, 6, 7, 8};
         new BinaryTree(array);
     }
 
-    public BinaryTree(int[] array) {
+    public BinaryTree(final int[] array) {
         childs = init(array);
         this.root = childs.get(0);
     }
@@ -36,7 +36,7 @@ public class BinaryTree {
         return root;
     }
 
-    public void setRoot(Node root) {
+    public void setRoot(final Node root) {
         this.root = root;
     }
 
@@ -44,45 +44,25 @@ public class BinaryTree {
         return childs;
     }
 
-    public void setChilds(List<Node> childs) {
+    public void setChilds(final List<Node> childs) {
         this.childs = childs;
-    }
-
-    class Node {
-        Node leftChild;
-        Node rightChild;
-        Object data;
-
-        public Node() {
-        }
-
-        public Node(Object data) {
-            this.leftChild = null;
-            this.rightChild = null;
-            this.data = data;
-        }
-
-        public Node(Node leftChild, Node rightChild, Object data) {
-            this.leftChild = leftChild;
-            this.rightChild = rightChild;
-            this.data = data;
-        }
-
-        @Override
-        public String toString() {
-            return data.toString();
-        }
     }
 
     /**
      * 数组转换成二叉树
+     * <pre>
+     *            1
+     *        2          3
+     *    4      5   6       7
+     * 8
+     * </pre>
      *
      * @param array
      * @return
      */
-    private List<Node> init(int[] array) {
+    private List<Node> init(final int[] array) {
 
-        List<Node> nodes = new LinkedList<>();
+        final List<Node> nodes = new LinkedList<>();
 
         for (int nodeIndex = 0; nodeIndex < array.length; nodeIndex++) {
             nodes.add(new Node(array[nodeIndex]));
@@ -98,7 +78,7 @@ public class BinaryTree {
         }
 
         // 最后一个父节点:因为最后一个父节点可能没有右孩子，所以单独拿出来处理
-        int lastParentIndex = array.length / 2 - 1;
+        final int lastParentIndex = array.length / 2 - 1;
         // 左孩子
         nodes.get(lastParentIndex).leftChild = nodes
                 .get(lastParentIndex * 2 + 1);
@@ -111,7 +91,7 @@ public class BinaryTree {
         return nodes;
     }
 
-    public int size(Node node) {
+    public int size(final Node node) {
         if (node == null) {
             return 0;
         } else {
@@ -123,12 +103,12 @@ public class BinaryTree {
         return size(root);
     }
 
-    public int depth(Node node) {
+    public int depth(final Node node) {
         if (node == null) {
             return 0;
         } else {
-            int depth1 = depth(node.leftChild);
-            int depth2 = depth(node.rightChild);
+            final int depth1 = depth(node.leftChild);
+            final int depth2 = depth(node.rightChild);
             return Math.max(depth1, depth2) + 1;
         }
     }
@@ -136,7 +116,7 @@ public class BinaryTree {
     static int sum = 0;
 
     // 求二叉树第K层的节点个数
-    public void getNumofLevel(Node node, int k, int tmp_k) {
+    public void getNumofLevel(final Node node, final int k, int tmp_k) {
         tmp_k++;
         if (k == 0 || node == null) return;
         if (k == 1 && node != null) sum = 1;
@@ -151,22 +131,74 @@ public class BinaryTree {
 
     }
 
+    // 求二叉树第K层以上的节点个数
+    public void getNumofLevelOver(final int k, final int tmp_k) {
+        getNumLevelOver(root, k, tmp_k);
+    }
+
+    static int count = 0;
+
+    private void getNumLevelOver(final Node node, final int k, int tmp_k) {
+        tmp_k++;
+        if (k == 0 || node == null) return;
+        if (k == 1 && node != null) count = 1;
+        if (node != null) {
+            if (tmp_k <= k) {
+                count++;
+            }
+        }
+
+        getNumLevelOver(node.leftChild, k, tmp_k);
+        getNumLevelOver(node.rightChild, k, tmp_k);
+
+    }
+
     // 求二叉树中叶子节点的个数
-    public int getLeafNodeNum(Node node) {
+    public int getLeafNodeNum(final Node node) {
         if (node == null) return 0;
         if (node.rightChild == null && node.leftChild == null) return 1;
 
         return 0;
     }
 
-    public static void main(String[] args) {
-        int[] array = {1, 2, 3, 4, 5, 6, 7, 8};
-        BinaryTree binaryTree = new BinaryTree(array);
-        List<Node> nodes = binaryTree.getChilds();
+    public static void main(final String[] args) {
+        final int[] array = {1, 2, 3, 4, 5, 6, 7, 8};
+        final BinaryTree binaryTree = new BinaryTree(array);
+        final List<Node> nodes = binaryTree.getChilds();
         System.out.println(nodes);
 
 
         binaryTree.getNumofLevel(binaryTree.getRoot(), 4, 0);
-        System.out.println(sum);
+        System.out.println("getNumofLevel:" + sum);
+
+        binaryTree.getNumofLevelOver(4, 0);
+        System.out.println("getNumofLevelOver:" + count);
     }
+
+    class Node {
+        Node leftChild;
+        Node rightChild;
+        Object data;
+
+        public Node() {
+        }
+
+        public Node(final Object data) {
+            this.leftChild = null;
+            this.rightChild = null;
+            this.data = data;
+        }
+
+        public Node(final Node leftChild, final Node rightChild, final Object data) {
+            this.leftChild = leftChild;
+            this.rightChild = rightChild;
+            this.data = data;
+        }
+
+        @Override
+        public String toString() {
+            return data.toString();
+        }
+    }
+
 }
