@@ -128,11 +128,13 @@ public class MapSortByValue {
         }).collect(Collectors.toList());
         list.stream().sorted((Map.Entry<String, Integer> e1, Map.Entry<String, Integer> e2) -> e1.getValue().compareTo(e2.getValue()));
         list.stream().sorted((e1, e2) -> e1.getValue().compareTo(e2.getValue()));
-        // 这种方式调用reversed()，需要getValue是static的，否则报错
+        // 这条语句调用reversed()会报错，原因是需要getValue是static的，否则报错。 可以用(1)(2)方式解决这个问题
         list.stream().sorted(Comparator.comparing(Map.Entry::getValue));
         // (1)
+        list.stream().sorted(Collections.reverseOrder(Comparator.comparing(Map.Entry::getValue)));
+        // (2)
         list.stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed());
-        // NB. (2)泛型的这种书写方式是错误的，(1)中的书写是对的
+        // NB. 泛型的这种书写方式是错误的，(2)中的书写是对的
         // list.stream().sorted(Map.Entry<String, Integer>.comparingByValue().reversed());
 
         newList.forEach(System.out::println);
