@@ -3,7 +3,7 @@ package com.yy.example.data_structure.heapsort;
 import java.util.Arrays;
 
 /**
- * Description: 堆排序
+ * Description: 堆排序 网上找的，思路不算清晰，不建议参考
  * <p>
  * 参考：https://www.cnblogs.com/jetpie/p/3971382.html
  * 辅助参考：
