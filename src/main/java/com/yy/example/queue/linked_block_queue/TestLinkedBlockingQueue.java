@@ -1,4 +1,4 @@
-package com.yy.example.queue;
+package com.yy.example.queue.linked_block_queue;
 
 /**
  * Created by yaoliang on 2017/2/27.
