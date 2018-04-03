@@ -1,4 +1,4 @@
-package com.yy.example.queue;
+package com.yy.example.queue.array_block_queue;
 
 /**
  * Created by yaoliang on 2017/2/27.
