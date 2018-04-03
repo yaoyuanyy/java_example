@@ -4,6 +4,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Created by yaoliang on 2017/2/27.
+ *
+ * * <pre>
+ *     refer to follow:
+ *     https://www.jianshu.com/p/28c9d9e34b29
+ *     https://juejin.im/entry/599c3e2df265da24874d0598
+ *     https://cloud.tencent.com/developer/article/1014694
+ * </pre>
  */
 public class TestLinkedBlockingQueue {
     public static void main(String[] args) throws InterruptedException {

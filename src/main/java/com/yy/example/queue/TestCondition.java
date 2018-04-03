@@ -4,7 +4,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Created by yaoliang on 2017/2/27.
+ * Created by skyler on 2017/2/27.
  * <pre>
  *     refer to follow:
  *     http://www.importnew.com/9281.html
