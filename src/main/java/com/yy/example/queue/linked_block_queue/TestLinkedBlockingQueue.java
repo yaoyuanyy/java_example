@@ -17,9 +17,10 @@ public class TestLinkedBlockingQueue {
 
         LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<>(3);
 
-        queue.put("a");
+      /*  queue.put("a");
         queue.put("b");
         queue.put("bb");
+
         String value = queue.take();
         String value2 = queue.take();
         String value3 = queue.take();
@@ -27,6 +28,10 @@ public class TestLinkedBlockingQueue {
 
         System.out.printf("%10s\n", value);
         System.out.format("%5s", value);
-        queue.put("c");
+        queue.put("c");*/
+
+        queue.offer("a");
+        queue.peek();
+        queue.poll();
     }
 }
