@@ -21,9 +21,9 @@ public class TestDelayQueue {
         long now = System.currentTimeMillis();
 
         System.out.println("current time in ms: " + now);
-        DelayedElement ob1=new DelayedElement("e1", now + 1000*60*2);
-        DelayedElement ob2=new DelayedElement("e2", now + 5000*60*2);
-        DelayedElement ob3=new DelayedElement("e3", now + 1500*60*2);
+        DelayedElement ob1=new DelayedElement("e1", now + 1000*60*10);
+        DelayedElement ob2=new DelayedElement("e2", now + 5000*60*20);
+        DelayedElement ob3=new DelayedElement("e3", now + 1500*60*20);
 
         dq.add(ob1);
         dq.add(ob2);
