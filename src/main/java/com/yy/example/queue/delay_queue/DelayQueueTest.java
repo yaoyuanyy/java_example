@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  * </pre>
  * Created by yaoliang on 2017/2/27.
  */
-public class TestDelayQueue {
+public class DelayQueueTest {
 
     /**
      * @param args

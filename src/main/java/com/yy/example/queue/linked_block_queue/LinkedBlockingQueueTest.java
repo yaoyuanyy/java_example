@@ -12,7 +12,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  *     https://cloud.tencent.com/developer/article/1014694
  * </pre>
  */
-public class TestLinkedBlockingQueue {
+public class LinkedBlockingQueueTest {
     public static void main(String[] args) throws InterruptedException {
 
         LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<>(3);

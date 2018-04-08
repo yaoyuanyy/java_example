@@ -5,7 +5,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 /**
  * Created by yaoliang on 2017/2/27.
  */
-public class TestArrayBlockingQueue {
+public class ArrayBlockingQueueTest {
     public static void main(final String[] args) throws InterruptedException {
 
         ArrayBlockingQueue<String> queue = new ArrayBlockingQueue<>(3);
