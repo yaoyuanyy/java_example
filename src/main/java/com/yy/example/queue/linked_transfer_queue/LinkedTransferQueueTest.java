@@ -4,14 +4,22 @@ import java.util.concurrent.LinkedTransferQueue;
 import java.util.stream.IntStream;
 
 /**
+ * LinkedTransferQueue特点：
+ *
+ * refer to:
+ * http://ifeve.com/java-transfer-queue/
+ * https://segmentfault.com/a/1190000011266361
+ * https://zhuanlan.zhihu.com/p/27148381
+ * https://blog.csdn.net/xiaoxufox/article/details/52241317#linkedtransferqueue%E7%BB%93%E6%9E%84-node
+ *
  * Created by yaoliang on 2017/2/27.
  */
-public class TransferBlockingQueueTest {
+public class LinkedTransferQueueTest {
     public static void main(final String[] args) {
 
         LinkedTransferQueue<Integer> queue = new LinkedTransferQueue<>();
-        new Thread(new TransferBlockingQueueTest().new Producer(queue)).start();
-        new Thread(new TransferBlockingQueueTest().new Customer(queue)).start();
+        new Thread(new LinkedTransferQueueTest().new Producer(queue)).start();
+        new Thread(new LinkedTransferQueueTest().new Customer(queue)).start();
 
     }
 
@@ -26,9 +34,14 @@ public class TransferBlockingQueueTest {
         @Override
         public void run() {
             IntStream.range(0, 5).forEach(a -> {
-                System.out.println("producer 等待生产...:"+a);
-                queue.add(a);
-                System.out.println("producer 生产完成:"+a);
+                try {
+                    System.out.println("producer 等待生产...:"+a);
+                    // queue.add(a);
+                    queue.transfer(a);
+                    System.out.println("producer 生产完成:"+a);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             });
         }
     }
