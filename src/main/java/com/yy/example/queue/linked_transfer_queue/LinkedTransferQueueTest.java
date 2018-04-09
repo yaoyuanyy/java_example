@@ -21,7 +21,7 @@ public class LinkedTransferQueueTest {
         LinkedTransferQueue<Integer> queue = new LinkedTransferQueue<>();
         new Thread(new LinkedTransferQueueTest().new Producer(queue)).start();
         new Thread(new LinkedTransferQueueTest().new Customer(queue)).start();
-
+        //new Thread(new LinkedTransferQueueTest().new Customer(queue)).start();
     }
 
 
