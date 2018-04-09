@@ -1,6 +1,7 @@
 package com.yy.example.queue.linked_transfer_queue;
 
 import java.util.concurrent.LinkedTransferQueue;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 /**
@@ -36,8 +37,17 @@ public class LinkedTransferQueueTest {
             IntStream.range(0, 5).forEach(a -> {
                 try {
                     System.out.println("producer 等待生产...:"+a);
+                    // 测试add方法
                     // queue.add(a);
+
+                    // 测试transfer方法
                     queue.transfer(a);
+
+                    // 测试tryTransfer方法
+                    //queue.tryTransfer(a);
+
+                    // 测试tryTransfer带时间的方法
+                    //queue.tryTransfer(a, 1000, TimeUnit.MILLISECONDS);
                     System.out.println("producer 生产完成:"+a);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
