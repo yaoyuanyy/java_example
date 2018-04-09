@@ -124,7 +124,7 @@ public class SingleLinkedListTest {
         if (current == null || current.next == null) return current;
         final Node nextNode = current.next;
         current.next = null;
-        final Node reverseRest = reverse(nextNode);
+        final Node reverseRest = reverseWithDIGUI(nextNode);
         nextNode.next = current;
         return reverseRest;
     }
