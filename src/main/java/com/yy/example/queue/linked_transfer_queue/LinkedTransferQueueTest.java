@@ -1,7 +1,6 @@
 package com.yy.example.queue.linked_transfer_queue;
 
 import java.util.concurrent.LinkedTransferQueue;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 /**
@@ -11,18 +10,20 @@ import java.util.stream.IntStream;
  * http://ifeve.com/java-transfer-queue/
  * https://segmentfault.com/a/1190000011266361
  * https://zhuanlan.zhihu.com/p/27148381
+ * https://cloud.tencent.com/developer/article/1014694
  * https://blog.csdn.net/xiaoxufox/article/details/52241317#linkedtransferqueue%E7%BB%93%E6%9E%84-node
  *
  * Created by yaoliang on 2017/2/27.
  */
 public class LinkedTransferQueueTest {
-    public static void main(final String[] args) {
 
+    public static void main(final String[] args) {
         LinkedTransferQueue<Integer> queue = new LinkedTransferQueue<>();
         new Thread(new LinkedTransferQueueTest().new Producer(queue)).start();
         new Thread(new LinkedTransferQueueTest().new Customer(queue)).start();
 
     }
+
 
     class Producer implements Runnable{
 
@@ -66,7 +67,7 @@ public class LinkedTransferQueueTest {
 
         @Override
         public void run() {
-            IntStream.range(0, 3).forEach(a -> {
+             IntStream.range(0, 3).forEach(a -> {
                 try {
                     System.out.println("Customer 等待消费...:"+a);
                     queue.take();
