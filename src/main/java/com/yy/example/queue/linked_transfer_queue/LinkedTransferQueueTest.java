@@ -34,7 +34,7 @@ public class LinkedTransferQueueTest {
 
         @Override
         public void run() {
-            IntStream.range(0, 5).forEach(a -> {
+            IntStream.range(0, 3).forEach(a -> {
                 try {
                     System.out.println("producer 等待生产...:"+a);
                     // 测试add方法
@@ -66,7 +66,7 @@ public class LinkedTransferQueueTest {
 
         @Override
         public void run() {
-            IntStream.range(0, 5).forEach(a -> {
+            IntStream.range(0, 3).forEach(a -> {
                 try {
                     System.out.println("Customer 等待消费...:"+a);
                     queue.take();
