@@ -17,21 +17,35 @@ public class LinkedBlockingQueueTest {
 
         LinkedBlockingQueue<String> queue = new LinkedBlockingQueue<>(3);
 
-      /*  queue.put("a");
-        queue.put("b");
-        queue.put("bb");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    queue.put("a");
+                    queue.put("b");
+                    queue.put("c");
+                    queue.put("e");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
 
-        String value = queue.take();
-        String value2 = queue.take();
-        String value3 = queue.take();
-        String value4 = queue.take();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String value1 = queue.take();
+                    String value2 = queue.take();
+                    String value3 = queue.take();
+                    String value4 = queue.take();
 
-        System.out.printf("%10s\n", value);
-        System.out.format("%5s", value);
-        queue.put("c");*/
-
-        queue.offer("a");
-        queue.peek();
-        queue.poll();
+                    System.out.printf("%10s\n", value1);
+                    System.out.format("%5s", value1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }

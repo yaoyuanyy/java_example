@@ -7,6 +7,38 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 public class ConcurrentLinkedQueueTest {
     public static void main(final String[] args) {
-        ConcurrentLinkedQueue queue = new ConcurrentLinkedQueue();
+        ConcurrentLinkedQueue<String> queue = new ConcurrentLinkedQueue();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    queue.add("a");
+                    queue.add("b");
+                    queue.offer("c");
+                    queue.add("d");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String value = queue.peek();
+
+                    String value2 = queue.poll();
+                    String value3 = queue.poll();
+                    String value4 = queue.poll();
+
+                    System.out.printf("%10s\n", value);
+                    System.out.format("%5s", value);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 }
