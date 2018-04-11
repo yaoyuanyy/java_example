@@ -3,6 +3,10 @@ package com.yy.example.queue.concurrent_linked_queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
+ * <pre>
+ *     refer to:
+ *     https://www.ibm.com/developerworks/cn/java/j-lo-concurrent/index.html
+ * </pre>
  * Created by yaoliang on 2017/2/27.
  */
 public class ConcurrentLinkedQueueTest {
