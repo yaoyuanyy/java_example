@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
  *   参考
  *     <a href="http://dongxuan.iteye.com/blog/901689">http://dongxuan.iteye.com/blog/901689</a>
  *     <a href="http://www.crazyant.net/2124.html">http://www.crazyant.net/2124.html</a>
+ *     https://cloud.tencent.com/developer/article/1014670
  *
  *   场景一：任务数大于最大线程数+队列长度
  *     coreSize maxSize queueSize taskSize
