@@ -76,7 +76,31 @@ public class DateUtil {
         return ldt;
     }
 
+    /**2017-10-15 23:59:59
+     */
+    public static Date getEndOfDay(Date date) {
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()),
+                ZoneId.systemDefault());
+        ;
+        LocalDateTime endOfDay = localDateTime.with(LocalTime.MAX);
+        return Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
+     * 获得某天最小时间
+     *
+     * @param date
+     * @return
+     */
+    public static Date getStartOfDay(Date date) {
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()),
+                ZoneId.systemDefault());
+        LocalDateTime startOfDay = localDateTime.with(LocalTime.MIN);
+        return Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
     public static void main(String[] args) {
+
         String result = formatWithCommon(null);
         System.out.println(result);
 
