@@ -87,7 +87,9 @@ public class HeapSort {
      */
     public static void main(final String[] args) {
 
-        final int[] a = {3, 7, 2, 11, 3, 4, 9, 2, 18, 0};
+       // final int[] a = {3, 7, 2, 11, 3, 4, 9, 2, 18, 0};
+        final int[] a = {18, 17, 12, 11, 3, 4, 9, 2, 1, 0};
+
         System.out.println("Input: " + Arrays.toString(a));
         heapSort(a);
         System.out.println("Output: " + Arrays.toString(a));

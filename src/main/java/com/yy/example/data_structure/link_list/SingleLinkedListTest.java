@@ -101,13 +101,12 @@ public class SingleLinkedListTest {
      */
     public Node reverse(Node<Integer> current) {
         Node pre = null;
-        while (current != null) {
+        while (current != null){
             final Node next = current.next;
             current.next = pre;
             pre = current;
             current = next;
         }
-
         return pre;
     }
 

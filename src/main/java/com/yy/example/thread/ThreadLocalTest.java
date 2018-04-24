@@ -9,23 +9,54 @@ package com.yy.example.thread;
  */
 public class ThreadLocalTest {
 
-    //final ThreadLocal<Integer> threadLocal = ThreadLocal.withInitial(() -> 0);
-
-    final ThreadLocal<Integer> threadLocal = new ThreadLocal() {
-        @Override
-        protected Object initialValue() {
-            return 0;
-        }
-    };
+    final ThreadLocal<Person> threadLocal = new ThreadLocal();
 
     public static void main(final String[] args) {
         final ThreadLocalTest threadLocalTest = new ThreadLocalTest();
-        System.out.println(threadLocalTest.test());
+        threadLocalTest.test();
     }
 
-    public int test() {
-        threadLocal.set(threadLocal.get() + 1);
-        return threadLocal.get();
+    public void test() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    threadLocal.set(new Person("yy"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1000);
+                    Person person = threadLocal.get();
+                    System.out.printf("ff:%10s\n", person.getName());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
     }
 
+    class Person{
+        private String name;
+
+        public Person() {}
+
+        public Person(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
 }

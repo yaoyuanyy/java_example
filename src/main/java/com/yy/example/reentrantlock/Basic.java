@@ -4,6 +4,12 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * <pre>
+ *     refer to:
+ *     https://javadoop.com/2017/07/20/AbstractQueuedSynchronizer-2/
+ * </pre>
+ */
 public class Basic {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {

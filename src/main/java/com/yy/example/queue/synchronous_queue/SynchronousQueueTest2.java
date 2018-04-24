@@ -1,6 +1,5 @@
 package com.yy.example.queue.synchronous_queue;
 
-import java.util.Random;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
@@ -8,7 +7,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * Description:
  * <p></p>
- * <pre></pre>
+ * <pre>
+ *     refer to:
+ *     http://www.voidcn.com/article/p-fzkvhcri-p.html
+ * </pre>
  * NB.
  * Created by skyler on 2018/4/11 at 下午11:46
  */
