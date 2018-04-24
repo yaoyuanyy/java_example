@@ -9,7 +9,7 @@ import java.util.Arrays;
  * NB.
  * Created by skyler on 2017/12/18 at 下午6:27
  */
-public class MyHeapSort {
+public class MyHeapSortTmp {
 
     public static void main(final String[] args) {
 
@@ -20,17 +20,9 @@ public class MyHeapSort {
     }
 
     public static void heapSort(final int[] a) {
-        // 构造一个大顶堆
         for (int i = a.length / 2; i >= 0; i--) {
             create2XMAXHeap(a, i, a.length);
-            //create2XMINHeap(a, i, a.length);
         }
-
-//        for (int i = a.length - 1; i >= 0; i--) {
-//            swap(a, 0, i);
-//            create2XMAXHeap(a, 0, i);
-//            //create2XMINHeap(a, 0, i);
-//        }
     }
 
     /**
@@ -39,38 +31,21 @@ public class MyHeapSort {
      * @param length
      */
     private static void create2XMAXHeap(final int[] a, int i, final int length) {
-        int child = 0;
+        int childIdx = 0;
         final int target;
-        for (target = a[i]; leftChild(i) < length; i = child) {
-            child = leftChild(i);
-            if (child != length - 1 && a[child] < a[child + 1]) {
-                child++;
+        for (target = a[i]; leftChild(i) < length; ) {
+            childIdx = leftChild(i);
+            if (childIdx != length - 1 && a[childIdx] < a[childIdx + 1]) {
+                childIdx++;
             }
 
-            if (target < a[child]) {
-                a[i] = a[child];
+            if (target < a[childIdx]) {
+                a[i] = a[childIdx];
             } else {
                 break;
             }
-        }
-        a[i] = target;
 
-    }
-
-    private static void create2XMINHeap(final int[] a, int i, final int length) {
-        int child = 0;
-        final int target;
-        for (target = a[i]; leftChild(i) < length; i = child) {
-            child = leftChild(i);
-            if (child != length - 1 && a[child] > a[child + 1]) {
-                child++;
-            }
-
-            if (target > a[child]) {
-                a[i] = a[child];
-            } else {
-                break;
-            }
+            i = childIdx;
         }
         a[i] = target;
     }
