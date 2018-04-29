@@ -1,4 +1,4 @@
-package com.yy.rest;
+package com.yy.rest.sign_verify;
 
 /**
  * Description:
@@ -7,7 +7,7 @@ package com.yy.rest;
  * NB.
  * Created by skyler on 2017/12/4 at 下午6:53
  */
-class Person{
+class Person {
     Long id;
     String name;
 
@@ -15,7 +15,7 @@ class Person{
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(final Long id) {
         this.id = id;
     }
 
@@ -23,7 +23,7 @@ class Person{
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 

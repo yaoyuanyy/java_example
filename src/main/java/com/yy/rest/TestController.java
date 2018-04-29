@@ -1,5 +1,6 @@
 package com.yy.rest;
 
+import com.yy.example.java8.Person;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,10 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by skyler on 2017/12/4 at 下午6:44
  */
 @RestController
-public class PersonController {
+public class TestController {
 
     @RequestMapping("/hello")
-    public String hello(Person person) {
+    public String hello(final Person person) {
         System.out.println(person);
 
         return "success";

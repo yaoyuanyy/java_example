@@ -5,6 +5,16 @@ logging:
 server:
   port: 8088
 
+skyler:
+    common:
+      private-key: et34egddfdsfsdf
+      public-key: safsffefefefdfdf
+      target-callback-url: http://localhost:9999/v2/skyler/person/list
+      excludeUrls:
+        - /v1/login
+        - /v1/list*
+        - /v1/admin
+
 
 
 
