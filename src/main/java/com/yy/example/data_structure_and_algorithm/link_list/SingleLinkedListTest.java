@@ -1,4 +1,4 @@
-package com.yy.example.data_structure.link_list;
+package com.yy.example.data_structure_and_algorithm.link_list;
 
 /**
  * Description:

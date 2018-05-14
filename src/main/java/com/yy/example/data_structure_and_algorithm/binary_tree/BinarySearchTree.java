@@ -1,7 +1,6 @@
-package com.yy.example.data_structure.binary_tree;
+package com.yy.example.data_structure_and_algorithm.binary_tree;
 
 import java.util.Objects;
-import java.util.stream.IntStream;
 
 /**
  * Description:

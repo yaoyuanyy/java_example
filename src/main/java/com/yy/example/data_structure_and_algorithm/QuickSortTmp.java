@@ -1,4 +1,4 @@
-package com.yy.example.data_structure;
+package com.yy.example.data_structure_and_algorithm;
 
 import java.util.Arrays;
 
@@ -21,7 +21,7 @@ import java.util.Arrays;
  * NB.
  * Created by skyler on 2017/12/16 at 上午11:41
  */
-public class QuickSort {
+public class QuickSortTmp {
 
     public static void main(final String[] args) {
         final int[] a = {38, 65, 97, 46, 13, 27, 4};
@@ -34,8 +34,7 @@ public class QuickSort {
         if (a == null || a.length < 2) {
             return;
         }
-
-        if (low < high) {
+        if (high > low) {
             final int middle = partion(a, low, high);
             quickSort(a, low, middle - 1);
             quickSort(a, middle + 1, high);
@@ -43,6 +42,7 @@ public class QuickSort {
     }
 
     public static int partion(final int[] a, int low, int high) {
+
         final int target = a[low];
         while (high > low) {
             while (high > low && a[high] > target) {
@@ -61,7 +61,6 @@ public class QuickSort {
 
             a[low] = target;
         }
-
         return low;
     }
 }

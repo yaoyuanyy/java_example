@@ -1,4 +1,4 @@
-package com.yy.example.data_structure.heapsort;
+package com.yy.example.data_structure_and_algorithm.heapsort;
 
 import java.util.Arrays;
 

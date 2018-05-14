@@ -1,4 +1,4 @@
-package com.yy.example.data_structure.binary_tree;
+package com.yy.example.data_structure_and_algorithm.binary_tree;
 
 import java.util.LinkedList;
 import java.util.List;

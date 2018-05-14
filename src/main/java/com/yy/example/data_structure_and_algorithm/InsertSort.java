@@ -1,4 +1,4 @@
-package com.yy.example.data_structure;
+package com.yy.example.data_structure_and_algorithm;
 
 import java.util.Arrays;
 

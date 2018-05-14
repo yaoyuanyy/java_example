@@ -1,4 +1,4 @@
-package com.yy.example.data_structure;
+package com.yy.example.data_structure_and_algorithm;
 
 import com.google.common.collect.Lists;
 
@@ -94,8 +94,8 @@ public class MapSortByValue {
         });
         Collections.sort(list, (Map.Entry<String, Integer> e1, Map.Entry<String, Integer> e2) -> e1.getValue().compareTo(e2.getValue()));
         Collections.sort(list, (e1, e2) -> e1.getValue().compareTo(e2.getValue()));
-        Collections.sort(list, Comparator.comparing(Map.Entry::getValue));
-        Collections.sort(list, Map.Entry.comparingByValue());*/
+        Collections.sort(list, Comparator.comparing(Map.Entry::getValue));*/
+        Collections.sort(list, Map.Entry.comparingByValue());
 
 
         /**
