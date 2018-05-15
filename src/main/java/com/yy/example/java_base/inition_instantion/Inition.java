@@ -1,7 +1,7 @@
-package com.yy.example;
+package com.yy.example.java_base.inition_instantion;
 
 /**
- * Description:
+ * Description: 初始化，这个一个特殊的类实例化过程，原因是父类中有子类的静态实例引用，这么做会产生问题
  * <p></p>
  * <pre>
  * 对象的初始化顺序：
@@ -14,7 +14,7 @@ package com.yy.example;
  * NB.
  * Created by skyler on 2018/5/15 at 上午8:14
  */
-public class Init_Instante {
+public class Inition {
 
     private static class A {
         static {
@@ -55,4 +55,6 @@ public class Init_Instante {
 
         }
     }
+
+
 }
