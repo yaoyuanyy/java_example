@@ -1,10 +1,10 @@
 package com.yy.example.java_base.gc;
 
 /**
- * Description: 测试垃圾回收
+ * Description: 测试垃圾回收，此类为gc入门程序
  * <p></p>
  * <pre>
- *     运行时配置: -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:SurvivorRatio=8 -XX:+PrintGCDetails
+ *     JVM Option argv: -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:SurvivorRatio=8 -XX:+PrintGCDetails
  *     refer to: 深入理解java虚拟机
  *                               第三章 3.5节-内存分配与回收策略
  *                                      代码清单3-3
