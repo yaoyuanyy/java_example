@@ -1,7 +1,7 @@
 package com.yy.example.java_base.gc;
 
 /**
- * Description:
+ * Description: 测试垃圾回收
  * <p></p>
  * <pre>
  *     运行时配置: -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:SurvivorRatio=8 -XX:+PrintGCDetails
