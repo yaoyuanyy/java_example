@@ -5,7 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
@@ -24,7 +23,7 @@ import java.util.Locale;
  * Created by skyler on 2018/4/29 at 上午10:27
  */
 @Slf4j
-@Component
+//@Component
 public class LocaleUtils {
     //请求终端
     private final static String SPIDER = "spider";

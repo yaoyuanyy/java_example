@@ -12,7 +12,6 @@ package com.yy.example.java_base.gc;
  *   参考:
  *   https://www.cnblogs.com/xuezhiyizu1120/p/6237510.html
  *   https://segmentfault.com/a/1190000014944731
- *   https://www.jianshu.com/p/22e609df559b
  *   http://ifeve.com/useful-jvm-flags-part-8-gc-logging/
  *   https://jacobchang.cn/experiment-on-jvm.html
  *   https://cloud.tencent.com/developer/article/1041079

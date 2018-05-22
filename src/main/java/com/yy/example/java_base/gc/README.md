@@ -6,13 +6,17 @@
    此时我们使用jvm的内置工具查看heap stack gc等信息就没有用了。所以我们的代码要在<b>debug模式</b>下运行   
 
 2. 基础知识储备
-   - JVM print GC基础
+    (1) JVM print GC基础
     -verbose.gc或-XX:+PrintGC 开关可显示GC的操作内容
     -XX:+PrintGCDetails #输出详细GC日志模式
     -XX:+PrintGCTimeStamps #输出gc的触发时间
     -XX:+PrintTenuringDistribution #输出每次minor GC后新的存活周期的阈值
     -XX:+PrintFlagsFinal可以列出所有的JVM flag
    http://ifeve.com/useful-jvm-flags-part-8-gc-logging/
+  
+   
+   (2) 查看JVM使用的什么垃圾收集器
+   https://blog.csdn.net/earthhour/article/details/76468084
 
 3. jvm option参数含义：
    通用配置
@@ -39,6 +43,8 @@
    JVM参数含义说明参考：
    
    http://ifeve.com/useful-jvm-flags-part-8-gc-logging/
+   http://www.cnblogs.com/redcreen/archive/2011/05/04/2037057.html
+
    官网：http://www.oracle.com/technetwork/java/javase/tech/index-jsp-136373.html
 ```
 
