@@ -15,6 +15,7 @@ package com.yy.example.java_base.gc;
  *
  *     refer to:
  *     https://cloud.tencent.com/developer/article/1041079
+ *     http://ifeve.com/useful-jvm-flags-part-8-gc-logging/
  * </pre>
  * NB.
  * Created by skyler on 2018/5/21 at 下午6:51

@@ -13,6 +13,7 @@ package com.yy.example.java_base.gc;
  *      -XX:+PrintTenuringDistribution
  *
  *     refer to:
+ *     https://jacobchang.cn/experiment-on-jvm.html
  *     https://www.jianshu.com/p/22e609df559b
  *     https://cloud.tencent.com/developer/article/1041079
  * </pre>
