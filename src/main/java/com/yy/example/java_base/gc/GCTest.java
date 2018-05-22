@@ -10,10 +10,10 @@ package com.yy.example.java_base.gc;
  *                                      代码清单3-3
  *
  *   Metaspace 各个字段的含义，参考:
- *   https://jacobchang.cn/experiment-on-jvm.html
- *   http://www.cnblogs.com/benwu/articles/8312699.html
- *   https://stackoverflow.com/questions/40891433/understanding-metaspace-line-in-jvm-heap-printout
+ *   https://www.jianshu.com/p/22e609df559b
  *   http://ifeve.com/useful-jvm-flags-part-8-gc-logging/
+ *   https://jacobchang.cn/experiment-on-jvm.html
+ *   https://cloud.tencent.com/developer/article/1041079
  * </pre>
  * NB.
  * Created by skyler on 2018/5/18 at 下午3:02
@@ -37,6 +37,6 @@ public class GCTest {
 
     public static void main(final String[] args) {
         testAllocation();
-        System.out.println("111");
+        //System.out.println("111");
     }
 }

@@ -14,6 +14,8 @@ import java.lang.reflect.Method;
  *
  *     refer to:
  *     http://www.importnew.com/28571.html
+ *     http://www.cnblogs.com/benwu/articles/8312699.html
+ *     https://stackoverflow.com/questions/40891433/understanding-metaspace-line-in-jvm-heap-printout
  * </pre>
  * NB.
  * Created by skyler on 2018/5/21 at 下午5:26
