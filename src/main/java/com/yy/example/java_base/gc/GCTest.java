@@ -9,7 +9,9 @@ package com.yy.example.java_base.gc;
  *                               第三章 3.5节-内存分配与回收策略
  *                                      代码清单3-3
  *
- *   Metaspace 各个字段的含义，参考:
+ *   参考:
+ *   https://www.cnblogs.com/xuezhiyizu1120/p/6237510.html
+ *   https://segmentfault.com/a/1190000014944731
  *   https://www.jianshu.com/p/22e609df559b
  *   http://ifeve.com/useful-jvm-flags-part-8-gc-logging/
  *   https://jacobchang.cn/experiment-on-jvm.html

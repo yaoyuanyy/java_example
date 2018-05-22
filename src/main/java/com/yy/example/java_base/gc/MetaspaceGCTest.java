@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
  * <pre>
  *      JVM参数:-XX:MetaspaceSize=8m -XX:MaxMetaspaceSize=128m -XX:+PrintFlagsInitial
  *
- *     refer to:
+ *  Metaspace 各个字段的含义，refer to:
  *     http://www.importnew.com/28571.html
  *     http://www.cnblogs.com/benwu/articles/8312699.html
  *     https://stackoverflow.com/questions/40891433/understanding-metaspace-line-in-jvm-heap-printout
