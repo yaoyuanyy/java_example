@@ -13,10 +13,14 @@
     -XX:+PrintTenuringDistribution #输出每次minor GC后新的存活周期的阈值
     -XX:+PrintFlagsFinal可以列出所有的JVM flag
    http://ifeve.com/useful-jvm-flags-part-8-gc-logging/
-  
    
-   (2) 查看JVM使用的什么垃圾收集器
+   (2) 调试GC及工具
+   官网：https://docs.oracle.com/javase/8/docs/technotes/tools/
+   
+   (3) 查看JVM使用的什么垃圾收集器
    https://blog.csdn.net/earthhour/article/details/76468084
+   
+   
 
 3. jvm option参数含义：
    通用配置

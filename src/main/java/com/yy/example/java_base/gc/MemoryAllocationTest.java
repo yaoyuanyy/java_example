@@ -61,7 +61,19 @@ public class MemoryAllocationTest {
         allocation1 = new byte[2 * _1MB];
         allocation2 = new byte[2 * _1MB];
         allocation3 = new byte[2 * _1MB];
+
+        try {
+            Thread.sleep(1000 * 60 * 5);
+        } catch (final InterruptedException e) {
+            e.printStackTrace();
+        }
         allocation4 = new byte[4 * _1MB]; //出现一次 Minor GC
+        try {
+            Thread.sleep(1000 * 60 * 5);
+        } catch (final InterruptedException e) {
+            e.printStackTrace();
+        }
+
     }
 
     /**
