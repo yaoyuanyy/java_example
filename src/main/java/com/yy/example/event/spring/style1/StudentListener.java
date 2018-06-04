@@ -22,7 +22,7 @@ public class StudentListener implements ApplicationListener<StudentEvent> {
         System.out.println("studentId:" + studentId);
     }
 
-    @Async
+    //@Async
     @EventListener(classes = Student.class)
     public void onStudentNameEvent(Student s){
         String name = s.getName();
