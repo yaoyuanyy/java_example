@@ -10,10 +10,17 @@ package com.yy.example.pattern_mode.factory_method.tutorial1;
 public class Test {
 
     public static void main(String[] args) {
-        Shape shape = (Shape) ShapeFactory.create(Circle.class);
-        shape.draw();
+//        Circle circle = (Circle) ShapeFactory.getShape("CIRCLE");
+//        circle.draw();
+//
+//        Rectangle rectangle = (Rectangle) ShapeFactory.getShape("RECTANGLE");
+//        rectangle.draw();
 
-        Shape shape2 = (Shape) ShapeFactory.create(Rectangle.class);
-        shape2.draw();
+        // 通过反射获取
+        Circle circle = (Circle) ShapeFactoryByReflect.create(Circle.class);
+        circle.draw();
+
+        Rectangle rectangle = (Rectangle) ShapeFactoryByReflect.create(Rectangle.class);
+        rectangle.draw();
     }
 }

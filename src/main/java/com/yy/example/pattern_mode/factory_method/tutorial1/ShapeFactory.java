@@ -9,13 +9,16 @@ package com.yy.example.pattern_mode.factory_method.tutorial1;
  */
 public class ShapeFactory {
 
-    public static Object create(Class clazz) {
-        Object obj = null;
-        try {
-            obj = Class.forName(clazz.getName()).newInstance();
-        } catch (Exception e) {
-            e.printStackTrace();
+    //使用 getShape 方法获取形状类型的对象
+    public static Shape getShape(String shapeType){
+        if(shapeType == null){
+            return null;
         }
-        return obj;
+        if(shapeType.equalsIgnoreCase("CIRCLE")){
+            return new Circle();
+        } else if(shapeType.equalsIgnoreCase("RECTANGLE")){
+            return new Rectangle();
+        }
+        return null;
     }
 }
