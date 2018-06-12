@@ -1,4 +1,4 @@
-package com.yy.example.pattern_mode.observer;
+package com.yy.example.pattern_mode.observer.demo_complex;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
  * NB.
  * Created by skyler on 2017/12/7 at 上午11:14
  */
-public class TrafficData implements Subject{
+public class TrafficSubject implements Subject{
 
     /**
      * <pre>
@@ -23,12 +23,12 @@ public class TrafficData implements Subject{
 
     private Traffic traffic;
 
-    public TrafficData(){
+    public TrafficSubject(){
         this.observers = new ArrayList<>();
         this.traffic = new Traffic();
     }
 
-    public TrafficData(Traffic traffic) {
+    public TrafficSubject(Traffic traffic) {
         this.observers = new ArrayList<>();
         this.traffic = traffic;
     }

@@ -1,4 +1,4 @@
-package com.yy.example.pattern_mode.observer;
+package com.yy.example.pattern_mode.observer.demo_complex;
 
 /**
  * 观察者{@link Observer}实现类
@@ -10,11 +10,11 @@ public class WeatherDisplay implements Observer, Display {
     private float temperature;
     private float humidity;
     private float pressure;
-    private Subject weatherData;
+    private Subject weatherSubject;
 
-    public WeatherDisplay(Subject weatherData) {
-        this.weatherData = weatherData;
-        weatherData.registerObserver(this);
+    public WeatherDisplay(Subject weatherSubject) {
+        this.weatherSubject = weatherSubject;
+        weatherSubject.registerObserver(this);
     }
 
     @Override

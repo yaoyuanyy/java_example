@@ -1,6 +1,4 @@
-package com.yy.example.pattern_mode.observer;
-
-import java.util.List;
+package com.yy.example.pattern_mode.observer.demo_complex;
 
 /**
  * Description: 观察者{@link Observer}实现类

@@ -1,13 +1,13 @@
-package com.yy.example.pattern_mode.observer;
+package com.yy.example.pattern_mode.observer.demo_complex;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 被观察者({@link com.yy.example.pattern_mode.observer.Subject})实现类
+ * 被观察者({@link Subject})实现类
  * Created by skyler on 2017/3/4.
  */
-public class WeatherData implements Subject {
+public class WeatherSubject implements Subject {
 
     /**
      * <pre>
@@ -20,7 +20,7 @@ public class WeatherData implements Subject {
 
     private Weather weather;
 
-    public WeatherData() {
+    public WeatherSubject() {
         this.observers = new ArrayList<Observer>();
     }
 

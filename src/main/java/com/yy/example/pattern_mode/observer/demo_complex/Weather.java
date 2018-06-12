@@ -1,4 +1,4 @@
-package com.yy.example.pattern_mode.observer;
+package com.yy.example.pattern_mode.observer.demo_complex;
 
 /**
  * Description:
