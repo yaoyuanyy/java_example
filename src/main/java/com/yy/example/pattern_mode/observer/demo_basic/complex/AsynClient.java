@@ -6,7 +6,7 @@ import com.yy.example.pattern_mode.observer.demo_basic.Subject;
 import java.time.LocalDateTime;
 
 /**
- * Description:
+ * Description: 实现自动通知
  * <p></p>
  * <pre>
  *     我们在AsynSubject中定义OnAttach接口,该接口负责通知观察者.
@@ -66,5 +66,8 @@ public class AsynClient {
                 }
             }
         });
+
+        // 这里不需要再调用asynSubject.noticeObservers()了
+
     }
 }
