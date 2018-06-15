@@ -5,6 +5,7 @@ import org.apache.commons.lang3.time.DateFormatUtils;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.Objects;
 
@@ -20,13 +21,38 @@ import java.util.Objects;
  */
 public class DateUtil {
 
+
+    /**
+     * 根据给定日期获取指定天数前后的日期
+     *
+     * @param date
+     * @param days 负数表示减
+     * @return
+     */
+    public LocalDateTime getSpecificDateByDay(Date date, long days){
+        return getSpecificDate(date, days, ChronoUnit.DAYS);
+    }
+
+    /**
+     * 根据给定日期获取指定单元数量前后的日期
+     *
+     * @param date
+     * @param num 数量
+     * @param unit 时间单元(维度)
+     * @return
+     */
+    public LocalDateTime getSpecificDate(Date date, long num, ChronoUnit unit){
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()).plus(num, unit), ZoneId.systemDefault());
+    }
+
     /**
      * 格式化 java.util.Date Format：yyyy-MM-dd HH:mm:ss
+     *
      * @param date
      * @return
      */
-    public static String formatWithJava8(Date date){
-        if(Objects.isNull(date)){
+    public static String formatWithJava8(Date date) {
+        if (Objects.isNull(date)) {
             return null;
         }
 
@@ -38,11 +64,12 @@ public class DateUtil {
 
     /**
      * 格式化 java.util.Date Format：yyyy-MM-dd HH:mm:ss
+     *
      * @param date
      * @return
      */
-    public static String formatWithCommon(Date date){
-        if(Objects.isNull(date)){
+    public static String formatWithCommon(Date date) {
+        if (Objects.isNull(date)) {
             return null;
         }
         String result = DateFormatUtils.format(date, DateFormatEnum.SIMPLE.format());
@@ -51,11 +78,12 @@ public class DateUtil {
 
     /**
      * localDateTime Convert to Date with china time
+     *
      * @param localDateTime
      * @return
      */
-    public Date localDateTimeConvertDate(LocalDateTime localDateTime){
-        if(Objects.isNull(localDateTime)) {
+    public Date localDateTimeConvertDate(LocalDateTime localDateTime) {
+        if (Objects.isNull(localDateTime)) {
             return null;
         }
         ZonedDateTime zdt = localDateTime.atZone(ZoneId.systemDefault());
@@ -65,18 +93,31 @@ public class DateUtil {
 
     /**
      * Date Convert to localDateTime
+     *
      * @param date
      * @return
      */
-    public LocalDateTime ConvertLocalDateTime(Date date){
-        if(Objects.isNull(date)) {
+    public LocalDateTime DateConvertLocalDateTime(Date date) {
+        if (Objects.isNull(date)) {
             return null;
         }
         LocalDateTime ldt = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
         return ldt;
     }
 
-    /**2017-10-15 23:59:59
+    /**
+     * 获取当前日期的边界(0点/24点)
+     *
+     * borderValue LocalTime.MAX-->24点; LocalTime.MIN-->0点
+     * @return 边界日期
+     */
+    public Date curDateDayBorder(LocalTime borderValue){
+        final LocalDateTime end = LocalDateTime.of(LocalDate.now(), borderValue);
+        return Date.from(end.atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    /**
+     * 获得某天最大时间 --> 时间部分为23:59:59
      */
     public static Date getEndOfDay(Date date) {
         LocalDateTime localDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(date.getTime()),
@@ -87,7 +128,7 @@ public class DateUtil {
     }
 
     /**
-     * 获得某天最小时间
+     * 获得某天最小时间--> 时间部分为00:00:00
      *
      * @param date
      * @return
@@ -141,7 +182,7 @@ public class DateUtil {
         System.out.println("localDate : " + localDate2);
         System.out.println("date : " + date2);
 
-        LocalDateTime localDateTime2 = LocalDateTime.of(2016,8,19,21,46,31);
+        LocalDateTime localDateTime2 = LocalDateTime.of(2016, 8, 19, 21, 46, 31);
         Date date3 = Date.from(localDateTime2.atZone(defaultZoneId2).toInstant());
         System.out.println("\n2. LocalDateTime -> Date");
         System.out.println("localDateTime : " + localDateTime2);
