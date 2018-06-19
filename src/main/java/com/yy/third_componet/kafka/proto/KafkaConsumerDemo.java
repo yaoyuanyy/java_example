@@ -1,4 +1,4 @@
-package com.yy.third_componet.kafka;
+package com.yy.third_componet.kafka.proto;
 
 import java.io.IOException;
 import java.util.Arrays;

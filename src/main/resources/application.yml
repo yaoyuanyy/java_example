@@ -15,6 +15,45 @@ skyler:
         - /v1/list*
         - /v1/admin
 
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: 0
+    producer:
+      batch-size: 65536
+      buffer-memory: 524288
+
+
+#kafka:
+#  consumer:
+#    zookeeper:
+#      connect: localhost:2181
+#    servers: localhost:9092
+#    enable:
+#      auto:
+#        commit: true
+#    session:
+#      timeout: 6000
+#    auto:
+#      commit:
+#        interval: 100
+#      offset:
+#        reset: latest
+#    topic: test
+#    group:
+#      id: test
+#    concurrency: 10
+#
+#  producer:
+#    servers: localhost:9092
+#    retries: 0
+#    batch:
+#      size: 4096
+#    linger: 1
+#    buffer:
+#      memory: 40960
+
 
 
 

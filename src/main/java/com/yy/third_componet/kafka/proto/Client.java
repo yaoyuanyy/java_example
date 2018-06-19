@@ -1,4 +1,4 @@
-package com.yy.third_componet.kafka;
+package com.yy.third_componet.kafka.proto;
 
 /**
  * Description:
@@ -7,7 +7,6 @@ package com.yy.third_componet.kafka;
  *     参考: https://www.jianshu.com/p/b119b1980c16
  *
  *     https://yq.aliyun.com/articles/66676?utm_campaign=wenzhang&utm_medium=article&utm_source=QQ-qun&utm_content=m_8502
- *     https://my.oschina.net/u/2608504/blog/1817842
  *     https://www.imooc.com/article/29943
  *     https://blog.csdn.net/shangmingtao/article/details/79567921
  * </pre>
