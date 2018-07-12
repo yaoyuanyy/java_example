@@ -13,16 +13,53 @@ import java.util.concurrent.Executors;
 public class CompletableFutureTest {
     ExecutorService pool = Executors.newFixedThreadPool(10);
 
+    @Test
+    public void runAsync() {
 
-    public static void main(String args[]) throws ExecutionException, InterruptedException {
-        CompletableFutureTest test = new CompletableFutureTest();
-        //test.thenApplyAsync();
-        //test.thenAcceptAsync();
-        //test.thenCompose();
-        //test.thenCombine();
-        //test.thenAcceptBothAsync();
-        test.applyToEither();
+        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+            System.out.println("runAsyn");
+            System.out.println("hello");
+            int i = 10/0;
+        }).exceptionally(throwable -> {
+            System.out.println("exception:"+throwable.getMessage());
+            return null;
+        });
+    }
 
+    @Test
+    public void supplyAsync() {
+        CompletableFuture<User> future = CompletableFuture.supplyAsync(() -> {
+            System.out.println("runAsyn");
+            System.out.println("hello");
+            System.out.println("当前线程：" + Thread.currentThread());
+            int i = 10/0;
+            return new User("y", "yy");
+        }).exceptionally(throwable -> {
+            throwable.printStackTrace();
+            System.out.println(throwable);
+            return null;
+        });
+    }
+
+    /**
+     * Get和Join对报错信息的比较
+     *
+     * 结果：
+     * future.get(); // 报62行出错
+     * future.join(); // 报58行出错，即join()报错更准，直接定位到具体的报错代码
+     *
+     * @throws ExecutionException
+     * @throws InterruptedException
+     */
+    @Test
+    public void CompareGetAndJoin() throws ExecutionException, InterruptedException {
+        CompletableFuture future = CompletableFuture.supplyAsync(() -> {
+            int i = 10 / 0;
+            return 10;
+        });
+
+        //future.get();
+        future.join();
     }
 
     @Test
