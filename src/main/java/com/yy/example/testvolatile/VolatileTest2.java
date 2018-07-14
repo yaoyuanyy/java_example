@@ -1,5 +1,7 @@
 package com.yy.example.testvolatile;
 
+import org.junit.Test;
+
 /**
  * Created by yaoliang on 2017/2/23.
  */
@@ -10,6 +12,7 @@ public class VolatileTest2 {
 
     public void test() {
         new Thread(new Runnable() {
+            @Override
             public void run() {
                 int counter = 0;
                 while (running) {
@@ -19,6 +22,7 @@ public class VolatileTest2 {
             }
         }).start();
         new Thread(new Runnable() {
+            @Override
             public void run() {
                 // Sleep for a bit so that thread 1 has a chance to start
                 try {

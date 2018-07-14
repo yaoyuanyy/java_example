@@ -1,4 +1,4 @@
-package com.yy.example.threadPool;
+package com.yy.example.mutil_thread.threadPool;
 
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;

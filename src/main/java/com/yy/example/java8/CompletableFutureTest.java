@@ -6,6 +6,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.IntStream;
 
 /**
  * Created by yaoliang on 2016/12/2.
@@ -53,13 +54,38 @@ public class CompletableFutureTest {
      */
     @Test
     public void CompareGetAndJoin() throws ExecutionException, InterruptedException {
-        CompletableFuture future = CompletableFuture.supplyAsync(() -> {
-            int i = 10 / 0;
+        CompletableFuture<Integer> future = CompletableFuture.supplyAsync(() -> {
+            //int i = 10 / 0;
             return 10;
         });
 
         //future.get();
-        future.join();
+        //future.join();
+        System.out.println(future.complete(10));
+    }
+
+    @Test
+    public void tt() {
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> {
+            try {
+                System.out.println("future:"+System.currentTimeMillis());
+                Thread.sleep(5000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return "Hello";
+        });
+
+        System.out.println(System.currentTimeMillis());
+        future.completeExceptionally(new Exception());
+
+        try {
+            System.out.println(future.get());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

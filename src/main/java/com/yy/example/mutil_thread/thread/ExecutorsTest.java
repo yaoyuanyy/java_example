@@ -1,7 +1,11 @@
-package com.yy.example.thread;
+package com.yy.example.mutil_thread.thread;
+
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 
 /**
  * Description:
@@ -13,11 +17,14 @@ import java.util.concurrent.Executors;
 public class ExecutorsTest {
 
     public static void main(final String[] args) {
-        final ExecutorService service = Executors.newFixedThreadPool(4);
+
+        BasicThreadFactory factory = new BasicThreadFactory.Builder().namingPattern("myspringbean-thread-%d").build();
+        final ExecutorService service = Executors.newFixedThreadPool(4, factory);
         executeTask(service);
 
 
-        final ExecutorService service1 = Executors.newCachedThreadPool();
+        ThreadFactory factory2 = new ThreadFactoryBuilder().setNameFormat("myspringbean-thread-%d").build();
+        final ExecutorService service1 = Executors.newFixedThreadPool(2, factory2);
         executeTask(service1);
 
     }

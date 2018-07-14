@@ -1,4 +1,4 @@
-package com.yy.example.thread;
+package com.yy.example.mutil_thread.thread;
 
 /**
  * Created by yaoliang on 2017/2/17.

@@ -1,4 +1,4 @@
-package com.yy.example.thread;
+package com.yy.example.mutil_thread.thread;
 
 import java.util.ArrayList;
 import java.util.Collections;
