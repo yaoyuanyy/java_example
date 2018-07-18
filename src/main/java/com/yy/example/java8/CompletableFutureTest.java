@@ -9,6 +9,8 @@ import java.util.concurrent.Executors;
 import java.util.stream.IntStream;
 
 /**
+ *
+ * refer to: https://segmentfault.com/a/1190000014479792
  * Created by yaoliang on 2016/12/2.
  */
 public class CompletableFutureTest {

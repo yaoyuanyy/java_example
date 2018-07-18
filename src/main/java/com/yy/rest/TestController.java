@@ -30,6 +30,11 @@ public class TestController {
 
         return "success";
     }
+
+    @RequestMapping("/ex")
+    public String ex() {
+        throw new IllegalArgumentException("ddd");
+    }
 }
 
 
