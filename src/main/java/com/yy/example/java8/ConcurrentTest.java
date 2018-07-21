@@ -25,19 +25,19 @@ public class ConcurrentTest {
         ConcurrentTest test = new ConcurrentTest();
 
         List<PersonBo> personList = test.personService(10000);
-//
-//        // 方法一 76ms
+
+        // 方法一 76ms
 //        long start1 = System.currentTimeMillis();
 //        List<PersonVo> personVos1 = test.handleWithCompletableFuture(personList);
 //        log.info("total handleWithCompletableFuture time:{} size:{}", System.currentTimeMillis() -start1, personVos1.size());
 
 
-        // 方法二 85ms
-        long start2 = System.currentTimeMillis();
-        List<PersonVo> personVos2 = test.handleWithStreamParallel(personList);
-        log.info("total handleWithStreamParallel time:{} size:{}", System.currentTimeMillis() -start2, personVos2.size());
+////         方法二 85ms
+//        long start2 = System.currentTimeMillis();
+//        List<PersonVo> personVos2 = test.handleWithStreamParallel(personList);
+//        log.info("total handleWithStreamParallel time:{} size:{}", System.currentTimeMillis() -start2, personVos2.size());
 
-//        // 方法三 89ms
+        // 方法三 89ms
 //        long start3 = System.currentTimeMillis();
 //        List<PersonVo> personVos3 = test.handleWithExecutorsMethod(personList);
 //        log.info("total handleWithExecutorsMethod time:{} size:{}", System.currentTimeMillis() -start3, personVos3.size());
@@ -100,9 +100,10 @@ public class ConcurrentTest {
         return personVos;
     }
 
-    ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 10, 1, TimeUnit.SECONDS
+    ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 20, 1, TimeUnit.SECONDS
             ,new LinkedBlockingDeque(10)
-            ,new BasicThreadFactory.Builder().namingPattern("PersonService-thread-%d").build());
+            ,new BasicThreadFactory.Builder().namingPattern("PersonService-thread-%d").build()
+            ,new ThreadPoolExecutor.CallerRunsPolicy());
 
     /**
      * 使用threadPoolExecutor.submit解析List<PersonBo>，并返回一个新的集合List<PersonVo> personVos
