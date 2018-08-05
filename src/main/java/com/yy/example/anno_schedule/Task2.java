@@ -8,7 +8,7 @@ import java.util.Date;
 @Component
 public class Task2 {
 
-    @Scheduled(fixedDelay = 4000)
+    //@Scheduled(fixedDelay = 4000)
     public void t() throws InterruptedException {
         System.out.println("task2: "+new Date());
         Thread.sleep(1000*5);

@@ -2,8 +2,10 @@ package com.yy.example.java8;
 
 import com.alibaba.fastjson.JSON;
 import com.google.gson.GsonBuilder;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.apache.commons.lang3.time.StopWatch;
@@ -13,18 +15,19 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
  * Created by yaoliang on 2016/12/5.
  */
 @Slf4j
-public class ConcurrentTest {
+public class MutilThreadTest {
 
     public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException {
-        ConcurrentTest test = new ConcurrentTest();
+        MutilThreadTest test = new MutilThreadTest();
 
-        List<PersonBo> personList = test.personService(10000);
+        List<PersonBo> personList = test.personService(1000);
 
         // 方法一 76ms
 //        long start1 = System.currentTimeMillis();
@@ -32,7 +35,7 @@ public class ConcurrentTest {
 //        log.info("total handleWithCompletableFuture time:{} size:{}", System.currentTimeMillis() -start1, personVos1.size());
 
 
-////         方法二 85ms
+//         方法二 85ms
 //        long start2 = System.currentTimeMillis();
 //        List<PersonVo> personVos2 = test.handleWithStreamParallel(personList);
 //        log.info("total handleWithStreamParallel time:{} size:{}", System.currentTimeMillis() -start2, personVos2.size());
@@ -48,9 +51,35 @@ public class ConcurrentTest {
 //        log.info("total handleWithCompletionService time:{} size:{}", System.currentTimeMillis() -start4, personVos4.size());
 
 
-//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(personVos));
+//        personList.parallelStream().forEach( o ->{
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            o.setCompany("上地数字传媒大厦-上地数字传媒大厦-上地数字传媒大厦-上地数字传媒大厦-上地数字传媒大厦");
+//        });
+//
+//        System.out.println("main -------------------");
+//        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(personList));
         //System.out.println(JSON.toJSONString(personVos2));
 //        System.out.println("length:" + personVos.size());
+
+
+        List<Integer> list = new ArrayList<>();
+        Collections.addAll(list, 1, 2,3,4,5);
+        list.parallelStream().forEach(o -> {
+            System.out.println("fff"+ Thread.currentThread().getName());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            String so= o + "-aa";
+            System.out.println(so);
+        });
+
+        System.out.println("main -------------------");
 
     }
 
@@ -163,9 +192,9 @@ public class ConcurrentTest {
 //            System.out.println("current thread:" + Thread.currentThread().getName());
             try{
                 // 模拟异常
-                if(vo.getId() == 6){
-                    int i = 10/0;
-                }
+//                if(vo.getId() == 6){
+//                    int i = 10/0;
+//                }
                 return PersonVo.builder()
                         .id(vo.getId())
                         .address(vo.getAddress())
@@ -234,7 +263,14 @@ public class ConcurrentTest {
         List<PersonBo> personList = new ArrayList<>();
 
         for (int i = 0; i< count; i++){
-            personList.add(new PersonBo(Long.valueOf(i),"y"+i,"yl0000000000000000"+i,"bj000000000000000"+i,i*10));
+            PersonBo bo = new PersonBo();
+            bo.setId(Long.valueOf(i));
+            bo.setName("y"+i);
+            bo.setFullName("yl000000000"+i);
+            bo.setAddress("bj0000000000"+i);
+            bo.setAge(i*10);
+
+            personList.add(bo);
         }
 //        Collections.addAll(personList,new PersonBo(1L,"y","yl","bj",10),
 //                new PersonBo(2L,"y2","yl22222222222222222","bj2222222222222222",20),
@@ -259,12 +295,15 @@ public class ConcurrentTest {
 
 @Data
 @Builder
+@AllArgsConstructor
+@RequiredArgsConstructor
 class PersonBo{
     private Long id;
     private String name;
     private String fullName;
     private String address;
     private Integer age;
+    private String company;
 }
 
 

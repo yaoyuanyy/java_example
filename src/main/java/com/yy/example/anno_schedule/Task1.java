@@ -9,7 +9,7 @@ import java.util.Date;
 @Component
 public class Task1 {
 
-    @Scheduled(fixedRate = 3000)
+    //@Scheduled(fixedRate = 3000)
     public void syn() throws InterruptedException {
         System.out.println("syn: "+new Date());
         Thread.sleep(1000*8);

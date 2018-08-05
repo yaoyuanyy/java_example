@@ -1,5 +1,7 @@
 package com.yy.example.java8;
 
+import com.google.common.collect.ImmutableMap;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +25,7 @@ public class MapNewMethodTest {
         map.getOrDefault(42, "not found");  // not found
 
         map.merge(9, "concat", (value, newValue) -> value.concat(newValue));
-        map.get(9); 
+        map.get(9);
+
 	}
 }

@@ -1,13 +1,17 @@
 package com.yy.example.collections_framework;
 
+import com.google.common.collect.ImmutableMap;
+
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
  * Created by yaoliang on 2017/2/27.
  */
 public class MapNullTest {
+
     public static void main(final String[] args) {
         System.out.println("");
 
@@ -22,5 +26,13 @@ public class MapNullTest {
         final TreeMap tm = new TreeMap();
         tm.put(null, "q");
         System.out.println(tm.get(null));
+
+
+
+        HashMap<String, String> map = new HashMap<String, String>(1){{
+            put("s","f");
+        }};
+
+        Map map2 = ImmutableMap.of("ff","gg");
     }
 }
