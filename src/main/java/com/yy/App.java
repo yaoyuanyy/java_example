@@ -21,5 +21,4 @@ public class App {
         double d = DoubleUtil.divide(10,1,2);
         System.out.println("d value: "+d);
     }
-
 }

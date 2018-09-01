@@ -1,10 +1,9 @@
 package com.yy.example.gson;
 
+import com.alibaba.fastjson.JSON;
 import com.google.gson.GsonBuilder;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Description:
@@ -16,6 +15,14 @@ import java.util.Map;
 public class Test {
 
     public static void main(String[] args) {
+
+        List list = new ArrayList(){{
+            add(1);
+            add(2);
+            add(3);
+        }};
+
+        System.out.println(JSON.toJSONString(list));
 
         CustomerBusinessPool pool1 = CustomerBusinessPool.builder()
                 .id(11L)
@@ -54,7 +61,7 @@ public class Test {
         map.put(pool2.getId()+"", pool2);
 
 
-        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(map));
+        //System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(map));
 
     }
 }

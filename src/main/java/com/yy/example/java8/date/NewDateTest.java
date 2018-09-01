@@ -66,6 +66,8 @@ public class NewDateTest {
         localDateTime = LocalDateTime.of(2014,Month.APRIL,10, 20, 50);
         System.out.println("时间"+localDateTime.toString());
 
+        LocalDateTime.ofInstant(new Date().toInstant(),ZoneId.systemDefault()).format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+
         //Clock 时钟(可选，可用now()获取同样的功能)
         //代替System.currentTimeMillis()来获取当前的毫秒值
         Clock clock = Clock.systemDefaultZone();//获取系统默认时区 (当前瞬时时间 )

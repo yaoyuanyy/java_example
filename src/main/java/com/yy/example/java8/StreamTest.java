@@ -1,42 +1,25 @@
 package com.yy.example.java8;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class StreamTest {
 	public static void main(String[] args) {
-		List<Person> list = new ArrayList<>();
-		
-		// 把一个Collection转化为Stream
-		// 实际应用对比：从person的集合中取出firstName放到另一个集合中
-		List<Person> persons = new ArrayList<>();
-		Collections.addAll(persons, new Person("11", "111"), new Person("12", "112"));
-		// java7
-		List<String> names = new ArrayList<String>();
-		for (Person person : persons) {
-			names.add(person.getFirstName());
-		}
-		
-		
-		// java8
-		list.stream().map(Person::getLastName).collect(Collectors.toList());
-		list.parallelStream().map(Person::getLastName).collect(Collectors.toList());//并行
-		
-		
-		list.stream().parallel().filter((p) -> p.getFirstName().contains("1")) //过滤
-				.forEach((pp) -> System.out.println("pp:" + pp.getFirstName() + "thread:" + Thread.currentThread()));
-		
-		List<String> list2 = new ArrayList<>();
-
-		list.parallelStream().filter(p -> p.getFirstName().contains("1")).<String>map(Person::getLastName)// 返回一个新的stream<T>
-		.collect(Collectors.toList()).forEach((sr) -> {
-			System.out.println(sr);
-			list2.toArray();
-		});
+		List<Integer> elements = new ArrayList<>();
+//		for(int i=0 ; i< 10000 ; i++) {
+//			elements.add(i);
+//		}
+//		List<Integer> matched = elements.parallelStream()
+//				.filter(e -> e >= 100)
+//				.collect(Collectors.toList());
+//		System.out.println(matched.size());
 
 		List<String> values = Arrays.asList("1", "2", "3");
 		String sum = values.stream().reduce("", (a, rrr) -> a + rrr);
@@ -44,7 +27,22 @@ public class StreamTest {
 		System.out.println(sum);
 
         System.out.println( "a"+getInt("dd", s ->s.equals("dd")));
+		for(int i=0 ; i< 100 ; i++) {
+			System.out.println(JSON.toJSONString(IntStream.range(0,5).parallel().map(x -> x*2).toArray()));
+		}
 
+
+		int _sum = 2;
+		for (int x : new int[]{1,2,3}) {
+			_sum += x;
+		}
+		System.out.println(_sum);
+
+		int _sum2 = Arrays.asList(new Integer[]{1,2,3}).stream().reduce(2, (x,y) -> x+y);
+		System.out.println(_sum2);
+
+		int _sum3 = Arrays.asList(new Integer[]{1,2,3}).stream().reduce(2, (a, b) -> a + 1 + b, Integer::sum);
+		System.out.println(_sum3);
 	}
 
 	public static int getInt(Object o, Predicate predicate) {

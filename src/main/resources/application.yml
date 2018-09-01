@@ -24,6 +24,9 @@ spring:
       batch-size: 65536
       buffer-memory: 524288
 
+debug: true
+
+banner.image.location: /tao.jpg
 
 #kafka:
 #  consumer:

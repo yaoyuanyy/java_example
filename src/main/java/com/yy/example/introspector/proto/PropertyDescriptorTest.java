@@ -1,6 +1,5 @@
 package com.yy.example.introspector.proto;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
 import lombok.Data;
 
 import java.beans.IntrospectionException;
