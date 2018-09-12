@@ -9,10 +9,11 @@ import java.util.stream.Collectors;
  * Description:
  * <p></p>
  * <pre></pre>
+ * @author
  * NB.
  * Created by skyler on 2017/12/17 at 下午10:54
  */
-public class MapSortByValue {
+public class ListMapSortByValue {
 
     public static void main(final String[] args) {
         // 默认情况，TreeMap按key升序排序
@@ -151,9 +152,11 @@ public class MapSortByValue {
         /**
          * ------------- 对自定义对象进行自定义排序方法从而实现排序 -------------
          */
-        final List<Human> humans = Lists.newArrayList(new Human("Sarah", 10), new Human("Jack", 12));
+        final List<Human> humans = Lists.newArrayList(new Human("Sarah", 10), new Human("Jack", 12), new Human("Jack", 15));
         humans.sort(Human::compareByNameThenAge);
-        // humans.forEach(System.out::println);
+        humans.forEach(o ->{
+            System.out.println(o.getAge() + " " +o.getName());
+        });
     }
 
 
@@ -162,6 +165,22 @@ public class MapSortByValue {
 class Human {
     private String name;
     private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public Human() {
         super();
@@ -176,7 +195,7 @@ class Human {
 
     public static int compareByNameThenAge(final Human lhs, final Human rhs) {
         if (lhs.name.equals(rhs.name)) {
-            return lhs.age - rhs.age;
+            return rhs.age - lhs.age;
         } else {
             return lhs.name.compareTo(rhs.name);
         }
