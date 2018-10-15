@@ -1,4 +1,4 @@
-package com.yy.example.data_structure_and_algorithm;
+package com.yy.example.collections_framework;
 
 import com.google.common.collect.Lists;
 
@@ -8,7 +8,9 @@ import java.util.stream.Collectors;
 /**
  * Description:
  * <p></p>
- * <pre></pre>
+ * <pre>
+ *     refer to https://dzone.com/articles/how-to-sort-a-map-by-value-in-java-8?edition=403191&utm_source=Daily%20Digest&utm_medium=email&utm_campaign=Daily%20Digest%202018-09-28
+ * </pre>
  * @author
  * NB.
  * Created by skyler on 2017/12/17 at 下午10:54

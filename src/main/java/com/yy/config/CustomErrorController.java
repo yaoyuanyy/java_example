@@ -1,5 +1,7 @@
 package com.yy.config;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.IOUtils;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,14 +17,15 @@ import javax.servlet.http.HttpServletResponse;
  * Created by skyler on 2018/7/16 at 下午10:54
  */
 @RestController
+@Slf4j
 public class CustomErrorController implements ErrorController{
 
     private static final String PATH="/error";
 
     @RequestMapping(PATH)
-    public String errorHandle(HttpServletRequest request, HttpServletResponse response){
-        System.out.println("cuowu");
-        return "lll";
+    public ResponseObj errorHandle(HttpServletRequest request, HttpServletResponse response){
+        log.error("request uri:{} response status:{}", request.getRequestURL(), response.getStatus());
+        return new ResponseObj(AppCode.ERROR, "");
     }
 
     @Override
