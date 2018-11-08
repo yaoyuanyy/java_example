@@ -23,6 +23,8 @@ spring:
     producer:
       batch-size: 65536
       buffer-memory: 524288
+  profiles:
+    active: @profileActive@
 
 debug: true
 

@@ -1,4 +1,4 @@
-package com.yy.custom_spring;
+package com.yy.custom_spring.custom2;
 
 import lombok.Data;
 

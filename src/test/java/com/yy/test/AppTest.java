@@ -3,8 +3,11 @@ package com.yy.test;
 
 import com.yy.App;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.context.WebApplicationContext;
 
 /**
  * test case base class, extend it if you define a test case class
@@ -13,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest(classes = {App.class}, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AppTest {
 
-
+    @Autowired
+    protected WebApplicationContext webApplicationContext;
 
 }

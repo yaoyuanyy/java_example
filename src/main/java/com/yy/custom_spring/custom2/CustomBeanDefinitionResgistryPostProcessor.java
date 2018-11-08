@@ -1,4 +1,4 @@
-package com.yy.custom_spring;
+package com.yy.custom_spring.custom2;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
@@ -8,22 +8,19 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
-import org.springframework.core.type.classreading.MetadataReader;
-import org.springframework.core.type.classreading.MetadataReaderFactory;
 import org.springframework.core.type.filter.AnnotationTypeFilter;
-import org.springframework.core.type.filter.TypeFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.io.IOException;
 import java.util.Set;
 
 /**
  * Description: 自定义 BeanDefinitionRegistryPostProcessor用于实现自己的bean definition注册逻辑。如可以按某个包注册，按某个注解注册
- * <p></p>
+ * <p>
+ *     BeanDefinitionRegistryPostProcessor 接口可以看作是BeanFactoryPostProcessor和ImportBeanDefinitionRegistrar的功能集合，既可以获取和修改BeanDefinition的元数据，也可以实现BeanDefinition的注册、移除等操作。
+ * </p>
  * <pre>
  *     refer to http://elim.iteye.com/blog/2394038
- *     NB.
  * </pre>
  *
  * Created by skyler on 2018/9/29 at 下午5:09
@@ -99,10 +96,14 @@ public class CustomBeanDefinitionResgistryPostProcessor implements BeanDefinitio
      */
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
+        log.info("into CustomBeanDefinitionResgistryPostProcessor.postProcessBeanDefinitionRegistry method");
+
+        BeanDefinition singleBeanDefinition = new RootBeanDefinition(Hello.class);
+        registry.registerBeanDefinition(Hello.class.getName(), singleBeanDefinition);
+
         boolean useDefaultFilters = false;
         ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(useDefaultFilters);
 
-        // 排除指定注解的类
         provider.addIncludeFilter(new AnnotationTypeFilter(Component.class));
 
         String scanPackage = "com.yy.rest";
@@ -117,9 +118,11 @@ public class CustomBeanDefinitionResgistryPostProcessor implements BeanDefinitio
         }
     }
 
+
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
 
+        log.info("into CustomBeanDefinitionResgistryPostProcessor.postProcessBeanFactory method");
     }
 
 }

@@ -6,11 +6,9 @@
 
     <groupId>com.yy</groupId>
     <artifactId>java_example</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>java_example</name>
-    <url>http://maven.apache.org</url>
     <developers>
         <developer>
             <name>skyler</name>
@@ -22,7 +20,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.8.RELEASE</version>
+        <version>1.5.10.RELEASE</version>
     </parent>
 
     <properties>
@@ -87,13 +85,11 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.29</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.2</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
@@ -119,25 +115,15 @@
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
         </dependency>
-         <!--https://mvnrepository.com/artifact/org.springframework.kafka/spring-kafka-->
         <dependency>
             <groupId>org.springframework.kafka</groupId>
             <artifactId>spring-kafka</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.kafka/kafka-streams -->
         <dependency>
             <groupId>org.apache.kafka</groupId>
             <artifactId>kafka-streams</artifactId>
             <version>0.10.1.1</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.poi</groupId>-->
-            <!--<artifactId>poi</artifactId>-->
-            <!--<version>3.11</version>-->
-        <!--</dependency>-->
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
@@ -148,61 +134,64 @@
             <artifactId>mybatis</artifactId>
             <version>3.4.5</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml-schemas -->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.poi</groupId>-->
-            <!--<artifactId>poi-ooxml-schemas</artifactId>-->
-            <!--<version>3.11</version>-->
-        <!--</dependency>-->
-
-
-        <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-examples -->
-        <!--<dependency>-->
-            <!--<groupId>org.apache.poi</groupId>-->
-            <!--<artifactId>poi-examples</artifactId>-->
-            <!--<version>3.11</version>-->
-        <!--</dependency>-->
-
     </dependencies>
 
-    <repositories>
+    <profiles>
+        <!--开发环境-->
+        <profile>
+            <id>local</id>
+            <properties>
+                <!--
+                    NOTE: difference between 'maven profile' and 'spring profile'
+                    ,please read url -> https://stackoverflow.com/questions/42390860/configure-active-profile-in-springboot-via-maven
+                -->
+
+                <!--自定义注解 这里只是设置maven profile而不是spring profile
+                    , 如果想设置spring profile且引用这里的profile, 需要在application.yml中引用: profiles.active: @profileActive@
+                -->
+                <profileActive>local</profileActive>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                        <includes>
+                            <!-- 原来的配置为<include>application.yml</include>
+                                这里一定要有通配符，不然后加的配置文件如application-test.yml加载不上，问题还不好查
+                            -->
+                            <include>application*.yml</include>
+                        </includes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
+
+    <!--  如果想发布项目到nexus仓库  -->
+    <!-- 这里的id必须和setting.xml文件中server的id值一一保持一致 -->
+    <distributionManagement>
+        <!-- Release包的管理 deploy打包时的version需要没有Snapshot字样 -->
         <repository>
-            <id>central</id>
-            <name>Central Repository</name>
-            <url>http://maven.aliyun.com/nexus/content/repositories/central</url>
-            <layout>default</layout>
-            <!-- <snapshots>
-               <enabled>false</enabled>
-             </snapshots>-->
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
+            <id>releases</id>
+            <url>http://47.98.189.37:8081/repository/skyler-release/</url>
         </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>central</id>
-            <name>Central Repository</name>
-            <url>http://maven.aliyun.com/nexus/content/repositories/central</url>
-            <layout>default</layout>
-            <!-- <snapshots>
-               <enabled>false</enabled>
-             </snapshots>-->
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
+        <!-- Snapshot包的管理 -->
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://47.98.189.37:8081/repository/skyler-snapshot/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 
     <build>
-
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        <filters>
+            <filter>src/main/resources/profile/${profileActive}.properties</filter>
+        </filters>
         <plugins>
             <!-- Spring Boot Maven -->
             <plugin>
@@ -214,6 +203,23 @@
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
                 <version>1.3.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+            </plugin>
+            <!-- 打包源码插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
