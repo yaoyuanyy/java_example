@@ -1,4 +1,4 @@
-package com.yy.example.java_base.gc;
+package com.yy.test;
 
 import org.assertj.core.internal.cglib.proxy.Enhancer;
 import org.assertj.core.internal.cglib.proxy.MethodInterceptor;

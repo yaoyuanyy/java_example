@@ -1,4 +1,4 @@
-package com.yy.example.java8;
+package com.yy.test;
 
 import org.apache.commons.codec.binary.Base64;
 import org.junit.AfterClass;

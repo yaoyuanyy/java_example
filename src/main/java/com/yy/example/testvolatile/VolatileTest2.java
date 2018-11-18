@@ -1,7 +1,5 @@
 package com.yy.example.testvolatile;
 
-import org.junit.Test;
-
 /**
  * Created by yaoliang on 2017/2/23.
  */

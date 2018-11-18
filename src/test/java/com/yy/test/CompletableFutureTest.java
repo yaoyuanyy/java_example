@@ -1,4 +1,4 @@
-package com.yy.example.java8;
+package com.yy.test;
 
 import org.junit.Test;
 
@@ -6,7 +6,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.stream.IntStream;
 
 /**
  *
