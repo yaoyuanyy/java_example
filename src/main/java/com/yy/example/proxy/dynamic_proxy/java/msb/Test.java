@@ -1,4 +1,4 @@
-package com.yy.example.proxy.dynamic_proxy;
+package com.yy.example.proxy.dynamic_proxy.java.msb;
 
 /**
  * Created by skyler on 2017/3/17.

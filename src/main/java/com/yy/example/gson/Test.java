@@ -1,9 +1,11 @@
 package com.yy.example.gson;
 
 import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 /**
  * Description:
@@ -15,7 +17,11 @@ import java.util.*;
 public class Test {
 
     public static void main(String[] args) {
+        Test test = new Test();
+        test.orgCHQ();
+    }
 
+    public void orgCBP(){
         List list = new ArrayList(){{
             add(1);
             add(2);
@@ -60,8 +66,23 @@ public class Test {
         map.put(pool1.getId()+"", pool1);
         map.put(pool2.getId()+"", pool2);
 
+        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(map));
+    }
 
-        //System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(map));
+    public void orgCHQ(){
+        DistributedHouseQuery query = new DistributedHouseQuery();
+        query.setActivityCode("dsfdsfdsfd活动活动");
+        query.setBusinessCode("b商家商家sdfdsf大幅度");
 
+        List<DistributedHouseQuery.DistributedHouse> list = new ArrayList();
+        IntStream.range(0,5000).forEach(i -> {
+            DistributedHouseQuery.DistributedHouse house = new DistributedHouseQuery.DistributedHouse();
+            house.setCouponTemplateId(Long.valueOf(i));
+            house.setRentUnitCode("1100000001063364" + i);
+            list.add(house);
+        });
+        query.setList(list);
+
+        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(query));
     }
 }

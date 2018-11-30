@@ -1,4 +1,4 @@
-package com.yy.example.proxy.dynamic_proxy;
+package com.yy.example.proxy.dynamic_proxy.java.msb;
 
 import java.lang.reflect.Method;
 
