@@ -17,15 +17,12 @@ skyler:
 
 spring:
   kafka:
-#    47.98.189.37:9092
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: 47.98.189.37:9092
     consumer:
       group-id: 0
     producer:
       batch-size: 65536
       buffer-memory: 524288
-  profiles:
-    active: @profileActive@
 
 debug: true
 

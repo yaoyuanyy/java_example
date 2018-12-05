@@ -1,4 +1,4 @@
-package com.yy.third_componet.kafka;
+package com.yy.message.kafka;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.Serdes;

@@ -1,4 +1,4 @@
-package com.yy.third_componet.kafka.spring;
+package com.yy.message.kafka.spring;
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaConsumer {
 
-    @KafkaListener(topics = {"skyler"})
+    @KafkaListener(topics = "skyler")
     public void receive(String message){
         System.out.println("consumer message:" + message);
     }

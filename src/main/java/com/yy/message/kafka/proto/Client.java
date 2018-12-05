@@ -1,4 +1,4 @@
-package com.yy.third_componet.kafka.proto;
+package com.yy.message.kafka.proto;
 
 /**
  * Description:

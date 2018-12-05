@@ -18,7 +18,8 @@ public class Test {
 
     public static void main(String[] args) {
         Test test = new Test();
-        test.orgCHQ();
+        //test.orgCHQ();
+        test.orgMarketingCHQ();
     }
 
     public void orgCBP(){
@@ -69,10 +70,10 @@ public class Test {
         System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(map));
     }
 
-    public void orgCHQ(){
+    public void orgDHQ(){
         DistributedHouseQuery query = new DistributedHouseQuery();
-        query.setActivityCode("dsfdsfdsfd活动活动");
-        query.setBusinessCode("b商家商家sdfdsf大幅度");
+        query.setActivityCode("M0001");
+        query.setBusinessCode("TESTQD201333");
 
         List<DistributedHouseQuery.DistributedHouse> list = new ArrayList();
         IntStream.range(0,5000).forEach(i -> {
@@ -84,5 +85,37 @@ public class Test {
         query.setList(list);
 
         System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(query));
+    }
+
+    public void orgCHQ(){
+        CentralizedHouseQuery query = new CentralizedHouseQuery();
+        query.setActivityCode("M0001");
+        query.setBusinessCode("TESTQD201333");
+
+        List<CentralizedHouseQuery.CentralizedHouse> list = new ArrayList();
+        IntStream.range(0,5000).forEach(i -> {
+            CentralizedHouseQuery.CentralizedHouse house = new CentralizedHouseQuery.CentralizedHouse();
+            house.setCouponTemplateId(Long.valueOf(i));
+            house.setLayoutCode("L100000000000207" + i);
+            list.add(house);
+        });
+        query.setCentralizedList(list);
+
+        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(query));
+    }
+
+    public void orgMarketingCHQ(){
+        List<MarketingCentralizedHouseQuery> list = new ArrayList<>();
+        IntStream.range(0,5000).forEach(i -> {
+            MarketingCentralizedHouseQuery query = new MarketingCentralizedHouseQuery();
+            query.setActivityCode("M0002");
+            query.setBusinessCode("TESTQD201333");
+            query.setLayoutCode("Q100000000000207" + i);
+            query.setCouponTemplateId(Long.valueOf(i));
+            query.setStatus((byte)4);
+            list.add(query);
+        });
+        System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(list));
+
     }
 }
