@@ -15,10 +15,19 @@ import javax.annotation.Resource;
 public class KafkaTest extends AppTest{
 
     @Resource
+    private KafkaTemplate<String, String> myKafkaTemplate;
+
+    @Resource
     private KafkaTemplate<String, String> kafkaTemplate;
 
     @Test
     public void test(){
         kafkaTemplate.send("skyler"," i am comint");
+    }
+
+    @Test
+    public void sendMessage() {
+        String topicName = "topicName";
+        myKafkaTemplate.send(topicName, "foo","kaka");
     }
 }
