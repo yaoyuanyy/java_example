@@ -1,4 +1,4 @@
-package com.yy.example.socket.tutorial1;
+package com.yy.example.socket.bio.tutorial1;
 
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
@@ -11,7 +11,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-import static com.yy.example.socket.Constants.SOCKET_PORT;
+import static com.yy.example.socket.bio.Constants.SOCKET_PORT;
 
 /**
  * Description:
@@ -29,7 +29,10 @@ public class Server {
 
     private static final ThreadPoolExecutor executor = new ThreadPoolExecutor(10, 20, 10
             , TimeUnit.MILLISECONDS, new LinkedBlockingQueue<>(10)
-            , new BasicThreadFactory.Builder().namingPattern("socket-thread-pool-%d").build());
+            , new BasicThreadFactory.Builder().namingPattern("socket-thread-pool-%d")
+            .uncaughtExceptionHandler((t, e) ->{
+                System.out.println("thread:"+t.getName() + " exception:"+e.getMessage());
+            }).build());
 
     public Server(int port) throws IOException {
         serverSocket = new ServerSocket(port);

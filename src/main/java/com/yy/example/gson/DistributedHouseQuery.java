@@ -34,7 +34,7 @@ public class DistributedHouseQuery {
     private String businessCode;
 
     @Valid
-    private List<DistributedHouse> list;
+    private List<DistributedHouse> distributedList;
 
     public static class DistributedHouse{
         /**

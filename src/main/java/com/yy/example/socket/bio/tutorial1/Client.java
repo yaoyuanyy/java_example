@@ -1,4 +1,4 @@
-package com.yy.example.socket.tutorial1;
+package com.yy.example.socket.bio.tutorial1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-import static com.yy.example.socket.Constants.SOCKET_PORT;
+import static com.yy.example.socket.bio.Constants.SOCKET_PORT;
 
 /**
  * Description:

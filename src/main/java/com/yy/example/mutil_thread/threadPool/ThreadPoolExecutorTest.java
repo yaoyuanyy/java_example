@@ -32,7 +32,7 @@ import java.util.concurrent.TimeUnit;
  *     coreSize maxSize queueSize taskSize
  *     3        10      5         10
  *
- *     任务编号：1， 2， 3， 4， 5， 6， 7， 8， 9
+ *     任务编号：1， 2， 3， 4， 5， 6， 7， 8， 9， 10
  *
  *     运行轨迹(步骤)     执行的任务编号                      本质揭秘(执行的数量)
  *        1              1, 2, 3                           coreSize

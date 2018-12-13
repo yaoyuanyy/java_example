@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 /**
@@ -19,7 +20,7 @@ public class Test {
     public static void main(String[] args) {
         Test test = new Test();
         //test.orgCHQ();
-        test.orgMarketingCHQ();
+        test.orgDHQ();
     }
 
     public void orgCBP(){
@@ -73,16 +74,17 @@ public class Test {
     public void orgDHQ(){
         DistributedHouseQuery query = new DistributedHouseQuery();
         query.setActivityCode("M0001");
-        query.setBusinessCode("TESTQD201333");
+        query.setBusinessCode("CMD407974");
 
         List<DistributedHouseQuery.DistributedHouse> list = new ArrayList();
+        Long random = ThreadLocalRandom.current().nextLong(1000,9999);
         IntStream.range(0,5000).forEach(i -> {
             DistributedHouseQuery.DistributedHouse house = new DistributedHouseQuery.DistributedHouse();
-            house.setCouponTemplateId(Long.valueOf(i));
-            house.setRentUnitCode("1100000001063364" + i);
+            house.setCouponTemplateId(100L);
+            house.setRentUnitCode("12000000010"+random+"11200");
             list.add(house);
         });
-        query.setList(list);
+        query.setDistributedList(list);
 
         System.out.println(new GsonBuilder().setPrettyPrinting().create().toJson(query));
     }

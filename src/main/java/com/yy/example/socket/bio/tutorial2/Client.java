@@ -1,9 +1,9 @@
-package com.yy.example.socket.tutorial2;
+package com.yy.example.socket.bio.tutorial2;
 
 import java.io.*;
 import java.net.Socket;
 
-import static com.yy.example.socket.Constants.SOCKET_PORT;
+import static com.yy.example.socket.bio.Constants.SOCKET_PORT;
 
 /**
  * Description:
