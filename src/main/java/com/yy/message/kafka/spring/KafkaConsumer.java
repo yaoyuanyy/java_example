@@ -18,7 +18,7 @@ public class KafkaConsumer {
         System.out.println("consumer message:" + message);
     }
 
-    @KafkaListener(topics = "topicName", group = "foo")
+    @KafkaListener(topics = "topicName", groupId = "foo")
     public void listen(String message) {
         System.out.println("Received Messasge in group foo: " + message);
     }

@@ -3,7 +3,6 @@ package com.yy.config;
 import com.yy.annotation.CustomClass2IOC;
 import com.yy.custom_spring.custom2.CustomBeanDefinitionResgistryPostProcessor;
 import com.yy.custom_spring.custom4.HelloService;
-import com.yy.custom_spring.custom5.CustomInstantiationAwarePostProcessorAdapter;
 import com.yy.custom_spring.custom5.InstantiationService;
 import com.yy.custom_spring.custom6.CustomBeanFactoryPostProcessor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**

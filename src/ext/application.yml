@@ -16,6 +16,8 @@ skyler:
         - /v1/admin
 
 spring:
+  application:
+    name: java-example-ext
   kafka:
     bootstrap-servers: 47.98.189.37:9092
     consumer:
@@ -28,6 +30,7 @@ debug: true
 
 banner.image.location: /tao.jpg
 
+## 使用kafka客户端的配置
 #kafka:
 #  consumer:
 #    zookeeper:

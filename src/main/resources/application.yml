@@ -29,7 +29,7 @@ spring:
 
 debug: true
 
-banner.image.location: /tao.jpg
+spring.banner.image.location: /tao.jpg
 
 #kafka:
 #  consumer:
