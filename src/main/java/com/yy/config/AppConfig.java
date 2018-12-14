@@ -10,8 +10,6 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.web.servlet.config.annotation.AsyncSupportConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * Description:
@@ -24,7 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Import(value = {MultiThreadConfig.class})
 @CustomClass2IOC(targets = {HelloService.class})
 @Slf4j
-public class AppConfig extends WebMvcConfigurerAdapter{
+public class AppConfig{
 
     @Bean
     public CustomBeanDefinitionResgistryPostProcessor customBeanDefinitionResgistryPostProcessor(){
@@ -49,12 +47,5 @@ public class AppConfig extends WebMvcConfigurerAdapter{
     @Bean
     public static BeanFactoryPostProcessor customBeanFactoryPostProcessor(){
         return new CustomBeanFactoryPostProcessor();
-    }
-
-    @Override
-    public void configureAsyncSupport(AsyncSupportConfigurer configurer) {
-        configurer.setDefaultTimeout(300);
-        //configurer.registerCallableInterceptors()
-        //super.configureAsyncSupport(configurer);
     }
 }

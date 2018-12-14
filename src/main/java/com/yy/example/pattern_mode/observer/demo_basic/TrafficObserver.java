@@ -1,7 +1,5 @@
 package com.yy.example.pattern_mode.observer.demo_basic;
 
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-
 import java.time.LocalDateTime;
 
 /**

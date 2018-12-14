@@ -1,12 +1,13 @@
 package com.yy.config;
 
+import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.FullHttpResponse;
+import io.netty.handler.codec.http.HttpRequest;
+import io.netty.handler.codec.http.HttpResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 /**
  * Description:
@@ -22,8 +23,8 @@ public class CustomErrorController implements ErrorController {
     private static final String PATH="/error";
 
     @RequestMapping(PATH)
-    public ResponseObj errorHandle(HttpServletRequest request, HttpServletResponse response){
-        log.error("request uri:{} response status:{}", request.getRequestURL(), response.getStatus());
+    public ResponseObj errorHandle(FullHttpRequest request, FullHttpResponse response){
+        log.error("request uri:{} response status:{}", request.uri(), response.status());
         return new ResponseObj(AppCode.ERROR, "");
     }
 

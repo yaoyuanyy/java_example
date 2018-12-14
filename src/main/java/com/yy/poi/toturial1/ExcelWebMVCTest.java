@@ -1,11 +1,11 @@
 package com.yy.poi.toturial1;
 
+import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.FullHttpResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
@@ -23,7 +23,7 @@ public class ExcelWebMVCTest {
     private ExcelWriter excelWriter;
 
     @RequestMapping("/export")
-    public void export(HttpServletRequest request, HttpServletResponse response) {
+    public void export(FullHttpRequest request, FullHttpResponse response) {
 
         ExcelMockData mockData = new ExcelMockData();
         List<ExcelModel> excelData = mockData.getExcelData(20);
@@ -38,10 +38,4 @@ public class ExcelWebMVCTest {
 
     }
 
-    @RequestMapping("/query")
-    public void query(HttpServletRequest request, HttpServletResponse response) {
-
-        System.out.println("quering ----");
-
-    }
 }

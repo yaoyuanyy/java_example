@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class KafkaConsumer {
 
-    @KafkaListener(topics = "skyler")
-    public void receive(String message){
-        System.out.println("consumer message:" + message);
-    }
-
-    @KafkaListener(topics = "topicName", groupId = "foo")
-    public void listen(String message) {
-        System.out.println("Received Messasge in group foo: " + message);
-    }
+//    @KafkaListener(topics = "skyler")
+//    public void receive(String message){
+//        System.out.println("consumer message:" + message);
+//    }
+//
+//    @KafkaListener(topics = "topicName", groupId = "foo")
+//    public void listen(String message) {
+//        System.out.println("Received Messasge in group foo: " + message);
+//    }
 }

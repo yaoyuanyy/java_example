@@ -1,5 +1,15 @@
 package com.yy.poi.toturial1;
 
+import io.netty.handler.codec.http.FullHttpResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.springframework.stereotype.Component;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -16,20 +26,6 @@ import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.yy.poi.toturial1.ExcelModel;
-import com.yy.poi.toturial1.ExcelUtils;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.concurrent.BasicThreadFactory;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.xssf.streaming.SXSSFRow;
-import org.apache.poi.xssf.streaming.SXSSFSheet;
-import org.apache.poi.xssf.streaming.SXSSFWorkbook;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletResponse;
-
 @Component
 @Slf4j
 public class ExcelWriter {
@@ -42,15 +38,17 @@ public class ExcelWriter {
 
     CompletionService completionService = new ExecutorCompletionService(executor);
 
-    public void asynExport(List<ExcelModel> excelModels, HttpServletResponse response){
-        executor.execute(() -> writeToExcelAutoFlush(excelModels,response));
+    public void asynExport(List<ExcelModel> excelModels, FullHttpResponse response) {
+        executor.execute(() -> writeToExcelAutoFlush(excelModels, response));
     }
+
     /**
      * using auto flush and default window size 100
+     *
      * @param excelModels
      * @param response
      */
-    public void writeToExcelAutoFlush(List<ExcelModel> excelModels, HttpServletResponse response) {
+    public void writeToExcelAutoFlush(List<ExcelModel> excelModels, FullHttpResponse response) {
         long start = System.currentTimeMillis();
         SXSSFWorkbook wb = null;
         OutputStream fos = null;
@@ -95,13 +93,13 @@ public class ExcelWriter {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_hh_mm_ss");
             String excelFileName = "广厦_" + formatter.format(LocalDateTime.now()) + ".xlsx";
             // 浏览器附件下载
-            fos = response.getOutputStream();
-            // application/vnd.ms-excel
-            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            // eliminates browser caching
-            response.setHeader("Expires:", "0");
-            response.setHeader("Content-disposition", "attachment; filename="+excelFileName);
-            wb.write(fos);
+//            fos = response.getOutputStream();
+//            // application/vnd.ms-excel
+//            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+//            // eliminates browser caching
+//            response.setHeader("Expires:", "0");
+//            response.setHeader("Content-disposition", "attachment; filename="+excelFileName);
+//            wb.write(fos);
             System.out.println("export time:" + (System.currentTimeMillis() - start) + "毫秒");
         } catch (Exception ex) {
 
@@ -125,9 +123,10 @@ public class ExcelWriter {
 
     /**
      * using manual flush and default window size 100
+     *
      * @param excelModels
      */
-    public void writeToExcelManualFlush(List<ExcelModel> excelModels, HttpServletResponse response) {
+    public void writeToExcelManualFlush(List<ExcelModel> excelModels, FullHttpResponse response) {
         SXSSFWorkbook wb = null;
         FileOutputStream fos = null;
         try {
@@ -198,10 +197,9 @@ public class ExcelWriter {
 
 
     /**
-     *
      * @param response
      */
-    public void writeToExcelAsyn(HttpServletResponse response) {
+    public void writeToExcelAsyn(FullHttpResponse response) {
         long start = System.currentTimeMillis();
         SXSSFWorkbook wb = null;
         OutputStream fos = null;
@@ -247,8 +245,8 @@ public class ExcelWriter {
             log.info("start write 前 20 columns");
 
             int total = 10002;
-            int pageSize=50;
-            int iteratorCount = total%pageSize == 0 ? total/pageSize: total/pageSize + 1;
+            int pageSize = 50;
+            int iteratorCount = total % pageSize == 0 ? total / pageSize : total / pageSize + 1;
             List<CompletableFuture> completableFutures = new ArrayList<>(iteratorCount);
 
             for (int i = 0; i < iteratorCount; i++) {
@@ -257,32 +255,32 @@ public class ExcelWriter {
                         System.out.println("jin lai le");
                         getData(sh, rowNum);
                     } catch (Exception e) {
-                        log.error("export error:{}",e);
+                        log.error("export error:{}", e);
                     }
-                }).handle((o,e) -> {
-                    if(e != null) {
-                        log.error("export error:{}",e);
+                }).handle((o, e) -> {
+                    if (e != null) {
+                        log.error("export error:{}", e);
                     }
                     return null;
                 }));
             }
 
-            CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[0])).get(5,TimeUnit.MINUTES);
+            CompletableFuture.allOf(completableFutures.toArray(new CompletableFuture[0])).get(5, TimeUnit.MINUTES);
 
             log.info("异步写完数据，准备写入流中");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_hh_mm_ss");
             String excelFileName = "广厦_" + formatter.format(LocalDateTime.now()) + ".xlsx";
             // 浏览器附件下载
-            fos = response.getOutputStream();
-            // application/vnd.ms-excel
-            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-            // eliminates browser caching
-            response.setHeader("Expires:", "0");
-            response.setHeader("Content-disposition", "attachment; filename="+excelFileName);
-            wb.write(fos);
-            System.out.println("export time:" + (System.currentTimeMillis() - start) + "毫秒");
+//            fos = response.getOutputStream();
+//            // application/vnd.ms-excel
+//            response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+//            // eliminates browser caching
+//            response.setHeader("Expires:", "0");
+//            response.setHeader("Content-disposition", "attachment; filename="+excelFileName);
+//            wb.write(fos);
+//            System.out.println("export time:" + (System.currentTimeMillis() - start) + "毫秒");
         } catch (Exception ex) {
-            log.error("poi export customerPool error:{}",ex);
+            log.error("poi export customerPool error:{}", ex);
         } finally {
             try {
                 if (fos != null) {
@@ -290,7 +288,7 @@ public class ExcelWriter {
                     fos.close();
                 }
             } catch (IOException e) {
-                log.error("fos flush close error:{}",e);
+                log.error("fos flush close error:{}", e);
             }
             try {
                 if (wb != null) {
@@ -298,7 +296,7 @@ public class ExcelWriter {
                     wb.close();
                 }
             } catch (IOException e) {
-                log.error("wb dispose close error:{}",e);
+                log.error("wb dispose close error:{}", e);
             }
         }
     }
@@ -361,15 +359,16 @@ public class ExcelWriter {
 
     /**
      * 由于Sheet.createRow()使用了TreeMap(TreeMap非线程安全)，所以重写此过程，加乐观锁实现线程安全
+     *
      * @param sh
      * @param rowNum
      * @return
      */
-    public Row getRow(Sheet sh, int rowNum){
-        try{
+    public Row getRow(Sheet sh, int rowNum) {
+        try {
             lock.lock();
             return sh.createRow(rowNum);
-        }finally {
+        } finally {
             lock.unlock();
         }
 

@@ -1,5 +1,7 @@
 package com.yy.poi.toturial2;
 
+import io.netty.handler.codec.http.FullHttpRequest;
+import io.netty.handler.codec.http.FullHttpResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -7,8 +9,6 @@ import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.time.LocalDateTime;
@@ -41,7 +41,7 @@ public class PoiWebMVCTest {
      * 使用多线程进行Excel写操作，提高写入效率。
      */
     @RequestMapping("/multiThreadWrite")
-    public void multiThreadWrite(HttpServletRequest request, HttpServletResponse response) {
+    public void multiThreadWrite(FullHttpRequest request, FullHttpResponse response) {
         executor2.execute(() -> {
             long start = System.currentTimeMillis();
 
@@ -71,13 +71,13 @@ public class PoiWebMVCTest {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_hh_mm_ss");
                 String excelFileName = "toturial_测试_" + formatter.format(LocalDateTime.now()) + ".xlsx";
                 // 浏览器附件下载
-                fos = response.getOutputStream();
-                // application/vnd.ms-excel
-                response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-                // eliminates browser caching
-                response.setHeader("Expires:", "0");
-                response.setHeader("Content-disposition", "attachment; filename="+excelFileName);
-                log.info("fos:"+fos+" wb:"+wb);
+//                fos = response.getOutputStream();
+//                // application/vnd.ms-excel
+//                response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+//                // eliminates browser caching
+//                response.setHeader("Expires:", "0");
+//                response.setHeader("Content-disposition", "attachment; filename="+excelFileName);
+//                log.info("fos:"+fos+" wb:"+wb);
                 wb.write(fos);
                 System.out.println("export time:" + (System.currentTimeMillis() - start) + "毫秒");
 
