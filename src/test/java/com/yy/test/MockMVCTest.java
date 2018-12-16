@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 //@WebAppConfiguration
 //@ContextConfiguration
-public class MockMVCTest extends AppTest {
+public class MockMVCTest extends JavaExampleAppTest {
 
     private MockMvc mockMvc;
 

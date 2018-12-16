@@ -71,8 +71,8 @@ public class CustomInstantiationAwarePostProcessorAdapter extends InstantiationA
     @Override
     public PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeansException {
         if(bean instanceof InstantiationService) {
-            log.info(" --- CustomInstantiationAwarePostProcessorAdapter postProcessPropertyValues bean:{} beanName:{} PropertyValues:{} PropertyDescriptor:{}",
-                    bean, beanName, JSON.toJSONString(pvs), JSON.toJSONString(pds));
+            // log.info(" --- CustomInstantiationAwarePostProcessorAdapter postProcessPropertyValues bean:{} beanName:{} PropertyValues:{} PropertyDescriptor:{}",
+                    // bean, beanName, JSON.toJSONString(pvs), JSON.toJSONString(pds));
         }
         return super.postProcessPropertyValues(pvs, pds, bean, beanName);
     }

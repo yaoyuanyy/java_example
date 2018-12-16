@@ -6,7 +6,7 @@ import org.junit.Test;
 import javax.annotation.Resource;
 import java.util.concurrent.Future;
 
-public class AsynAnnotationTest extends AppTest {
+public class AsynAnnotationTest extends JavaExampleAppTest {
 
     @Resource
     Task task;

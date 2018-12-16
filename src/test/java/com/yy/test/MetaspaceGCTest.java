@@ -1,8 +1,8 @@
 package com.yy.test;
 
-import org.assertj.core.internal.cglib.proxy.Enhancer;
-import org.assertj.core.internal.cglib.proxy.MethodInterceptor;
-import org.assertj.core.internal.cglib.proxy.MethodProxy;
+import org.springframework.cglib.proxy.Enhancer;
+import org.springframework.cglib.proxy.MethodInterceptor;
+import org.springframework.cglib.proxy.MethodProxy;
 
 import java.lang.reflect.Method;
 

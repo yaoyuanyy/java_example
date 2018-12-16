@@ -18,7 +18,7 @@ import org.springframework.util.Assert;
  */
 
 @Slf4j
-public class CustomSpringComponentTest extends AppTest{
+public class CustomSpringComponentTest extends JavaExampleAppTest {
 
     @Autowired
     private Hello hello;
