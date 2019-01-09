@@ -1,20 +1,17 @@
-package com.yy.example.reactive.rxjava;
+package com.yy.test.rxjava;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.yy.example.reactive.Person;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
 import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.functions.Action2;
-import rx.functions.Func1;
+import rx.functions.Func0;
 import rx.observables.SyncOnSubscribe;
-
-import java.util.List;
-import java.util.stream.Stream;
+import rx.schedulers.Schedulers;
 
 /**
  * Description: 被观察者一旦发送有观察者订阅它，它就会把数据流发送给观察者们。(就会：不一定立刻执行)
@@ -28,23 +25,15 @@ import java.util.stream.Stream;
  * Created by skyler on 2019-01-07 at 15:50
  */
 @Slf4j
-public class GetStarted {
-
-
-    public static void main(String[] args) {
-        //t3();
-        //t3();
-        //t5();
-        //t6();
-        t7();
-    }
+public class GetStarted_1 {
 
     // /----------------------------------------------\
     // |     observable observer subscriber三者协助    |
     // \----------------------------------------------/
 
 
-    public static void t0() {
+    @Test
+    public void t0() {
         Observable.just(1, 2).subscribe(o -> System.out.println(o));
     }
 
@@ -53,7 +42,8 @@ public class GetStarted {
      * 形式2：{@link #t5}
      * 形式3：{@link #t4}
      */
-    public static void t1() {
+    @Test
+    public void t1() {
         // 创建被观察者
         Observable observable = Observable.create(new Observable.OnSubscribe<Person>() {
             @Override
@@ -89,7 +79,8 @@ public class GetStarted {
     /**
      * 被观察者、观察者、订阅写在一条语句中
      */
-    public static void t2() {
+    @Test
+    public void t2() {
         Observable.create(new Observable.OnSubscribe<String>() {
 
             @Override
@@ -119,7 +110,8 @@ public class GetStarted {
     /**
      * 出现异常时的例子
      */
-    public static void t3() {
+    @Test
+    public void t3() {
         Observable.create(new Observable.OnSubscribe<String>() {
 
             @Override
@@ -141,7 +133,7 @@ public class GetStarted {
 
             @Override
             public void onError(Throwable e) {
-                log.info("onError:",e);
+                log.info("onError:", e);
             }
 
             @Override
@@ -152,12 +144,13 @@ public class GetStarted {
     }
 
     /**
-     *
      * 订阅形式：observable.subscribe(subscriber)
+     *
      * @see #t1()
      * @see #t5()
      */
-    public static void t4() {
+    @Test
+    public void t4() {
         Person person1 = Person.builder().id(111).name("aa").build();
         Person person2 = Person.builder().id(112).name("c").build();
 
@@ -201,7 +194,8 @@ public class GetStarted {
      * @see #t6() 支持多个action入参
      * TODO 一个被观察者能给多个观察者发送事件吗
      */
-    public static void t5() {
+    @Test
+    public void t5() {
         Person person1 = Person.builder().id(111).name("aa").build();
         Person person2 = Person.builder().id(112).name("c").build();
 
@@ -212,7 +206,7 @@ public class GetStarted {
         Action1<Person> action1 = new Action1<Person>() {
             @Override
             public void call(Person p) {
-                System.out.println(p.getName() + "-" +p.getId());
+                System.out.println(p.getName() + "-" + p.getId());
             }
         };
 
@@ -223,11 +217,13 @@ public class GetStarted {
 
     /**
      * 订阅形式：observable.subscribe(action1,action2,action3)
+     *
      * @see #t1()
      * @see #t4()
      * @see #t5()
      */
-    public static void t6() {
+    @Test
+    public void t6() {
         Observable observable = Observable.create(new Observable.OnSubscribe<Person>() {
 
             @Override
@@ -249,14 +245,14 @@ public class GetStarted {
         Action1<Person> action1 = new Action1<Person>() {
             @Override
             public void call(Person p) {
-                log.info(p.getName() + "-" +p.getId());
+                log.info(p.getName() + "-" + p.getId());
             }
         };
 
         Action1<Throwable> action2 = new Action1<Throwable>() {
             @Override
             public void call(Throwable t) {
-                log.error("ERROR:{} ",t);
+                log.error("ERROR:{} ", t);
             }
         };
 
@@ -273,10 +269,10 @@ public class GetStarted {
 
 
     /**
-     *
+     * Observable.create(new Observable.OnSubscribe()已被Deprecated，使用Observable.create(SyncOnSubscribe.createStateless()代替
      */
-    public static void t7() {
-
+    @Test
+    public void t7() {
         Observable observable = Observable.create(SyncOnSubscribe.createStateless(new Action1<Observer<? super Person>>() {
             @Override
             public void call(Observer<? super Person> observer) {
@@ -291,7 +287,7 @@ public class GetStarted {
         Action1<Person> action1 = new Action1<Person>() {
             @Override
             public void call(Person p) {
-                log.info(p.getName() + "-" +p.getId());
+                log.info(p.getName() + "-" + p.getId());
             }
         };
 
@@ -299,32 +295,50 @@ public class GetStarted {
         observable.subscribe(action1);
     }
 
-
-
-    // /----------------------------------------------\
-    // |        操作符map,filter,compose               |
-    // \----------------------------------------------/
-
-
-
     /**
-     * 使用map操作符转换被观察者到另一个被观察者
-     * @param names
+     * SyncOnSubscribe.createSingleState()多参数结合subscribeOn()例子
+     * <p>
+     * Observable.create(SyncOnSubscribe.createSingleState(Func0<? extends S> generator,
+     * final Action2<? super S, ? super Observer<? super T>> next,
+     * final Action1<? super S> onUnsubscribe)
+     * <p>
+     * <p>
+     * <p>
+     * TODO Observable.subscribeOn() Observable.observeOn()作用、使用、效果
      */
-    public static void t8(String... names) {
-
-        List list = Lists.newArrayList("aa", "ee");
-        Observable.from(list)
-                .map(new Func1<String, Integer>() {
-                    @Override
-                    public Integer call(String s) {
-                        return s.length();
-                    }
-                }).subscribe(new Action1<Integer>() {
+    @Test
+    public void t8() {
+        Observable observable2 = Observable.create(SyncOnSubscribe.createSingleState(new Func0<String>() {
             @Override
-            public void call(Integer integer) {
-                System.out.println(integer);
+            public String call() {
+                System.out.println("Func0 cur thread:" + Thread.currentThread().getName());
+                return "t7";
+            }
+        }, new Action2<String, Observer<? super Person>>() {
+
+            @Override
+            public void call(String s, Observer<? super Person> observer) {
+                try {
+                    System.out.println(s + " Action2 cur thread:" + Thread.currentThread().getName());
+                    observer.onNext(Person.builder().name(s).build());
+                    observer.onCompleted();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    observer.onError(e);
+                }
+            }
+        }, (a) -> {
+            System.out.println(a + " lambda cur thread:" + Thread.currentThread().getName());
+        })).subscribeOn(Schedulers.io());
+
+
+        observable2.subscribe(new Action1() {
+            @Override
+            public void call(Object o) {
+                System.out.println(o);
             }
         });
     }
+
 }
