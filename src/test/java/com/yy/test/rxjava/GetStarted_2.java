@@ -13,6 +13,7 @@ import rx.schedulers.Schedulers;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  * <p></p>
  * <pre>
  *
+ *   refer to https://juejin.im/entry/59e406c9f265da43215315b9
  *   NB.
  * </pre>
  * <p>
@@ -29,9 +31,9 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class GetStarted_2 {
 
-    // /----------------------------------------------\
-    // |        创建操作符: create,just,from            |
-    // \----------------------------------------------/
+    // /---------------------------------------------------------\
+    // |        创建操作符: create,just,from,defer,lift            |
+    // \---------------------------------------------------------/
 
     /**
      * just操作符：将对象或者对象集合转换为一个能够发射这些对象的Observable
@@ -152,4 +154,117 @@ public class GetStarted_2 {
 
         //Observable.just(1).
     }
+
+    /**
+     * lift()方法例子
+     */
+    @Test
+    public void t4(){
+        Observable.just(1,2).lift(new Observable.Operator<Person, Integer>() {
+            @Override
+            public Subscriber<? super Integer> call(Subscriber<? super Person> subscriber) {
+                return new Subscriber<Integer>() {
+                    @Override
+                    public void onCompleted() {
+                        log.info("lift Subscriber completed");
+                        subscriber.onCompleted();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        log.error("lift onError throw:{}", e);
+                        subscriber.onError(e);
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        log.info("lift Subscriber onNext value:{}", integer);
+                        subscriber.onNext(Person.builder().id(integer).build());
+                    }
+                };
+            }
+        }).subscribe(new Subscriber<Person>() {
+            @Override
+            public void onCompleted() {
+                log.info("outer onCompleted");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                log.info("outer onError value:{}", e);
+
+            }
+
+            @Override
+            public void onNext(Person person) {
+                log.info("outer subscribe value:{}", person);
+            }
+        });
+    }
+
+    @Test
+    public void t5(){
+
+        Future<String> future = Executors.newSingleThreadExecutor().submit(() -> {
+            Thread.sleep(1000*5);
+            log.info("t5 future cur thread:{}", Thread.currentThread().getName());
+            return "dd"; });
+        Observable.from(future).subscribe(new Action1<String>() {
+            @Override
+            public void call(String s) {
+                log.info("t5 value:{} cur thread:{}", s, Thread.currentThread().getName());
+            }
+        });
+    }
+
+
+    // /---------------------------------------------------------\
+    // |  下列操作符一般用于测试: never,empty,error        |
+    // \---------------------------------------------------------/
+
+
+
+    @Test
+    public void t6(){
+
+        // 不发送任何Items和通知给observer
+        Observable.never().subscribe(a -> log.info("never:{}",a));
+
+        // 不发送任何Items，但是会立刻调用OnCompleted
+        Observable.empty().subscribe(new Observer<Object>() {
+            @Override
+            public void onCompleted() {
+                log.info("onCompleted被empty调用到了");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                log.info("onError被empty调用到了");
+            }
+
+            @Override
+            public void onNext(Object o) {
+                log.info("onNext被empty调用到了");
+            }
+        });
+
+        // 会立刻调用onError
+        Observable.error(new RuntimeException("dd")).subscribe(new Observer<Object>() {
+            @Override
+            public void onCompleted() {
+                log.info("onCompleted被error调用到了");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                log.info("onError被error调用到了 ERROR:{}", e);
+            }
+
+            @Override
+            public void onNext(Object o) {
+                log.info("onNext被error调用到了 value:{}", o);
+            }
+        });
+    }
+
 }

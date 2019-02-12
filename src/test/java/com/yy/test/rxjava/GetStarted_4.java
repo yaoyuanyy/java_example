@@ -3,6 +3,7 @@ package com.yy.test.rxjava;
 import com.yy.example.reactive.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
+import rx.Notification;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
@@ -14,7 +15,7 @@ import rx.observables.SyncOnSubscribe;
 import rx.schedulers.Schedulers;
 
 /**
- * Description: 被观察者一旦发送有观察者订阅它，它就会把数据流发送给观察者们。(就会：不一定立刻执行)
+ * Description: Observable结合Observable.doOnXXX()方法实战
  * <p></p>
  * <pre>
  *
@@ -24,16 +25,23 @@ import rx.schedulers.Schedulers;
  * Created by skyler on 2019-01-07 at 15:50
  */
 @Slf4j
-public class GetStarted_1 {
+public class GetStarted_4 {
 
     // /----------------------------------------------\
-    // |     observable observer subscriber三者协助    |
+    // |     Observable.doOnXXX()方法实战              |
     // \----------------------------------------------/
 
-
+    /**
+     * doOnNext例子
+     */
     @Test
     public void t0() {
-        Observable.just(1, 2).subscribe(o -> System.out.println(o));
+        Observable.just(1, 2).doOnNext(new Action1<Integer>() {
+            @Override
+            public void call(Integer integer) {
+                log.info("doOnNext value:{}", integer);
+            }
+        }).subscribe(o -> log.info("subscribe value:{}", o));
     }
 
     /**
@@ -303,7 +311,7 @@ public class GetStarted_1 {
      * <p>
      * <p>
      * <p>
-     * TODO Observable.subscribeOn() Observable.observeOn()作用、使用、效果见GetStarted_4 class
+     * TODO Observable.subscribeOn() Observable.observeOn()作用、使用、效果
      */
     @Test
     public void t8() {
@@ -340,60 +348,55 @@ public class GetStarted_1 {
         });
     }
 
-    /**
-     * 本例演示Observable.defer()的效果，为了对比，使用Observable.just()形成对比效果
-     */
+
     @Test
-    public void t9_1() {
-        SomeType someType = new SomeType();
-        Observable<String> observable1 = someType.init_just();
-        someType.setValue("dd");
-        observable1.subscribe(new Action1<String>() {
+    public void t9() {
+        Observable observable2 = Observable.create(SyncOnSubscribe.createSingleState(new Func0<String>() {
             @Override
-            public void call(String s) {
-                log.info("t9 just value:{}", s);
+            public String call() {
+                log.info("createSingleState param 1, cur thread:{}", Thread.currentThread().getName());
+                return "t7";
+            }
+        }, new Action2<String, Observer<? super Person>>() {
+
+            @Override
+            public void call(String s, Observer<? super Person> observer) {
+                try {
+                    log.info("createSingleState param 2 value:{}, cur thread:{}", s, Thread.currentThread().getName());
+                    observer.onNext(Person.builder().name(s).build());
+                    observer.onCompleted();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    observer.onError(e);
+                }
+            }
+        }, (a) -> {
+            log.info("createSingleState param 3 value:{}, cur thread:{}", a, Thread.currentThread().getName());
+        }));//.subscribeOn(Schedulers.io());
+
+
+        observable2.doOnNext(new Action1() {
+            @Override
+            public void call(Object o) {
+                log.info("doOnNext 调用onNext后走这里代码 value:{}, cur thread:{}", o, Thread.currentThread().getName());
+            }
+        }).doOnTerminate(new Action0() {
+            @Override
+            public void call() {
+                log.info("doOnTerminate 代码执行完走这里，cur thread:{}", Thread.currentThread().getName());
+            }
+        }).doOnEach(new Action1<Notification>() {
+            @Override
+            public void call(Notification notification) {
+                log.info("doOnEach 代码执行完走这里，cur thread:{}", Thread.currentThread().getName());
+            }
+        }).subscribe(new Action1() {
+            @Override
+            public void call(Object o) {
+                log.info("subscribe，value:{} cur thread:{}", o, Thread.currentThread().getName());
             }
         });
     }
 
-    /**
-     * <pre>
-     *  本例演示Observable.defer()的效果
-     *  参考：https://www.jianshu.com/p/c83996149f5b
-     * </pre>
-     */
-    @Test
-    public void t9_2() {
-        SomeType someType = new SomeType();
-        Observable<String> observable = someType.init_defer();
-        someType.setValue("dd");
-        observable.subscribe(new Action1<String>() {
-            @Override
-            public void call(String s) {
-                log.info("t9 defer value:{}", s);
-            }
-        });
-    }
-
-}
-
-class SomeType {
-    private String value;
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public Observable<String> init_just() {
-        return Observable.just(value);
-    }
-
-    public Observable<String> init_defer(){
-        return Observable.<String>defer(new Func0<Observable<String>>() {
-            @Override
-            public Observable<String> call() {
-                return Observable.just(value);
-            }
-        });
-    }
 }
