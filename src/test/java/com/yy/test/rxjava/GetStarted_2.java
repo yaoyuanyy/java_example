@@ -267,4 +267,67 @@ public class GetStarted_2 {
         });
     }
 
+
+    // /---------------------------------------------------------\
+    // |  下列操作符一般用于测试: defer及实际使用        |
+    // \---------------------------------------------------------/
+
+
+    /**
+     * 本例演示Observable.defer()的效果，为了对比，使用Observable.just()形成对比。结合{@link GetStarted_2#t9_2()}看效果
+     */
+    @Test
+    public void t9_1() {
+        SomeType someType = new SomeType();
+        Observable<String> observable1 = someType.init_just();
+        someType.setValue("dd");
+        observable1.subscribe(new Action1<String>() {
+            @Override
+            public void call(String s) {
+                log.info("t9 just value:{}", s);
+            }
+        });
+    }
+
+    /**
+     * <pre>
+     *  本例演示Observable.defer()的效果
+     *  参考：https://www.jianshu.com/p/c83996149f5b
+     * </pre>
+     * 结合{@link GetStarted_2#t9_1()}看效果
+     */
+    @Test
+    public void t9_2() {
+        SomeType someType = new SomeType();
+        Observable<String> observable = someType.init_defer();
+        someType.setValue("dd");
+        observable.subscribe(new Action1<String>() {
+            @Override
+            public void call(String s) {
+                log.info("t9 defer value:{}", s);
+            }
+        });
+    }
+
+}
+
+class SomeType {
+    private String value;
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public Observable<String> init_just() {
+        return Observable.just(value);
+    }
+
+    public Observable<String> init_defer(){
+        return Observable.<String>defer(new Func0<Observable<String>>() {
+            @Override
+            public Observable<String> call() {
+                return Observable.just(value);
+            }
+        });
+    }
 }

@@ -14,7 +14,7 @@ import rx.observables.SyncOnSubscribe;
 import rx.schedulers.Schedulers;
 
 /**
- * Description: 被观察者一旦发送有观察者订阅它，它就会把数据流发送给观察者们。(就会：不一定立刻执行)
+ * Description: 被观察者一旦发现有观察者订阅它，它就会把数据流发送给观察者们。(注意：不一定立刻执行)
  * <p></p>
  * <pre>
  *
@@ -30,20 +30,15 @@ public class GetStarted_1 {
     // |     observable observer subscriber三者协助    |
     // \----------------------------------------------/
 
-
-    @Test
-    public void t0() {
-        Observable.just(1, 2).subscribe(o -> System.out.println(o));
-    }
-
     /**
-     * 创建被观察者、创建观察者、两者订阅。形式： observable.subscribe(observer)
+     * 创建被观察者、创建观察者、观察者订阅被观察者，也可以说被观察者通知观察者。
+     * 形式： observable.subscribe(observer)
      * 形式2：{@link #t5}
      * 形式3：{@link #t4}
      */
     @Test
-    public void t1() {
-        // 创建被观察者
+    public void t0() {
+        // (1)创建被观察者
         Observable observable = Observable.create(new Observable.OnSubscribe<Person>() {
             @Override
             public void call(Subscriber<? super Person> subscriber) {
@@ -53,8 +48,13 @@ public class GetStarted_1 {
             }
         });
 
-        // 创建观察者
+        // (2)创建观察者
         Observer<Person> observer = new Observer<Person>() {
+            @Override
+            public void onNext(Person p) {
+                log.info("param: {}", p);
+            }
+
             @Override
             public void onCompleted() {
                 log.info("completed");
@@ -64,14 +64,9 @@ public class GetStarted_1 {
             public void onError(Throwable e) {
                 log.error("ERROR:", e);
             }
-
-            @Override
-            public void onNext(Person p) {
-                log.info("param: {}", p);
-            }
         };
 
-        // 将被观察者与观察者关联：通过订阅的方式关联
+        // (3)将被观察者与观察者关联：观察者通过订阅被观察者的方式关联
         observable.subscribe(observer);
     }
 
@@ -79,7 +74,7 @@ public class GetStarted_1 {
      * 被观察者、观察者、订阅写在一条语句中
      */
     @Test
-    public void t2() {
+    public void t1() {
         Observable.create(new Observable.OnSubscribe<String>() {
 
             @Override
@@ -110,24 +105,30 @@ public class GetStarted_1 {
      * 出现异常时的例子
      */
     @Test
-    public void t3() {
+    public void t2() {
         Observable.create(new Observable.OnSubscribe<String>() {
 
             @Override
             public void call(Subscriber<? super String> subscriber) {
-                subscriber.onNext("String");
-                subscriber.onNext(getStr());
-                subscriber.onCompleted();
-                subscriber.onError(new Exception("dd"));
+                try {
+                    subscriber.onNext("String");
+                    subscriber.onNext(getStr());
+                    subscriber.onCompleted();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    subscriber.onError(new Exception("dd"));
+                }
             }
 
             private String getStr() {
                 throw new RuntimeException("exception");
             }
+
+
         }).subscribe(new Observer<String>() {
             @Override
             public void onCompleted() {
-                log.info("onCompleted-2");
+                log.info("onCompleted-2:");
             }
 
             @Override
@@ -137,13 +138,51 @@ public class GetStarted_1 {
 
             @Override
             public void onNext(String o) {
-                log.info("onNext-2" + o);
+                log.info("onNext-2:" + o);
             }
         });
     }
 
     /**
+     * 创建被观察者、创建观察者、观察者订阅被观察者，也可以说被观察者通知观察者。
+     * 形式： observable.subscribe(Action)
+     * 形式2：{@link #t0}
+     */
+    @Test
+    public void t2_2() {
+        Observable.create(new Observable.OnSubscribe<String>() {
+
+            @Override
+            public void call(Subscriber<? super String> subscriber) {
+                subscriber.onNext("String");
+                subscriber.onNext("String2");
+            }
+
+        }).subscribe(new Action1<String>() {
+            @Override
+            public void call(String s) {
+                log.info("action1 result:{}",s);
+            }
+        });
+    }
+
+
+    /**
+     * Observable observable = Observable.just("Hello", "Hi", "Aloha");
+     * // 将会依次调用：
+     * // onNext("Hello");
+     * // onNext("Hi");
+     * // onNext("Aloha");
+     * // onCompleted();
+     */
+    @Test
+    public void t3() {
+        Observable.just(1, 2).subscribe(o -> System.out.println(o));
+    }
+
+    /**
      * 订阅形式：observable.subscribe(subscriber)
+     * subscriber较observer多了一个onStart()方法
      *
      * @see #t1()
      * @see #t5()
@@ -166,7 +205,7 @@ public class GetStarted_1 {
 
             @Override
             public void onError(Throwable e) {
-                log.error("onStart:{}", e);
+                log.error("onError:{}", e);
             }
 
             @Override
@@ -188,7 +227,7 @@ public class GetStarted_1 {
     /**
      * 订阅形式：observable.subscribe(action1)
      *
-     * @see #t1()
+     * @see #t0()
      * @see #t4()
      * @see #t6() 支持多个action入参
      * TODO 一个被观察者能给多个观察者发送事件吗
@@ -217,7 +256,7 @@ public class GetStarted_1 {
     /**
      * 订阅形式：observable.subscribe(action1,action2,action3)
      *
-     * @see #t1()
+     * @see #t0()
      * @see #t4()
      * @see #t5()
      */
@@ -230,12 +269,11 @@ public class GetStarted_1 {
                 subscriber.onNext(Person.builder().id(6).name("t6").build());
                 subscriber.onNext(getStr());
                 subscriber.onCompleted();
-                subscriber.onError(new Exception("dd"));
             }
 
             private Person getStr() {
-                // when test error, open //(1)
-                // return Person.builder().id(66).name("t66").build(); //(1)
+                // when test error, open (1) close (2)
+                //return Person.builder().id(66).name("t66").build(); //(1)
                 throw new RuntimeException("exception"); // (2)
             }
         });
@@ -277,7 +315,9 @@ public class GetStarted_1 {
             public void call(Observer<? super Person> observer) {
                 observer.onNext(Person.builder().name("t7").build());
                 observer.onCompleted();
-                observer.onError(new Exception());
+                // 这句放这是错误的，因为程序走了observer.onCompleted()方法后，就不会执行observer.onError()方法
+                // 正确的使用方法见this.t8()会this.t2()方法
+                // observer.onError(new Exception());
             }
         }));
 
@@ -308,28 +348,29 @@ public class GetStarted_1 {
     @Test
     public void t8() {
         Observable observable2 = Observable.create(SyncOnSubscribe.createSingleState(new Func0<String>() {
-            @Override
-            public String call() {
-                System.out.println("Func0 cur thread:" + Thread.currentThread().getName());
-                return "t7";
-            }
-        }, new Action2<String, Observer<? super Person>>() {
-
-            @Override
-            public void call(String s, Observer<? super Person> observer) {
-                try {
-                    System.out.println(s + " Action2 cur thread:" + Thread.currentThread().getName());
-                    observer.onNext(Person.builder().name(s).build());
-                    observer.onCompleted();
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    observer.onError(e);
+                @Override
+                public String call() {
+                    System.out.println("Func0 cur thread:" + Thread.currentThread().getName());
+                    return "t7";
                 }
-            }
-        }, (a) -> {
-            System.out.println(a + " lambda cur thread:" + Thread.currentThread().getName());
-        })).subscribeOn(Schedulers.io());
+            }, new Action2<String, Observer<? super Person>>() {
+
+                @Override
+                public void call(String s, Observer<? super Person> observer) {
+                    try {
+                        System.out.println(s + " Action2 cur thread:" + Thread.currentThread().getName());
+                        observer.onNext(Person.builder().name(s).build());
+                        observer.onCompleted();
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        observer.onError(e);
+                    }
+                }
+            }, (a) -> {
+                System.out.println(a + " lambda cur thread:" + Thread.currentThread().getName());
+            })
+        ).subscribeOn(Schedulers.io());
 
 
         observable2.subscribe(new Action1() {
@@ -338,62 +379,13 @@ public class GetStarted_1 {
                 System.out.println(o);
             }
         });
-    }
 
-    /**
-     * 本例演示Observable.defer()的效果，为了对比，使用Observable.just()形成对比效果
-     */
-    @Test
-    public void t9_1() {
-        SomeType someType = new SomeType();
-        Observable<String> observable1 = someType.init_just();
-        someType.setValue("dd");
-        observable1.subscribe(new Action1<String>() {
-            @Override
-            public void call(String s) {
-                log.info("t9 just value:{}", s);
-            }
-        });
-    }
-
-    /**
-     * <pre>
-     *  本例演示Observable.defer()的效果
-     *  参考：https://www.jianshu.com/p/c83996149f5b
-     * </pre>
-     */
-    @Test
-    public void t9_2() {
-        SomeType someType = new SomeType();
-        Observable<String> observable = someType.init_defer();
-        someType.setValue("dd");
-        observable.subscribe(new Action1<String>() {
-            @Override
-            public void call(String s) {
-                log.info("t9 defer value:{}", s);
-            }
-        });
-    }
-
-}
-
-class SomeType {
-    private String value;
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public Observable<String> init_just() {
-        return Observable.just(value);
-    }
-
-    public Observable<String> init_defer(){
-        return Observable.<String>defer(new Func0<Observable<String>>() {
-            @Override
-            public Observable<String> call() {
-                return Observable.just(value);
-            }
-        });
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
+
+
