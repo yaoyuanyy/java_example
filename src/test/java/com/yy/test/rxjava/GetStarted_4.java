@@ -14,6 +14,9 @@ import rx.functions.Func0;
 import rx.observables.SyncOnSubscribe;
 import rx.schedulers.Schedulers;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
 /**
  * Description: Observable结合Observable.doOnXXX()方法实战
  * <p></p>
@@ -152,6 +155,20 @@ public class GetStarted_4 {
                 log.info("subscribe，value:{} cur thread:{}", o, Thread.currentThread().getName());
             }
         });
+    }
+
+    @Test
+    public void t10() {
+        Future future = Observable.just(1).toBlocking().toFuture();
+        if(future.isDone()) {
+            try {
+                log.info("result:{}", future.get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 }

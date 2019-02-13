@@ -320,7 +320,7 @@ public class GetStarted_2 {
     public void t6() {
 
         // 不发送任何Items和通知给observer
-        Observable.never().subscribe(a -> log.info("never():{}", a));
+        Observable.never().single().subscribe(a -> log.info("never():{}", a));
 
         // 不发送任何Items，但是会立刻调用OnCompleted
         Observable.empty().subscribe(new Observer<Object>() {
