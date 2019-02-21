@@ -12,7 +12,7 @@ import javax.annotation.Resource;
  * NB.
  * Created by skyler on 2018/6/15 at 上午6:45
  */
-public class KafkaTest extends AppTest{
+public class KafkaTest extends JavaExampleAppTest {
 
     @Resource
     private KafkaTemplate<String, String> myKafkaTemplate;

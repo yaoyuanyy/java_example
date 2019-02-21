@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.util.concurrent.*;
 
-public class ScheduledThreadPoolExecutorTest extends AppTest {
+public class ScheduledThreadPoolExecutorTest extends JavaExampleAppTest {
 
 
     /**

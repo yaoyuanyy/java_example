@@ -10,7 +10,7 @@ import org.springframework.core.type.AnnotationMetadata;
 import java.util.Map;
 
 /**
- * Description: 目标 通过自定义注解将指定的class注入到bean Factory ioc中，用于使用
+ * Description: 通过自定义注解将指定的class注入到bean Factory ioc中，用于后续使用
  * <p></p>
  * <pre>
  *
