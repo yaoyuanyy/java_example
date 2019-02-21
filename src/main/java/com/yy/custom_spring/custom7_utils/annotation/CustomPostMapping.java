@@ -1,4 +1,4 @@
-package com.yy.custom_spring.custom7.annotation;
+package com.yy.custom_spring.custom7_utils.annotation;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 

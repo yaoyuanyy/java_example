@@ -1,4 +1,4 @@
-package com.yy.custom_spring.custom7.annotation;
+package com.yy.custom_spring.custom7_utils.annotation;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * <p>
  * Created by skyler on 2018/10/19 at 上午7:48
  */
-//@CustomPostMapping(path = "/c")
-public class CController extends PController{
+@RequestMapping("/p")
+public class PController {
 
-    @RequestMapping("/c_method")
-    public void cothed(){
+    @RequestMapping("/p_method")
+    public void pMothed(){
 
     }
 }

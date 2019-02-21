@@ -1,9 +1,8 @@
-package com.yy.custom_spring.custom7.annotation;
+package com.yy.custom_spring.custom7_utils.annotation;
 
 import com.yy.annotation.CustomClass2IOC;
 import com.yy.config.AppConfig;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.event.EventListener;
 import org.springframework.core.MethodIntrospector;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.AnnotationUtils;

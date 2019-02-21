@@ -1,7 +1,7 @@
 package com.yy.test;
 
-import com.yy.custom_spring.custom2.Hello;
-import com.yy.custom_spring.custom2.CustomBeanDefinitionResgistryPostProcessor;
+import com.yy.custom_spring.custom2.sub1.Hello;
+import com.yy.custom_spring.custom2.sub1.CustomBeanDefinitionResgistryPostProcessor;
 import com.yy.custom_spring.custom3.HelloCustomFactoryBean;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;

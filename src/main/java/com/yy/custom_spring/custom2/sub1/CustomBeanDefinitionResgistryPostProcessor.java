@@ -1,4 +1,4 @@
-package com.yy.custom_spring.custom2;
+package com.yy.custom_spring.custom2.sub1;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
