@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Slf4j
 @RestController
 @RequestMapping(value = "/time")
-public class SimpleController {
+public class AsyncController {
 
     private final AtomicInteger counter = new AtomicInteger(0);
 
