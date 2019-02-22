@@ -19,8 +19,4 @@ public class ShapeFactory {
         if(1 == flag) return new Rectangle();
         return null;
     }
-
-    public Shape getShape(String className) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        return (Shape) ClassUtils.forName(className, this.getClass().getClassLoader()).newInstance();
-    }
 }

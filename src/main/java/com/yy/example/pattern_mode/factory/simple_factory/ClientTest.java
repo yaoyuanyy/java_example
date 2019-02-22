@@ -18,8 +18,6 @@ public class ClientTest {
 
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException {
         System.out.println(new ShapeFactory().getShape(1).getClass().getName());
-        System.out.println(new ShapeFactory().getShape(Circle.class.getName()));
-
 
         // 通过反射获取
         Shape shape = (Shape) ShapeFactoryByReflect.create(Circle.class);
