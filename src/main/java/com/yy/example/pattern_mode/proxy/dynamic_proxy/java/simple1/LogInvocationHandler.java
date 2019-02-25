@@ -1,4 +1,4 @@
-package com.yy.example.pattern_mode.proxy.dynamic_proxy.java.simple;
+package com.yy.example.pattern_mode.proxy.dynamic_proxy.java.simple1;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

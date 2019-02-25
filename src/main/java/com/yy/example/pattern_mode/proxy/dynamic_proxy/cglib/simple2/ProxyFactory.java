@@ -8,12 +8,15 @@ import java.lang.reflect.Method;
 
 /**
  * Description:
- * <p></p>
+ *
  * <pre>
  *  https://segmentfault.com/a/1190000013735171
  *   NB.
  * </pre>
  * <p>
+ * @see com.yy.example.pattern_mode.proxy.dynamic_proxy.java.simple2.ProxyFactory#getProxyObject() jvm动态代理
+ * </p>
+ *
  * Created by skyler on 2018-11-30 at 07:49
  */
 public class ProxyFactory implements MethodInterceptor {

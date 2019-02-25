@@ -1,4 +1,4 @@
-package com.yy.example.pattern_mode.proxy.dynamic_proxy.java.simple;
+package com.yy.example.pattern_mode.proxy.dynamic_proxy.java.simple1;
 
 public class HelloImp implements Hello{
 
