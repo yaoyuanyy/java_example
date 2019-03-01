@@ -18,9 +18,6 @@ public abstract class TravelStrategy {
         this.name = name;
     }
 
-    protected TravelStrategy() {
-    }
-
     public abstract void route();
 
     public abstract void durationTime();
