@@ -18,6 +18,7 @@ public class CustomProxyFactory {
         ProxyFactory factory = new ProxyFactory();
         factory.addInterface(clazz);
         factory.addAdvice(new ParemterMethodBeforeAdvice());
+        factory.addAdvice(new CustomMethodAfterAdvice());
         factory.setExposeProxy(true);
         factory.setTarget(target);
         return factory;
