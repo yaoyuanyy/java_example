@@ -41,10 +41,4 @@ public class CustomFactoryBean implements FactoryBean<HelloCustomFactoryBean>{
         log.info(" --- CustomFactoryBean.isSingleton");
         return true;
     }
-
-    public static void main(String[] args) {
-        Integer i1 = 2;
-        Integer i2 = 2;
-        System.out.println(i1 == i2.shortValue());
-    }
 }
