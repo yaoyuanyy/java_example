@@ -6,6 +6,7 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,10 +16,7 @@ import sun.plugin2.os.windows.SECURITY_ATTRIBUTES;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -68,6 +66,14 @@ public class ResponsePDFImageController implements ServletContextAware {
         InputStream in = this.getClass().getClassLoader().getResourceAsStream("picture/aspect.png");
         response.setContentType(MediaType.IMAGE_JPEG_VALUE);
         IOUtils.copy(in, response.getOutputStream());
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        ResponsePDFImageController controller = new ResponsePDFImageController();
+        InputStream in = controller.getClass().getClassLoader().getResourceAsStream("picture/aspect.png");
+
+        File file = ResourceUtils.getFile("application.yml");
+        System.out.println(file.getPath());
     }
 
 
