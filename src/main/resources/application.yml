@@ -27,7 +27,7 @@ spring:
   profiles:
     active: @profileActive@
 
-debug: true
+debug: @debug.log@
 
 banner.image.location: /tao.jpg
 

@@ -1,0 +1,13 @@
+
+server:
+  port: 20282
+
+debug: false
+
+banner.image.location: /tao.jpg
+
+
+
+
+
+
