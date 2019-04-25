@@ -26,7 +26,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Slf4j
 public class AppConfig extends WebMvcConfigurerAdapter{
 
-    @Bean
+    @Bean("alis_customBeanDefinitionResgistryPostProcessor")
     public CustomBeanDefinitionResgistryPostProcessor customBeanDefinitionResgistryPostProcessor(){
         log.info("CustomBeanDefinitionResgistryPostProcessor @bean start");
         return new CustomBeanDefinitionResgistryPostProcessor();
