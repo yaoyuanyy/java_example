@@ -1,4 +1,4 @@
-package com.yy.example.java_base.gc.online.question_exampe;
+package com.yy.example.jvm.gc.online.question_exampe;
 
 /**
  * Description: 死锁实例展示

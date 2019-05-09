@@ -1,4 +1,4 @@
-package com.yy.example.java_base.gc;
+package com.yy.example.jvm.gc;
 
 /**
  * Description: 堆内存分析，此类为gc入门程序

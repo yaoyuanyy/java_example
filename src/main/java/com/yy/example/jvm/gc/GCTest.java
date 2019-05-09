@@ -1,4 +1,4 @@
-package com.yy.example.java_base.gc;
+package com.yy.example.jvm.gc;
 
 /**
  * Description: 测试垃圾回收，此类为gc入门程序
