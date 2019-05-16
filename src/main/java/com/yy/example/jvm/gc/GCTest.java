@@ -4,7 +4,7 @@ package com.yy.example.jvm.gc;
  * Description: 测试垃圾回收，此类为gc入门程序
  * <p></p>
  * <pre>
- *     JVM Option argv: -verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:SurvivorRatio=8 -XX:+PrintGCDetails
+ *     JVM Option argv: -verbose:gc -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=80  -Xms20M -Xmx20M -Xmn10M -XX:SurvivorRatio=8 -XX:+PrintGCDetails -XX:+PrintGCDateStamps
  *     refer to: 深入理解java虚拟机
  *                               第三章 3.5节-内存分配与回收策略
  *                                      代码清单3-3
@@ -32,7 +32,7 @@ public class GCTest {
         allocation1 = new byte[2 * _1MB];
         allocation2 = new byte[2 * _1MB];
         allocation3 = new byte[2 * _1MB];
-        allocation4 = new byte[4 * _1MB];
+        allocation4 = new byte[4 * _1MB]; // 出现一次Minor gc
 
     }
 
