@@ -10,12 +10,22 @@ import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.reactive.function.server.ServerRequest;
+import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.util.function.Tuple2;
+import reactor.util.function.Tuples;
+
+import java.time.Duration;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.BiFunction;
 
 /**
  * Description:
@@ -43,7 +53,6 @@ public class UserController {
     @RequestMapping("/test")
     public Flux<Person> test(ServerHttpRequest serverHttpRequest) {
 
-        log.info("param:{}", serverHttpRequest.getPath().contextPath().value());
 
         return Flux.just(new Person());
     }
@@ -67,6 +76,75 @@ public class UserController {
     public ResponseObj queryOne() {
         return ResponseObj.success(userService.getById(1L));
     }
+
+    /**
+     * <pre>
+     * <font color=green size=5>服务器推送事件</font>
+     *   服务器推送事件（Server-Sent Events，SSE）允许服务器端不断地推送数据到客户端。
+     *   相对于 WebSocket 而言，服务器推送事件只支持服务器端到客户端的单向数据传递。
+     *   虽然功能较弱，但优势在于 SSE 在已有的 HTTP 协议上使用简单易懂的文本格式来表示传输的数据。
+     *   作为 W3C 的推荐规范，SSE 在浏览器端的支持也比较广泛，除了 IE 之外的其他浏览器都提供了支持。
+     *   在 IE 上也可以使用 polyfill 库来提供支持。在服务器端来说，SSE 是一个不断产生新数据的流，非常适合于用反应式流来表示。
+     *   在 WebFlux 中创建 SSE 的服务器端是非常简单的。只需要返回的对象的类型是 Flux<ServerSentEvent>，就会被自动按照 SSE 规范要求的格式来发送响应。
+     * </pre>
+     *
+     * @return
+     */
+    @GetMapping("/randomNumbers")
+    public Flux<ServerSentEvent<Integer>> randomNumbers() {
+        return Flux.interval(Duration.ofSeconds(1))
+                .map(seq -> Tuples.of(seq, ThreadLocalRandom.current().nextInt()))
+                .map(data -> ServerSentEvent.<Integer>builder()
+                        .event("random")
+                        .id(Long.toString(data.getT1()))
+                        .data(data.getT2())
+                        .build());
+    }
+
+
+    //----------------------------------------------\
+    //     一个简单的计算器来展示函数式编程模型的用法     |
+    //----------------------------------------------/
+
+    @GetMapping("/add")
+    public Mono<ServerResponse> add(final ServerRequest request) {
+        return calculate(request, (v1, v2) -> v1 + v2);
+    }
+
+    @GetMapping("/subtract")
+    public Mono<ServerResponse> subtract(final ServerRequest request) {
+        return calculate(request, (v1, v2) -> v1 - v2);
+    }
+
+    @GetMapping("/multiply")
+    public Mono<ServerResponse>  multiply(final ServerRequest request) {
+        return calculate(request, (v1, v2) -> v1 * v2);
+    }
+
+    @GetMapping("/divide")
+    public Mono<ServerResponse> divide(final ServerRequest request) {
+        return calculate(request, (v1, v2) -> v1 / v2);
+    }
+
+    private Mono<ServerResponse> calculate(final ServerRequest request, final BiFunction<Integer, Integer, Integer> calculateFunc) {
+
+        final Tuple2<Integer, Integer> operands = extractOperands(request);
+        return ServerResponse.ok().body((Mono.just(calculateFunc.apply(operands.getT1(), operands.getT2()))), Integer.class);
+    }
+
+
+    private Tuple2<Integer, Integer> extractOperands(final ServerRequest request) {
+        return Tuples.of(parseOperand(request, "v1"), parseOperand(request, "v2"));
+    }
+
+    private int parseOperand(final ServerRequest request, final String param) {
+        try {
+            return Integer.parseInt(request.queryParam(param).orElse("0"));
+        } catch (final NumberFormatException e) {
+            return 0;
+        }
+    }
+
 }
 
 
