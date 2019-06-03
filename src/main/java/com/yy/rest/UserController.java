@@ -3,6 +3,9 @@ package com.yy.rest;
 import com.yy.config.ResponseObj;
 import com.yy.example.java8.Person;
 import com.yy.service.IUserService;
+import io.netty.handler.codec.http.DefaultFullHttpRequest;
+import io.netty.handler.codec.http.DefaultHttpRequest;
+import io.netty.handler.codec.http.FullHttpRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
 import org.slf4j.Logger;
@@ -41,6 +44,14 @@ public class UserController {
     public Flux<Person> test(ServerHttpRequest serverHttpRequest) {
 
         log.info("param:{}", serverHttpRequest.getPath().contextPath().value());
+
+        return Flux.just(new Person());
+    }
+
+    @RequestMapping("/test2")
+    public Flux<Person> test2(DefaultHttpRequest httpRequest) {
+
+        log.info("param:{}", httpRequest.uri());
 
         return Flux.just(new Person());
     }
