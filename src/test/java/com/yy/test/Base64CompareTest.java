@@ -5,8 +5,6 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import sun.misc.BASE64Encoder;
-
 import java.util.Random;
 
 /**
@@ -32,12 +30,9 @@ public class Base64CompareTest {
 
     @Test
     public void testSunBase64Encode() throws Exception {
-
-        BASE64Encoder encoder = new BASE64Encoder();
-
         long before = System.currentTimeMillis();
 
-        encodedSun = encoder.encode(randomBinaryData);
+        encodedSun = Base64.encodeBase64String(randomBinaryData);
 
         long after = System.currentTimeMillis();
         durationSun = after - before;

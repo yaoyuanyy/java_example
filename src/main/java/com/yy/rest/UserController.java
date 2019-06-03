@@ -48,6 +48,13 @@ public class UserController {
         return Flux.just(new Person());
     }
 
+    /**
+     * 报错："No primary or default constructor found for class io.netty.handler.codec.http.DefaultHttpRequest
+     * 看来netty的HttpRequest不能直接用于spring web接收页面的参数数据
+     *
+     * @param httpRequest
+     * @return
+     */
     @RequestMapping("/test2")
     public Flux<Person> test2(DefaultHttpRequest httpRequest) {
 
