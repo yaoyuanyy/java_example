@@ -38,41 +38,41 @@ public class Test {
                 , error -> System.err.println(error + " error thread:" + Thread.currentThread().getName())
                 , () -> System.out.println("completed thread:" + Thread.currentThread().getName()));
 
-
-        Object[] array = {1,2,3,4,5,6};
-        Flux.fromArray(array).doOnNext((a) -> {
-            System.out.println("a: " + a + "回调OnNext方法");
-        }).subscribe(new BaseSubscriber<Object>() {
-
-
-            @Override
-            protected void hookOnNext(Object value) {
-                System.out.println("value:" + value + " hookOnNext");
-            }
-        });
-
-        Flux.range(1, 10).subscribe(new Subscriber<Integer>() {
-            @Override
-            public void onSubscribe(Subscription s) {
-                // n: 表示限制执行item次数
-                s.request(3);
-            }
-
-            @Override
-            public void onNext(Integer integer) {
-                System.out.println("onNext:" + integer);
-            }
-
-            @Override
-            public void onError(Throwable t) {
-
-            }
-
-            @Override
-            public void onComplete() {
-                System.out.println("completed");
-            }
-        });
+//
+//        Object[] array = {1,2,3,4,5,6};
+//        Flux.fromArray(array).doOnNext((a) -> {
+//            System.out.println("a: " + a + "回调OnNext方法");
+//        }).subscribe(new BaseSubscriber<Object>() {
+//
+//
+//            @Override
+//            protected void hookOnNext(Object value) {
+//                System.out.println("value:" + value + " hookOnNext");
+//            }
+//        });
+//
+//        Flux.range(1, 10).subscribe(new Subscriber<Integer>() {
+//            @Override
+//            public void onSubscribe(Subscription s) {
+//                // n: 表示限制执行item次数
+//                s.request(3);
+//            }
+//
+//            @Override
+//            public void onNext(Integer integer) {
+//                System.out.println("onNext:" + integer);
+//            }
+//
+//            @Override
+//            public void onError(Throwable t) {
+//
+//            }
+//
+//            @Override
+//            public void onComplete() {
+//                System.out.println("completed");
+//            }
+//        });
 
         // interval();
     }

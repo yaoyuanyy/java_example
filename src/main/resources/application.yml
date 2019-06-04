@@ -1,6 +1,9 @@
 logging:
   level:
     root: info
+    org.springframework.boot.actuate: debug
+    # logback.xml中的LOG_PATH的值对应logging.path的值
+  path: ${user.dir}/logs
 
 server:
   port: 8088
@@ -61,5 +64,10 @@ spring.banner.image.location: /tao.jpg
 #      memory: 40960
 
 
-
-
+management:
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: env,beans,mappings,loggers
+        exclude: info
