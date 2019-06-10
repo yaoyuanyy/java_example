@@ -21,7 +21,7 @@ import java.util.concurrent.CompletableFuture;
  * </p>
  * Created by skyler on 2019-06-03 at 17:28
  */
-public class Test {
+public class Tutorial1 {
 
     public static void main(String[] args) throws InterruptedException {
 
