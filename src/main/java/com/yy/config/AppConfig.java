@@ -10,6 +10,8 @@ import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.reactive.config.EnableWebFlux;
+import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 /**
  * Description:
@@ -22,7 +24,8 @@ import org.springframework.context.annotation.Import;
 @Import(value = {MultiThreadConfig.class})
 @CustomClass2IOC(targets = {HelloService.class})
 @Slf4j
-public class AppConfig{
+@EnableWebFlux
+public class AppConfig implements WebFluxConfigurer {
 
     @Bean
     public CustomBeanDefinitionResgistryPostProcessor customBeanDefinitionResgistryPostProcessor(){

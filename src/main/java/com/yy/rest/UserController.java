@@ -14,10 +14,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpRequest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -47,6 +45,12 @@ import java.util.function.BiFunction;
 @RequestMapping("/user")
 public class UserController {
 
+    @InitBinder
+    public void initBinder(WebDataBinder webDataBinder){
+        //webDataBinder.registerCustomEditor();
+
+    }
+
     @Autowired
     private IUserService userService;
 
@@ -59,6 +63,20 @@ public class UserController {
     @RequestMapping("/test")
     public Flux<Person> test(ServerHttpRequest serverHttpRequest) {
 
+
+        return Flux.just(new Person());
+    }
+
+    /**
+     * localhost:8088/test2/11?name=22;age=33
+     * @param id
+     * @param age
+     * @param request
+     * @return
+     */
+    @RequestMapping("/test2/${id}")
+    public Flux<Person> test2(@PathVariable Integer id, @RequestParam String name, @MatrixVariable Integer age, ServerHttpRequest request) {
+        log.info("id:{} name:{} age:{}", id, name, age);
 
         return Flux.just(new Person());
     }

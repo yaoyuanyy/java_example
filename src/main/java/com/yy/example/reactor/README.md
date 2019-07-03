@@ -1,4 +1,43 @@
-# 聊聊reactive streams的backpressure
+# 响应式编程
+
+## 架构
+
+### 代码api总体结构
+Reactive Stream API 介绍
+让我们来简要看一下 Reactive Stream API。它只提供了四个接口。
+
+```aidl
+Publisher：是元素（消息）序列的提供者，根据它的订阅者的需求，来发布这些元素（消息）。
+public interface Publisher<T> {
+    public void subscribe(Subscriber<? super T> s);
+}
+
+Subscriber：当通过 Publisher.subscribe(Subscriber) 注册后，它将通过 Subscriber.onSubscribe(Subscription) 来接收消息。
+public interface Subscriber<T> {
+    public void onSubscribe(Subscription s);
+    public void onNext(T t);
+    public void onError(Throwable t);
+    public void onComplete();
+}
+
+Subscription：代表了消息从 Publisher 到 Subscriber 的一个一对一的生命周期。
+public interface Subscription {
+    public void request(long n);
+    public void cancel();
+}
+
+Processor：继承了 Publisher 和 Subscriber，用于转换发布者到订阅者之间管道中的元素。Processor<T,R> 订阅类型为 T 的数据元素，接收并转换为类型为 R 的数据，然后发布变换后的数据。
+public interface Processor<T, R> extends Subscriber<T>, Publisher<R> {
+}
+```
+### 结构图
+![结构图](https://github.com/ZhongyangMA/images/raw/master/webflux-streaming-demo/processor.png)
+
+### 发布者和订阅者之间的典型交互顺序图
+![](https://github.com/ZhongyangMA/images/raw/master/webflux-streaming-demo/publisher-subscriber.png)
+
+
+## 聊聊reactive streams的backpressure
 
 - 原文  https://juejin.im/post/5a5b4929f265da3e3e33bce9
 - 参考：https://www.dnocm.com/articles/almond/java%20projectreactor-flux/
@@ -279,3 +318,6 @@
 
 ## 小结
 reactive streams对于具有多个阶段的数据处理来说，非常有用，可以节省很多时间，另外又有backpressure来控制订阅者速度过慢的问题，非常值得使用。
+
+资料
+[webflux学习路径](https://xwjie.github.io/webflux/webflux-study-path.html#java%E4%B8%ADthis%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86)
