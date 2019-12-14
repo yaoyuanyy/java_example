@@ -22,10 +22,6 @@ public class CustomSpringComponentTest extends JavaExampleAppTest {
 
     @Autowired
     private Hello hello;
-
-    @Autowired
-    private ApplicationContext applicationContext;
-
     @Autowired
     private HelloC helloC;
 
