@@ -22,29 +22,23 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class CustomFactoryBean implements FactoryBean<HelloCustomFactoryBean>{
+public class CustomFactoryBean implements FactoryBean<HelloC>{
 
     @Override
-    public HelloCustomFactoryBean getObject() throws Exception {
-        log.info(" --- CustomFactoryBean.getObject");
-        return new HelloCustomFactoryBean();
+    public HelloC getObject() throws Exception {
+        log.debug(" --- CustomFactoryBean.getObject");
+        return new HelloC();
     }
 
     @Override
     public Class<?> getObjectType() {
-        log.info(" --- CustomFactoryBean.getObjectType");
-        return HelloCustomFactoryBean.class;
+        //log.debug(" --- CustomFactoryBean.getObjectType");
+        return HelloC.class;
     }
 
     @Override
     public boolean isSingleton() {
-        log.info(" --- CustomFactoryBean.isSingleton");
+        //log.debug(" --- CustomFactoryBean.isSingleton");
         return true;
-    }
-
-    public static void main(String[] args) {
-        Integer i1 = 2;
-        Integer i2 = 2;
-        System.out.println(i1 == i2.shortValue());
     }
 }

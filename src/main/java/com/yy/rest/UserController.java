@@ -3,20 +3,13 @@ package com.yy.rest;
 import com.yy.config.ResponseObj;
 import com.yy.example.java8.Person;
 import com.yy.service.IUserService;
-import io.netty.handler.codec.http.DefaultFullHttpRequest;
 import io.netty.handler.codec.http.DefaultHttpRequest;
-import io.netty.handler.codec.http.FullHttpRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Publisher;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.codec.ServerSentEvent;
-import org.springframework.http.server.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Flux;
@@ -24,11 +17,6 @@ import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
 
-import javax.ws.rs.core.Response;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.time.Duration;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.BiFunction;
 
 /**
@@ -60,10 +48,9 @@ public class UserController {
         return Mono.just("success");
     }
 
-    @RequestMapping("/test")
+    @GetMapping("/test")
+    @CrossOrigin("http://localhost2")
     public Flux<Person> test(ServerHttpRequest serverHttpRequest) {
-
-
         return Flux.just(new Person());
     }
 
@@ -74,9 +61,9 @@ public class UserController {
      * @param request
      * @return
      */
-    @RequestMapping("/test2/${id}")
-    public Flux<Person> test2(@PathVariable Integer id, @RequestParam String name, @MatrixVariable Integer age, ServerHttpRequest request) {
-        log.info("id:{} name:{} age:{}", id, name, age);
+    @GetMapping("/test2/{id}")
+    public Flux<Person> test2(@PathVariable("id") Integer id, @MatrixVariable Integer age, ServerHttpRequest request) {
+        log.info("id:{} age:{}", id, age);
 
         return Flux.just(new Person());
     }
@@ -96,17 +83,17 @@ public class UserController {
         return Flux.just(new Person());
     }
 
-    @RequestMapping("/test3")
-    public Mono<ServerResponse> test3(DefaultHttpRequest httpRequest) throws URISyntaxException {
-
-        log.info("param:{}", httpRequest.uri());
-
-        return ServerResponse.ok()
-                .location(new URI(httpRequest.uri()))
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(BodyInserters.fromObject(new Person("name", "name2")));
-
-    }
+//    @RequestMapping("/test3")
+//    public Mono<ServerResponse> test3(DefaultHttpRequest httpRequest) throws URISyntaxException {
+//
+//        log.info("param:{}", httpRequest.uri());
+//
+//        return ServerResponse.ok()
+//                .location(new URI(httpRequest.uri()))
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .body(BodyInserters.fromObject(new Person("name", "name2")));
+//
+//    }
 
     @RequestMapping("/query_one")
     public ResponseObj queryOne() {
@@ -126,16 +113,16 @@ public class UserController {
      *
      * @return
      */
-    @GetMapping("/randomNumbers")
-    public Flux<ServerSentEvent<Integer>> randomNumbers() {
-        return Flux.interval(Duration.ofSeconds(1))
-                .map(seq -> Tuples.of(seq, ThreadLocalRandom.current().nextInt()))
-                .map(data -> ServerSentEvent.<Integer>builder()
-                        .event("random")
-                        .id(Long.toString(data.getT1()))
-                        .data(data.getT2())
-                        .build());
-    }
+//    @GetMapping("/randomNumbers")
+//    public Flux<ServerSentEvent<Integer>> randomNumbers() {
+//        return Flux.interval(Duration.ofSeconds(1))
+//                .map(seq -> Tuples.of(seq, ThreadLocalRandom.current().nextInt()))
+//                .map(data -> ServerSentEvent.<Integer>builder()
+//                        .event("random")
+//                        .id(Long.toString(data.getT1()))
+//                        .data(data.getT2())
+//                        .build());
+//    }
 
 
     //----------------------------------------------\

@@ -1,0 +1,14 @@
+logging:
+  level:
+    root: info
+    org.springframework.boot: debug
+    # logback.xml中的LOG_PATH的值对应这里的logging.path的值
+  path: ${user.dir}/logs
+
+
+server:
+  port: 8088
+
+
+
+

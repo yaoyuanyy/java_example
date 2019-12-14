@@ -2,7 +2,7 @@ package com.yy.test;
 
 import com.yy.custom_spring.custom2.Hello;
 import com.yy.custom_spring.custom2.CustomBeanDefinitionResgistryPostProcessor;
-import com.yy.custom_spring.custom3.HelloCustomFactoryBean;
+import com.yy.custom_spring.custom3.HelloC;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class CustomSpringComponentTest extends JavaExampleAppTest {
     private ApplicationContext applicationContext;
 
     @Autowired
-    private HelloCustomFactoryBean helloCustomFactoryBean;
+    private HelloC helloC;
 
     /**
      * 测试自定义的 BeanDefinitionResgistryPostProcessor
@@ -45,8 +45,8 @@ public class CustomSpringComponentTest extends JavaExampleAppTest {
      */
     @Test
     public void testCustomFactoryBean(){
-        Assert.notNull(helloCustomFactoryBean, "helloCustomFactoryBean object must be not null");
-        // output --> bean info:HelloCustomFactoryBean(id=null, clazz=null, className=null)
+        Assert.notNull(helloC, "HelloC object must be not null");
+        // output --> bean info:HelloC(id=null, clazz=null, className=null)
         log.info("bean info:{}",applicationContext.getBean("customFactoryBean"));
 
         // output --> bean info:com.yy.custom_spring.CustomFactoryBean@4f169009

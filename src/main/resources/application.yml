@@ -1,13 +1,3 @@
-logging:
-  level:
-    root: info
-    org.springframework.boot.actuate: debug
-    # logback.xml中的LOG_PATH的值对应logging.path的值
-  path: ${user.dir}/logs
-
-server:
-  port: 8088
-
 skyler:
     common:
       private-key: et34egddfdsfsdf
@@ -63,11 +53,20 @@ spring.banner.image.location: /tao.jpg
 #    buffer:
 #      memory: 40960
 
-
+## 端点endpoint设置
+#include: '*' 表示：暴露所有的endpoint, 除了(exclude)features, info节点
 management:
   endpoints:
     web:
-      base-path: /
       exposure:
-        include: env,beans,mappings,loggers
-        exclude: info
+        include: '*'
+        exclude: features, info
+      base-path: /
+    enabled-by-default: true
+  endpoint:
+    mappings:
+      enabled: true
+    loggers:
+      enabled: true
+
+
