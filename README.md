@@ -30,11 +30,3 @@
 [Reactor 3 Reference Guide](https://projectreactor.io/docs/core/release/reference/#_latest_version_copyright_notice)
 
 [Java ProjectReactor框架之Flux篇](https://www.dnocm.com/articles/almond/java%20projectreactor-flux/)
-
-```
-http://www.ityouknow.com/springboot/2018/03/19/spring-boot-docker.html
-https://lw900925.github.io/docker/docker-springboot.html
-http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html
-https://blog.wuwii.com/springboot-23.html
-https://tomoyadeng.github.io/blog/2017/07/23/spring-boot-mybatis-docker/index.html
-```
