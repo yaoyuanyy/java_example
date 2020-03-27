@@ -17,6 +17,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <spring.boot.version>2.1.6.RELEASE</spring.boot.version>
         <spring.cloud.version>Greenwich.SR2</spring.cloud.version>
+        <docker.image.prefix>springboot_demo</docker.image.prefix>
     </properties>
 
     <dependencies>
@@ -44,6 +45,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -129,16 +135,20 @@
             <artifactId>okhttp</artifactId>
             <version>3.9.0</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.apache.kafka</groupId>-->
-            <!--<artifactId>kafka-clients</artifactId>-->
-            <!--<version>0.9.0.0</version>-->
-        <!--</dependency>-->
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-streams</artifactId>
+            <version>0.10.1.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.poi</groupId>
@@ -154,6 +164,18 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/io.reactivex/rxjava -->
+        <dependency>
+            <groupId>io.reactivex</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.netty</groupId>-->
+<!--            <artifactId>netty-all</artifactId>-->
+<!--            <version>5.0.0.Alpha2</version>-->
+<!--        </dependency>-->
     </dependencies>
 
     <dependencyManagement>
@@ -233,6 +255,11 @@
             <filter>src/main/resources/profile/${profileActive}.properties</filter>
         </filters>
         <resources>
+            <!--
+            第一个resource配置是过滤src/main/resources目录下文件context.xml，若文件中有类似${key}这样的配置，就会根据maven的配置进行覆盖，让其使用真实值来填写
+            第二个resource配置是不过滤src/main/resources目录下除了context.xml的其他文件，也就不会用真实值来填写${key}这样的配置
+            参考：https://my.oschina.net/anxiaole/blog/1613348
+            -->
             <resource>
                 <directory>src/main/resources</directory>
                 <filtering>true</filtering>
@@ -256,13 +283,22 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-            <!-- 生成mybatis dao mapper mapper.xml -->
-            <!--<plugin>-->
-                <!--<groupId>org.mybatis.generator</groupId>-->
-                <!--<artifactId>mybatis-generator-maven-plugin</artifactId>-->
-                <!--<version>1.3.2</version>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
@@ -279,6 +315,38 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <!-- Docker maven plugin -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <!-- 打包的image名称 -->
+                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <!-- Dockerfile文件的位置，以项目的 root 目录为根节点，建议到单独建立一个目录。位置非固定，随意指定，如：./src/docker/-->
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <!-- 远程docker的api地址，这里为我的linux开发机地址-->
+                    <dockerHost>http://47.98.189.37:2375</dockerHost>
+                    <!-- image tag，可以指定多个，不声明默认即latest-->
+                    <imageTags>
+                        <imageTag>latest</imageTag>
+                        <imageTag>${project.version}</imageTag>
+                    </imageTags>
+                    <!-- 执行构建docker镜像的时候需要哪些文件，即Dockerfile和项目jar和指定他们的位置-->
+                    <resources>
+                        <resource>
+                            <!--这里指定的文件是target中的jar文件 -->
+                            <!--
+                                ${project.build.directory} 表示项目项目构建输出目录，默认为 ${basedir}/target
+                                ${project.build.filename} 表示项目打包输出文件的名称，默认为 ${project.artifactId}-${project.version}
+                            -->
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
             </plugin>
         </plugins>
     </build>

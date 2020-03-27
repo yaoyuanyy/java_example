@@ -1,8 +1,9 @@
 package com.yy.config;
 
 import com.yy.annotation.CustomClass2IOC;
-import com.yy.custom_spring.custom2.CustomBeanDefinitionResgistryPostProcessor;
-import com.yy.custom_spring.custom4.HelloService;
+
+import com.yy.custom_spring.custom2.sub1.CustomBeanDefinitionResgistryPostProcessor;
+import com.yy.custom_spring.custom2.sub2.HelloService;
 import com.yy.custom_spring.custom5.InstantiationService;
 import com.yy.custom_spring.custom6.CustomBeanFactoryPostProcessor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,7 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
 @EnableWebFlux
 public class AppConfig implements WebFluxConfigurer {
 
-    @Bean
+    @Bean("alis_customBeanDefinitionResgistryPostProcessor")
     public CustomBeanDefinitionResgistryPostProcessor customBeanDefinitionResgistryPostProcessor(){
         log.info("CustomBeanDefinitionResgistryPostProcessor @bean start");
         return new CustomBeanDefinitionResgistryPostProcessor();

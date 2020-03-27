@@ -79,7 +79,6 @@ public class UserController {
     public Flux<Person> test2(DefaultHttpRequest httpRequest) {
 
         log.info("param:{}", httpRequest.uri());
-
         return Flux.just(new Person());
     }
 

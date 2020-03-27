@@ -1,8 +1,8 @@
 package com.yy.test;
 
-import com.yy.custom_spring.custom2.Hello;
-import com.yy.custom_spring.custom2.CustomBeanDefinitionResgistryPostProcessor;
 import com.yy.custom_spring.custom3.HelloC;
+import com.yy.custom_spring.custom2.sub1.Hello;
+import com.yy.custom_spring.custom2.sub1.CustomBeanDefinitionResgistryPostProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +43,9 @@ public class CustomSpringComponentTest extends JavaExampleAppTest {
     public void testCustomFactoryBean(){
         Assert.notNull(helloC, "HelloC object must be not null");
         // output --> bean info:HelloC(id=null, clazz=null, className=null)
-        log.info("bean info:{}",applicationContext.getBean("customFactoryBean"));
+        log.info("bean info:{}",webApplicationContext.getBean("customFactoryBean"));
 
         // output --> bean info:com.yy.custom_spring.CustomFactoryBean@4f169009
-        log.info("bean info:{}",applicationContext.getBean("&customFactoryBean"));
+        log.info("bean info:{}",webApplicationContext.getBean("&customFactoryBean"));
     }
 }

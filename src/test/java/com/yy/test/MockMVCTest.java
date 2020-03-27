@@ -30,7 +30,7 @@ public class MockMVCTest extends JavaExampleAppTest {
 
     @Before
     public void init(){
-        mockMvc = MockMvcBuilders.webAppContextSetup((WebApplicationContext) applicationContext).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup((WebApplicationContext) webApplicationContext).build();
     }
 
     @Test
