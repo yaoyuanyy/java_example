@@ -3,9 +3,6 @@
 本项目是java基础、高级、java8、spring特性、commons apache包的知识小点的集中营，都是日常工作中常见的，常用的，结合实际工作经验的汇总
 个人学习java过程中各个知识点的test例子，有基础的，高级的，数据结构的，设计模式的，并发的，lock的等等
 
-<<<<<<< HEAD
-
-<<<<<<< HEAD
 ### WebFlux
 
 #### Reactor 简介
@@ -13,7 +10,7 @@
 
 #### spring-webflux
 > WebFlux 模块的名称是 spring-webflux，名称中的 Flux 来源于 Reactor 中的类 Flux。该模块中包含了对反应式 HTTP、服务器推送事件和 WebSocket 的客户端和服务器端的支持。对于开发人员来说，比较重要的是服务器端的开发，这也是本文的重点。在服务器端，WebFlux 支持两种不同的编程模型：第一种是 Spring MVC 中使用的基于 Java 注解的方式；第二种是基于 Java 8 的 lambda 表达式的函数式编程模型。这两种编程模型只是在代码编写方式上存在不同。它们运行在同样的反应式底层架构之上，因此在运行时是相同的。WebFlux 需要底层提供运行时的支持，WebFlux 可以运行在支持 Servlet 3.1 非阻塞 IO API 的 Servlet 容器上，或是其他异步运行时环境，如 Netty 和 Undertow。
-```$xslt
+```
 
 
 ```
@@ -33,17 +30,11 @@
 [Reactor 3 Reference Guide](https://projectreactor.io/docs/core/release/reference/#_latest_version_copyright_notice)
 
 [Java ProjectReactor框架之Flux篇](https://www.dnocm.com/articles/almond/java%20projectreactor-flux/)
-=======
-=======
+
 ```
->>>>>>> 3771dfd684bc9aaf6933af5fea7028be05a4be99
 http://www.ityouknow.com/springboot/2018/03/19/spring-boot-docker.html
 https://lw900925.github.io/docker/docker-springboot.html
 http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html
 https://blog.wuwii.com/springboot-23.html
 https://tomoyadeng.github.io/blog/2017/07/23/spring-boot-mybatis-docker/index.html
-<<<<<<< HEAD
->>>>>>> master
-=======
 ```
->>>>>>> 3771dfd684bc9aaf6933af5fea7028be05a4be99
