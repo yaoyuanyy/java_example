@@ -22,6 +22,8 @@ public interface BinarySearchTree {
      */
     boolean insert(int data);
 
+    BinaryTreeNode getRoot();
+
     /**
      * 中序遍历
      * @param current

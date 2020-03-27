@@ -16,13 +16,76 @@ import java.util.Objects;
  */
 public class BinarySearchTreeImpl implements BinarySearchTree{
 
+    BinaryTreeNode<Integer> root;
+
+    public BinarySearchTreeImpl(Integer data) {
+        this.root = new BinaryTreeNode<>(data);
+    }
+
     @Override
-    public BinaryTreeNode find(int key) {
-        return null;
+    public BinaryTreeNode getRoot() {
+        return root;
     }
 
     @Override
     public boolean insert(int data) {
+        if(root == null) {
+            root = new BinaryTreeNode<>(data);
+            return true;
+        }
+
+        BinaryTreeNode<Integer> node = root;
+
+        while (node != null) {
+            if(data < node.data) {
+                if(node.leftChild == null) {
+                    BinaryTreeNode newNode = new BinaryTreeNode<>(data);
+                    node.leftChild = newNode;
+                    return true;
+                }
+                node = node.leftChild;
+            }else {
+                if(node.rightChild == null) {
+                    BinaryTreeNode newNode = new BinaryTreeNode<>(data);
+                    node.rightChild = newNode;
+                    return true;
+                }
+                node = node.rightChild;
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public BinaryTreeNode<Integer> find(int targetData) {
+        BinaryTreeNode<Integer> node = root;
+
+        while (node != null){
+            if(targetData == node.data) {
+                return node;
+            }else if(targetData < node.data) {
+                node = node.leftChild;
+            }else {
+                node = node.rightChild;
+            }
+        }
+
+        return null;
+    }
+
+    @Override
+    public BinaryTreeNode findMax() {
+        return null;
+    }
+
+    @Override
+    public BinaryTreeNode findMin() {
+        return null;
+    }
+
+    @Override
+    public boolean delete(int key) {
         return false;
     }
 
@@ -64,20 +127,4 @@ public class BinarySearchTreeImpl implements BinarySearchTree{
         postOrder(node.rightChild);
         System.out.println("node.data:" + node.data);
     }
-
-    @Override
-    public BinaryTreeNode findMax() {
-        return null;
-    }
-
-    @Override
-    public BinaryTreeNode findMin() {
-        return null;
-    }
-
-    @Override
-    public boolean delete(int key) {
-        return false;
-    }
-
 }

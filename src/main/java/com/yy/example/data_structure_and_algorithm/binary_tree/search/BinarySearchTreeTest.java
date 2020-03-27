@@ -1,5 +1,7 @@
 package com.yy.example.data_structure_and_algorithm.binary_tree.search;
 
+import com.yy.example.data_structure_and_algorithm.binary_tree.BinaryTreeNode;
+
 /**
  * Description:
  * <pre>
@@ -13,6 +15,16 @@ package com.yy.example.data_structure_and_algorithm.binary_tree.search;
 public class BinarySearchTreeTest {
 
     public static void main(String[] args) {
-        BinarySearchTree binarySearchTree = new BinarySearchTreeImpl();
+        BinarySearchTree binarySearchTree = new BinarySearchTreeImpl(10);
+        binarySearchTree.insert(20);
+        binarySearchTree.insert(80);
+        binarySearchTree.insert(50);
+        binarySearchTree.insert(90);
+        binarySearchTree.insert(15);
+
+        BinaryTreeNode root = binarySearchTree.getRoot();
+                System.out.println("root.data:" + root.data);
+
+        System.out.println("找到50了吗：" + binarySearchTree.find(50).data);
     }
 }
