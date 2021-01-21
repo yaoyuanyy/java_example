@@ -51,9 +51,11 @@ public class UnsafeTest {
                 unsafe = (Unsafe)field.get(null);
 
                 Class<?> clazz = Person.class;
+                System.out.println("unsafe.addressSize():" + unsafe.addressSize());
                 ageOffset = unsafe.objectFieldOffset(clazz.getDeclaredField("age"));
-
+                System.out.println("ageOffset:" + ageOffset);
                 nameOffset = unsafe.objectFieldOffset(clazz.getDeclaredField("name"));
+                System.out.println("nameOffset:" + nameOffset);
             } catch (Exception e) {
                 throw new Error(e);
             }
