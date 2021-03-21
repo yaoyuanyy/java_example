@@ -1,4 +1,4 @@
-package com.yy.example.biainchengzhuji.book_x_x_x;
+package com.yy.example.bianchengzhuji.book_x_x_x;
 
 import com.alibaba.fastjson.JSON;
 
