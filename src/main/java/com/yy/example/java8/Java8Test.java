@@ -12,72 +12,62 @@ import java.util.stream.Collectors;
  * Hello world!
  */
 public class Java8Test {
+
     public static void main(String[] args) {
+        List<Person> people = init();
 
-        System.out.println("Hello!");
-        Predicate<String> predicate = (s) -> s.length() > 0;
-        System.out.println(predicate.test("lll"));
-
-        Function<String, Integer> toInteger = Integer::valueOf;
-        System.out.println(toInteger.apply("111"));
-
-        Supplier<String> personSupplier = String::new;
-        String s = personSupplier.get();
-        System.out.println(s);
-
-        Consumer<Person> greeter = (p) -> System.out.println("Hello, " + p.getFirstName());
-        greeter.accept(new Person("Luke", "Skywalker"));
-
-        List<Person> list = new ArrayList<>();
-        List<String> list2 = new ArrayList<>();
-       /* list.parallelStream().map((p) -> p.getFirstName()).collect(Collectors.toList()).forEach( s33 -> {
-            System.out.println(s33);
-            s33.toString();
-            list2.add(s33);
-        });*/
-
-        list.parallelStream().collect(Collectors.toList()).forEach( s33 -> {
-            System.out.println(s33);
-            s33.toString();
-            list2.add(s33.getFirstName());
-        });
-
-        list.parallelStream()
-                .filter(p -> p.getFirstName().contains("1"))
-                .map(Person::getLastName)// 返回一个新的stream<T>
-                .collect(Collectors.toList())
-                .forEach((sr) -> {
-                    System.out.println(sr);
-                    list2.toArray();
-                });
-
-        Optional<String> optional = Optional.of("null");
-
-        optional.isPresent();           // true
-        optional.get();                 // "bam"
-        optional.orElse("fallback");    // "bam"
-
-        optional.ifPresent((sw) -> System.out.println(sw.charAt(0)));
-
-        Map<Integer, String> map = new HashMap<>();
-        for (int i = 0; i < 10; i++) {
-            map.putIfAbsent(i, "val" + i);
-        }
-        map.forEach((key, val) -> {
-            System.out.println(val.contains("d"));
-        });
-
-        map.computeIfPresent(3, (num, val) -> val + num);
-        map.get(3);             // val33
-        map.remove(3, "val3");
-
-        map.computeIfPresent(9, (num, val) -> null);
-        map.containsKey(9);     // false
-
-        map.getOrDefault(42, "not found");  // not found
-
-        map.merge(9, "concat", (value, newValue) -> value.concat(newValue));
-        map.get(9);             // val9concat
+        listToMapWithFilter1(people);
+        listToMapWithFilter2(people);
     }
+
+    private static List<Person> init() {
+        List<Person> people = new ArrayList<>();
+        people.add(new Person("A", "a", 100));
+        people.add(new Person("B", "b", 50));
+        people.add(new Person("C", "c", 10));
+        people.add(new Person("C", "c2", 11));
+        people.add(new Person("D", "d", 30));
+        people.add(new Person("D2", "d", 31));
+        people.add(new Person("E", "e", 10));
+        people.add(new Person("F", "f", 90));
+        return people;
+    }
+
+    /**
+     * List<Object> to Map<Object.attr, Object>>
+     *
+     * NOTE: 以对象的一个字段a分组，并且相同字段a值的取另一个字段b的中数值较大的那个对象
+     * @param people
+     */
+    private static void listToMapWithFilter1(List<Person> people) {
+        Map<String, Person> map = people.stream().collect(Collectors.groupingBy(o -> o.getFirstName(),
+                Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparing(o -> o.getAge())), Optional::get)));
+
+        System.out.println("map:" + map);
+    }
+
+    private static void listToMapWithFilter2(List<Person> people) {
+        Map<String, Person> map = people.stream().collect(Collectors.groupingBy(o -> o.getFirstName(),
+                Collectors.collectingAndThen(Collectors.reducing((a, b) -> a.getAge() > b.getAge() ? a : b), Optional::get)));
+
+        System.out.println("map:" + map);
+    }
+
+    private static void listToMapWithFilter3(List<Person> people) {
+        Map<String, Optional<Person>> resultMap = people.stream().collect(
+                Collectors.groupingBy(
+                    o -> o.getFirstName(),
+                    LinkedHashMap::new,
+                    Collectors.maxBy(Comparator.comparing(Person::getAge))
+                )
+        );
+
+        System.out.println("resultMap:" + resultMap);
+
+
+        List<Person> persons = resultMap.values().stream().filter(person -> person.isPresent()).map(Optional::get).collect(Collectors.toList());
+        System.out.println("persons:" + persons);
+    }
+
 }
 
