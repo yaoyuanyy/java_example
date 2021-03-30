@@ -12,7 +12,7 @@ public class Java8Test {
         List<Person> people = init();
 
         listToMapWithKeyAttrValueObjectWithMax1(people);
-        listToMapWithFilter2(people);
+        listToMapWithKeyAttrValueObjectWithMax2(people);
     }
 
     private static List<Person> init() {
