@@ -46,6 +46,12 @@ public class Java8Test {
         System.out.println("map:" + map);
     }
 
+    /**
+     * List<Object> to Map<Object.attr, Object>>
+     *
+     * NOTE: 以对象的一个字段a分组，并且相同字段a值的取另一个字段b的中数值较大的那个对象
+     * @param people
+     */
     private static void listToMapWithFilter2(List<Person> people) {
         Map<String, Person> map = people.stream().collect(Collectors.groupingBy(o -> o.getFirstName(),
                 Collectors.collectingAndThen(Collectors.reducing((a, b) -> a.getAge() > b.getAge() ? a : b), Optional::get)));
@@ -53,6 +59,12 @@ public class Java8Test {
         System.out.println("map:" + map);
     }
 
+    /**
+     * List<Object> to Map<Object.attr, Object>>
+     *
+     * NOTE: 以对象的一个字段a分组，并且相同字段a值的取另一个字段b的中数值较大的那个对象
+     * @param people
+     */
     private static void listToMapWithFilter3(List<Person> people) {
         Map<String, Optional<Person>> resultMap = people.stream().collect(
                 Collectors.groupingBy(
