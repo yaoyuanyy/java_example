@@ -14,7 +14,7 @@ public class Test_4_6_1 {
 
     public static void main(String[] args) {
         int[] arraySorted = new int[]{2,4,6,8,10,11,15,33,39};
-        int index = binarySearch(arraySorted, 12);
+        int index = binarySearch(arraySorted, 39);
         System.out.println("index:" + index);
     }
 
@@ -32,13 +32,7 @@ public class Test_4_6_1 {
                 return mid;
             }
             if(start >= end || (start + 1 == end)) {
-                System.out.println("没有找到target:" + target
-                        + " steps:" + steps
-                        + " mid:" + mid
-                        + " start:" + start
-                        + " startValue:" + arraySorted[start]
-                        + " end:" + end
-                        + " endValue:" + arraySorted[end]);
+                System.out.println("没有找到target:" + target  + " steps:" + steps  + " mid:" + mid + " start:" + start + " startValue:" + arraySorted[start] + " end:" + end + " endValue:" + arraySorted[end]);
                 return -1;
             }
             if(target > midValue) {
