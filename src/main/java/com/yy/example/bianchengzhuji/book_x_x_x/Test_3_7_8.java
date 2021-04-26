@@ -42,14 +42,6 @@ public class Test_3_7_8 {
 
     public static void main(String[] args) {
         //尝试凑出8的形状
-//        System.out.println(" _ ");
-//        System.out.print('|');
-//        System.out.print('_');
-//        System.out.println("|");
-//        System.out.print('|');
-//        System.out.print('_');
-//        System.out.println("|");
-
         init();
         int[] array = getArray(6789);
         getOut(array);
@@ -126,16 +118,6 @@ public class Test_3_7_8 {
     }
 
     private static void init() {
-//        map.put(0, new byte[]{});
-//        map.put(1, new byte[]{3,5});
-//        map.put(2, new byte[]{0,1,2,4,5});
-//        map.put(3, new byte[]{0,1,2,4,6});
-//        map.put(4, new byte[]{1,3,4,6});
-//        map.put(5, new byte[]{0,1,2,3,6});
-//        map.put(6, new byte[]{0,1,2,3,5,6});
-//        map.put(7, new byte[]{2,4,6});
-//        map.put(8, new byte[]{0,1,2,3,4,5,6});
-//        map.put(9, new byte[]{0,1,2,3,4,6});
         map.put(0, new byte[]{1, 0, 1, 1, 1, 1, 1});
         // {3,5}
         map.put(1, new byte[]{0, 0, 0, 1, 0, 1, 0});
