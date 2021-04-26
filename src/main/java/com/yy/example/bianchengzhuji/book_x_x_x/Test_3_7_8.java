@@ -1,5 +1,7 @@
 package com.yy.example.bianchengzhuji.book_x_x_x;
 
+import com.alibaba.fastjson.JSON;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,30 +41,119 @@ public class Test_3_7_8 {
     private static final Map<Integer, byte[]> map = new HashMap<>();
 
     public static void main(String[] args) {
+        //尝试凑出8的形状
+//        System.out.println(" _ ");
+//        System.out.print('|');
+//        System.out.print('_');
+//        System.out.println("|");
+//        System.out.print('|');
+//        System.out.print('_');
+//        System.out.println("|");
+
         init();
-        byte[] values = cal(5);
-        System.out.println("values:" + values);
+        int[] array = getArray(6789);
+        getOut(array);
     }
 
-    private static byte[] cal(int n) {
-        if(n < 1 || n > 10) {
-            return new byte[0];
+    private static void getOut(int[] array) {
+        for (int value : array) {
+            byte[] showSegments = map.get(value);
+            showSegment(showSegments);
+            System.out.println("\t\n");
+        }
+    }
+
+    private static void showSegment(byte[] showSegments) {
+        if (showSegments[2] == 1) {
+            System.out.println(" - ");
+        }
+        if (showSegments[3] == 1) {
+            System.out.print("|");
+        } else {
+            System.out.print(" ");
         }
 
-        return new byte[0];
+        if (showSegments[4] == 1) {
+            System.out.print(" |");
+        }
+        System.out.println("");
+        if (showSegments[1] == 1) {
+            System.out.println(" - ");
+        }
+
+        if (showSegments[5] == 1) {
+            System.out.print("|");
+        } else {
+            System.out.print(" ");
+        }
+
+        if (showSegments[6] == 1) {
+            System.out.print(" |");
+        }
+        System.out.println("");
+        if (showSegments[0] == 1) {
+            System.out.println(" - ");
+        }
+    }
+
+    /**
+     * @param num
+     * @return 得到int正整数各 位上的数字形成的数组
+     */
+    private static int[] getArray(int num) {
+        System.out.println("原始值：" + JSON.toJSONString(getArray(num)));
+        
+        if (num > 99999) {
+            throw new RuntimeException("入参不合法 num:" + num);
+        }
+        if (num < 10) {
+            return new int[]{num};
+        }
+
+        int length = getLengthOf(num);
+        int[] array = new int[length];
+        for (int i = 1; i <= length; i++) {
+            int valueOfIndex = num / (int) Math.pow(10, (length - i));
+            array[i - 1] = valueOfIndex;
+            num = num - ((int) Math.pow(10, (length - i))) * valueOfIndex;
+        }
+
+        return array;
+    }
+
+    private static int getLengthOf(int num) {
+        return String.valueOf(num).length();
     }
 
     private static void init() {
-        map.put(0, new byte[]{});
-        map.put(1, new byte[]{3,5});
-        map.put(2, new byte[]{0,1,2,4,5});
-        map.put(3, new byte[]{0,1,2,4,6});
-        map.put(4, new byte[]{1,3,4,6});
-        map.put(5, new byte[]{0,1,2,3,6});
-        map.put(6, new byte[]{0,1,2,3,5,6});
-        map.put(7, new byte[]{2,4,6});
-        map.put(8, new byte[]{0,1,2,3,4,5,6});
-        map.put(9, new byte[]{0,1,2,3,4,6});
+//        map.put(0, new byte[]{});
+//        map.put(1, new byte[]{3,5});
+//        map.put(2, new byte[]{0,1,2,4,5});
+//        map.put(3, new byte[]{0,1,2,4,6});
+//        map.put(4, new byte[]{1,3,4,6});
+//        map.put(5, new byte[]{0,1,2,3,6});
+//        map.put(6, new byte[]{0,1,2,3,5,6});
+//        map.put(7, new byte[]{2,4,6});
+//        map.put(8, new byte[]{0,1,2,3,4,5,6});
+//        map.put(9, new byte[]{0,1,2,3,4,6});
+        map.put(0, new byte[]{1, 0, 1, 1, 1, 1, 1});
+        // {3,5}
+        map.put(1, new byte[]{0, 0, 0, 1, 0, 1, 0});
+        // {0,1,2,4,5})
+        map.put(2, new byte[]{1, 1, 1, 0, 1, 1, 0});
+        // {0,1,2,4,6})
+        map.put(3, new byte[]{1, 1, 1, 0, 1, 1, 0});
+        // {1,3,4,6})
+        map.put(4, new byte[]{0, 1, 0, 1, 1, 0, 1});
+        // {0,1,2,3,6})
+        map.put(5, new byte[]{1, 1, 1, 1, 0, 0, 1});
+        // {0,1,2,3,5,6})
+        map.put(6, new byte[]{1, 1, 1, 1, 0, 1, 1});
+        // {2,4,6}
+        map.put(7, new byte[]{0, 0, 1, 0, 1, 0, 1});
+        // {0,1,2,3,4,5,6}
+        map.put(8, new byte[]{1, 1, 1, 1, 1, 1, 1});
+        // {0,1,2,3,4,6}
+        map.put(9, new byte[]{1, 1, 1, 1, 1, 0, 1});
     }
-
 }
