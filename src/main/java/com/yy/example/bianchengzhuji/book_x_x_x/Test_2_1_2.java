@@ -3,7 +3,7 @@ package com.yy.example.bianchengzhuji.book_x_x_x;
 import com.alibaba.fastjson.JSON;
 
 /**
- * Description:
+ * Description: 编程珠玑-第二章习题2
  * <pre>
  * 问题：将一个n元一维的向量向左旋转i个位置。例如，当n=8且i=3时，向量abcdefgh旋转为defghabc。
  * 简单的代码使用一个n元的中间向量在b步内完成该工作。你能否仅使用数十个额外字节的存储空间，在正比于n的时间内完成向量的旋转

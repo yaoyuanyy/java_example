@@ -3,7 +3,7 @@ package com.yy.example.bianchengzhuji.book_x_x_x;
 import com.alibaba.fastjson.JSON;
 
 /**
- * Description:
+ * Description: 编程珠玑-第三章习题8
  * <pre>
  * 本书行将出版之时，美国的个人所得税分为5种不同的费率，其中最大的费率大约为40%。
  * 以前的情况更为复杂，税率也更高。下面所示的程序文本采用25个if语句的合理方式来计算1978年的美国联邦所得税。
