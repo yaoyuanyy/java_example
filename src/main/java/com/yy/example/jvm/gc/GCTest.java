@@ -38,6 +38,6 @@ public class GCTest {
 
     public static void main(final String[] args) {
         testAllocation();
-        //System.out.println("111");
+        System.out.println("test main");
     }
 }

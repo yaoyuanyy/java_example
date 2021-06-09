@@ -17,6 +17,8 @@ import reactor.core.publisher.Mono;
 import reactor.util.function.Tuple2;
 import reactor.util.function.Tuples;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.BiFunction;
 
 /**
@@ -97,6 +99,25 @@ public class UserController {
     @RequestMapping("/query_one")
     public ResponseObj queryOne() {
         return ResponseObj.success(userService.getById(1L));
+    }
+
+    /**
+     * -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSParallelRemarkEnabled -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/Users/yaoliang/Documents -Xmx20m -Xms20m -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCCause
+     *
+     * JVM Option argv: -verbose:gc -Xms20m -Xmx20m -Xmn10m -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintTenuringDistribution
+     *
+     * @param step
+     * @return
+     */
+    @RequestMapping("/testJVMGC")
+    public ResponseObj testJVMGC(@RequestParam("step") Integer step) {
+        List<PersonObj> list = new ArrayList<>();
+        // 创建n个1M大小的数组，耗尽内存
+        for (int i = 0; i < step; i++) {
+            list.add(new PersonObj("women" + i, i, new byte[1024 * 1024]));
+        }
+
+        return ResponseObj.success("success list.size:" + list.size());
     }
 
     /**
