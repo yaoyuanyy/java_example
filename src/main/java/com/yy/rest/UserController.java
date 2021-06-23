@@ -102,22 +102,42 @@ public class UserController {
     }
 
     /**
-     * -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSParallelRemarkEnabled -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/Users/yaoliang/Documents -Xmx20m -Xms20m -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCCause
+     * -XX:+UseConcMarkSweepGC -XX:+UseParNewGC -XX:+CMSParallelRemarkEnabled -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/Users/yaoliang/Documents -Xmx20m -Xms20m -Xmn10m -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCCause
      *
      * JVM Option argv: -verbose:gc -Xms20m -Xmx20m -Xmn10m -XX:+PrintGCDetails -XX:+PrintGCTimeStamps -XX:+PrintTenuringDistribution
      *
+     * -XX:+UseConcMarkSweepGC -XX:+ExplicitGCInvokesConcurrent -XX:+UseParNewGC -XX:+CMSParallelRemarkEnabled -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/Users/yaoliang/Documents -Xmx200m -Xms200m -Xmn100m -XX:+PrintGC -XX:+PrintGCDetails -XX:+PrintGCCause -jar /Users/yaoliang/skyler/project/mytest/test/java_example-0.0.1-SNAPSHOT.jar
+     *
      * @param step
+     * @param capacity
      * @return
      */
-    @RequestMapping("/testJVMGC")
-    public ResponseObj testJVMGC(@RequestParam("step") Integer step) {
+    @GetMapping("/testJVMGC")
+    public ResponseObj testJVMGC(@RequestParam("step") Integer step, @RequestParam("capacity") Integer capacity, @RequestParam("systemGC") Integer systemGC) {
         List<PersonObj> list = new ArrayList<>();
+
+        if(systemGC == 1) {
+            System.gc();
+            return ResponseObj.success("success 手动调用 System.gc() systemGC == 1");
+        }
         // 创建n个1M大小的数组，耗尽内存
         for (int i = 0; i < step; i++) {
-            list.add(new PersonObj("women" + i, i, new byte[1024 * 1024]));
+            list.add(new PersonObj("women" + i, i, new byte[1024 * 1024 * capacity]));
+        }
+
+        if(systemGC == 2) {
+            System.gc();
+            return ResponseObj.success("success 手动调用 System.gc() systemGC == 2");
         }
 
         return ResponseObj.success("success list.size:" + list.size());
+    }
+
+    @GetMapping("/testJVMGC-systemGC")
+    public ResponseObj testJVMGCSystemGC(@RequestParam("systemGC") Integer systemGC) {
+       System.gc();
+
+       return ResponseObj.success("success 手动调用 System.gc()");
     }
 
     /**
