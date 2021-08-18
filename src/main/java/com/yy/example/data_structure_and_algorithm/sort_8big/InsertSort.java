@@ -1,9 +1,9 @@
-package com.yy.example.data_structure_and_algorithm;
+package com.yy.example.data_structure_and_algorithm.sort_8big;
 
 import java.util.Arrays;
 
 /**
- * Description:
+ * Description: 直接插入排序
  * <pre>
  *     1.思想：
  *     直接插入排序的基本操作是将一个记录插入到已经排好的有序表中，从而得到一个新的、记录数增1的有序表。

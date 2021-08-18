@@ -18,6 +18,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class TestMain {
 
     public static void main(String[] args) {
+
+        int id = 12;
+
+
         System.out.println("VM.current().details():" + VM.current().details());
         System.out.println("----------------");
         System.out.println(ClassLayout.parseClass(Consumer.class).toPrintable());

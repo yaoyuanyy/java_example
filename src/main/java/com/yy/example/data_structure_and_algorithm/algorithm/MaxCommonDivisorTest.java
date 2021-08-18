@@ -1,7 +1,7 @@
 package com.yy.example.data_structure_and_algorithm.algorithm;
 
 /**
- * Description:
+ * Description: 求两个数的最大公约数
  * <pre>
  *  最大公约数：来源：算法设计与分析基础 第三版-第一章
  * </pre>

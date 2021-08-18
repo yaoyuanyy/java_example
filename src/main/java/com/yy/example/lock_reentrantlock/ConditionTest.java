@@ -1,4 +1,4 @@
-package com.yy.example.reentrantlock;
+package com.yy.example.lock_reentrantlock;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
@@ -30,7 +30,7 @@ public class ConditionTest {
                     System.out.printf("%s\n", "我收到一个信号，我去浪了");
 
                 }catch(Exception e){
-                    System.out.printf("%s\n", e);
+                    e.printStackTrace();
                 }finally {
                     lock.unlock();
                 }
@@ -47,7 +47,7 @@ public class ConditionTest {
                     System.out.printf("%s\n", "即将释放一个信息");
                     condition.signal();
                 }catch(Exception e){
-                    System.out.printf("%s\n", e);
+                    e.printStackTrace();
                 }finally {
                     lock.unlock();
                 }
@@ -55,23 +55,23 @@ public class ConditionTest {
         }).start();
 
         // Step2: 当两个线程的时候弄明白之后，再加一个线程，继续走源码
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try{
-                    lock.lock();
-                    System.out.println("线程2");
-                    System.out.printf("%s\n", "线程2正在等一个信号");
-                    condition.await();
-                    System.out.printf("%s\n", "线程2收到一个信号，我去浪了");
-
-                }catch(Exception e){
-                    System.out.printf("%s\n", e);
-                }finally {
-                    lock.unlock();
-                }
-            }
-        }).start();
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try{
+//                    lock.lock();
+//                    System.out.println("线程2");
+//                    System.out.printf("%s\n", "线程2正在等一个信号");
+//                    condition.await();
+//                    System.out.printf("%s\n", "线程2收到一个信号，我去浪了");
+//
+//                }catch(Exception e){
+//                    System.out.printf("%s\n", e);
+//                }finally {
+//                    lock.unlock();
+//                }
+//            }
+//        }).start();
     }
 
 }

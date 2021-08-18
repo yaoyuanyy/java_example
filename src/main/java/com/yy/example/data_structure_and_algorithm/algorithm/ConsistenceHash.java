@@ -18,6 +18,9 @@ public class ConsistenceHash {
 
     public String getTargetMachine(String hostIp){
         SortedMap<Integer, String> sortedMap = nodesMap.tailMap(hostIp.hashCode());
+        System.out.println("sortedMap:" + sortedMap);
+        System.out.println("nodesMap:" + nodesMap);
+
         if(sortedMap.size() == 0){
             return nodesMap.firstEntry().getValue();
         }
@@ -30,17 +33,15 @@ public class ConsistenceHash {
     }
 
     public static void main(String[] args) {
-        System.out.println(0xff);
-        System.out.println(Integer.toHexString(255));
-//        ConsistenceHash consistenceHash = new ConsistenceHash();
-//        consistenceHash.add("192.168.31.2");
-//        consistenceHash.add("192.168.31.20");
-//        consistenceHash.add("192.168.31.50");
-//        consistenceHash.add("192.168.31.100");
-//        consistenceHash.add("192.168.31.200");
-//
-//        String cacheKey = "1000010";
-//        String hostName = consistenceHash.getTargetMachine(cacheKey);
-//        System.out.println("cacheKey:" + hostName + " --> hashcode:" + cacheKey.hashCode() + " --> 匹配的机器为" + hostName);
+        ConsistenceHash consistenceHash = new ConsistenceHash();
+        consistenceHash.add("192.168.31.2");
+        consistenceHash.add("192.168.31.20");
+        consistenceHash.add("192.168.31.50");
+        consistenceHash.add("192.168.31.100");
+        consistenceHash.add("192.168.31.200");
+
+        String cacheKey = "10000";
+        String hostName = consistenceHash.getTargetMachine(cacheKey);
+        System.out.println("cacheKey:" + cacheKey + " --> cacheKey hashcode:" + cacheKey.hashCode() + " --> 匹配的机器为" + hostName);
     }
 }

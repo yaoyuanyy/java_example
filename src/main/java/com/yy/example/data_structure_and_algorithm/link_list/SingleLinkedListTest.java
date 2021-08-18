@@ -70,28 +70,6 @@ public class SingleLinkedListTest {
     }
 
     /**
-     * TODO
-     * 对已有链表进行按data值(假设data是int类型)由小到大排序
-     * <p>
-     * <pre>
-     *     Java单链表实现快速排序:
-     *     http://blog.csdn.net/bug_moving/article/details/56677219
-     * </pre>
-     */
-    public void sort() {
-        final Node<Integer> cur = head;
-        while (cur != null) {
-            final Node<Integer> next = head.next;
-            if (next == null) return;
-
-            if (cur.data > next.data) {
-
-            }
-        }
-
-    }
-
-    /**
      * 不使用递归
      * 反转当前链表
      * <p>
@@ -102,10 +80,10 @@ public class SingleLinkedListTest {
     public Node reverse(Node<Integer> current) {
         Node pre = null;
         while (current != null){
-            final Node next = current.next;
+            final Node tmp = current.next;
             current.next = pre;
             pre = current;
-            current = next;
+            current = tmp;
         }
         return pre;
     }

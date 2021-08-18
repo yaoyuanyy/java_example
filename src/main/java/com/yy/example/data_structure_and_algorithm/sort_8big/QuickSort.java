@@ -1,9 +1,9 @@
-package com.yy.example.data_structure_and_algorithm;
+package com.yy.example.data_structure_and_algorithm.sort_8big;
 
 import java.util.Arrays;
 
 /**
- * Description:快速排序算法分析
+ * Description: 快速排序算法分析
  * <p>
  * 参考：：http://www.imooc.com/article/11013
  * </p>
@@ -21,7 +21,7 @@ import java.util.Arrays;
  * NB.
  * Created by skyler on 2017/12/16 at 上午11:41
  */
-public class QuickSortTmp {
+public class QuickSort {
 
     public static void main(final String[] args) {
         final int[] a = {38, 65, 97, 46, 13, 27, 4};
@@ -34,7 +34,8 @@ public class QuickSortTmp {
         if (a == null || a.length < 2) {
             return;
         }
-        if (high > low) {
+
+        if (low < high) {
             final int middle = partion(a, low, high);
             quickSort(a, low, middle - 1);
             quickSort(a, middle + 1, high);
@@ -42,7 +43,6 @@ public class QuickSortTmp {
     }
 
     public static int partion(final int[] a, int low, int high) {
-
         final int target = a[low];
         while (high > low) {
             while (high > low && a[high] > target) {
@@ -61,6 +61,7 @@ public class QuickSortTmp {
 
             a[low] = target;
         }
+
         return low;
     }
 }

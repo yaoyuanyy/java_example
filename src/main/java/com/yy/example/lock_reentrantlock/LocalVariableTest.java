@@ -1,8 +1,4 @@
-package com.yy.example.reentrantlock;
-
-import java.util.concurrent.locks.Condition;
-import java.util.concurrent.locks.LockSupport;
-import java.util.concurrent.locks.ReentrantLock;
+package com.yy.example.lock_reentrantlock;
 
 /**
  * Description:
@@ -16,41 +12,6 @@ import java.util.concurrent.locks.ReentrantLock;
 public class LocalVariableTest {
 
     public static void main(String[] args) {
-        //Person person = new Person(1, "skyler");
-
-        // Step1: 用两个线程来追踪源码
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try{
-//                    System.out.println("线程0");
-//                    final Person p = person;
-//                    System.out.println("name:"+p.getName());
-//                    Thread.sleep(1000);
-//                    System.out.println("2 name:"+p.getName());
-//                }catch(Exception e){
-//                    System.out.printf("%s\n", e);
-//                }finally {
-//                }
-//            }
-//        }).start();
-//
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try{
-//                    Thread.sleep(100);
-//                    System.out.println("线程1");
-//                    final Person p = person;
-//                    p.setName("ss");
-//                }catch(Exception e){
-//                    System.out.printf("%s\n", e);
-//                }finally {
-//                }
-//            }
-//        }).start();
-
-
         Person person = new Person(1, "skyler");
 
         new Thread(new Runnable() {

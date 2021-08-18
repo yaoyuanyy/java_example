@@ -1,6 +1,5 @@
 package com.yy.example.mutil_thread.thread;
 
-import java.time.Period;
 import java.util.Objects;
 
 /**
@@ -12,7 +11,8 @@ import java.util.Objects;
  */
 public class ThreadLocalTest {
 
-    final ThreadLocal<Person> threadLocal = new ThreadLocal();
+    final ThreadLocal<Person> ptl = new ThreadLocal();
+    final ThreadLocal<Student> studentThreadLocal = new ThreadLocal();
 
     public static void main(final String[] args) {
         final ThreadLocalTest threadLocalTest = new ThreadLocalTest();
@@ -24,11 +24,15 @@ public class ThreadLocalTest {
             @Override
             public void run() {
                 try {
-                    threadLocal.set(new Person("yy"));
+                    ptl.set(new Person("yy"));
 
-                    threadLocal.set(new Person("-new"));
-                    Person p = threadLocal.get();
-                    System.out.println(""+p);
+                    ptl.set(new Person("-new"));
+                    Person p = ptl.get();
+                    System.out.println("p:"+p);
+
+                    studentThreadLocal.set(new Student("Student"));
+                    Student s = studentThreadLocal.get();
+                    System.out.println("s:"+s);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -43,7 +47,7 @@ public class ThreadLocalTest {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Person person = threadLocal.get();
+                Person person = ptl.get();
                 if (Objects.nonNull(person)) {
                     System.out.printf("ff:%10s\n", person.getName());
                 }
@@ -72,6 +76,32 @@ public class ThreadLocalTest {
         @Override
         public String toString() {
             return "Person{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
+    }
+
+    class Student {
+        private String name;
+
+        public Student() {
+        }
+
+        public Student(String name) {
+            this.name = name;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "Student{" +
                     "name='" + name + '\'' +
                     '}';
         }

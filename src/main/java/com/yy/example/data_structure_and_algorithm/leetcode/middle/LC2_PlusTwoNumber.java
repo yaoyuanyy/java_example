@@ -1,4 +1,4 @@
-package com.yy.example.data_structure_and_algorithm.leetcode;
+package com.yy.example.data_structure_and_algorithm.leetcode.middle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,21 +14,21 @@ import java.util.Objects;
  * @author skyler
  * Created by on 2020-01-04 at 20:23
  */
-public class C2_PlusTwoNumber {
+public class LC2_PlusTwoNumber {
 
     public static void main(String[] args) {
-        C2_PlusTwoNumber c2PlusTwoNumber = new C2_PlusTwoNumber();
+        LC2_PlusTwoNumber c2PlusTwoNumber = new LC2_PlusTwoNumber();
         //test(plusTwoNumber);
         cal();
     }
 
     public static void cal(){
-        C2_PlusTwoNumber c2PlusTwoNumber = new C2_PlusTwoNumber();
+        LC2_PlusTwoNumber c2PlusTwoNumber = new LC2_PlusTwoNumber();
         c2PlusTwoNumber.add(new ListNode(2, null));
         c2PlusTwoNumber.add(new ListNode(4, null));
         c2PlusTwoNumber.add(new ListNode(5, null));
 
-        C2_PlusTwoNumber c2PlusTwoNumber2 = new C2_PlusTwoNumber();
+        LC2_PlusTwoNumber c2PlusTwoNumber2 = new LC2_PlusTwoNumber();
         c2PlusTwoNumber2.add(new ListNode(5, null));
         c2PlusTwoNumber2.add(new ListNode(6, null));
         c2PlusTwoNumber2.add(new ListNode(5, null));
@@ -57,7 +57,7 @@ public class C2_PlusTwoNumber {
         System.out.println(list);
     }
 
-    public static void test(C2_PlusTwoNumber c2PlusTwoNumber) {
+    public static void test(LC2_PlusTwoNumber c2PlusTwoNumber) {
         c2PlusTwoNumber.add(new ListNode(1, null));
         c2PlusTwoNumber.add(new ListNode(2, null));
         c2PlusTwoNumber.add(new ListNode(3, null));

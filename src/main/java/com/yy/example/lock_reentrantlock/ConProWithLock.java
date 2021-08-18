@@ -1,4 +1,4 @@
-package com.yy.example.reentrantlock;
+package com.yy.example.lock_reentrantlock;
 
 import java.util.ArrayList;
 import java.util.List;
