@@ -1,7 +1,7 @@
 package com.yy.rest;
 
 import com.yy.config.ResponseObj;
-import com.yy.example.java8.Person;
+import com.yy.example.java.java8.Person;
 import com.yy.service.IUserService;
 import io.netty.handler.codec.http.DefaultHttpRequest;
 import lombok.extern.slf4j.Slf4j;

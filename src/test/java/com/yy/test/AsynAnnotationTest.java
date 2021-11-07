@@ -1,6 +1,6 @@
 package com.yy.test;
 
-import com.yy.example.anno_async.Task;
+import com.yy.example.spring.anno_async.Task;
 import org.junit.Test;
 
 import javax.annotation.Resource;

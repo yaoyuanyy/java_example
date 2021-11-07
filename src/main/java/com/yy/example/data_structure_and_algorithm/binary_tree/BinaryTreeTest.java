@@ -19,11 +19,12 @@ public class BinaryTreeTest {
      *    d      e   f       g
      * h     i
      * </pre>
+     *
      * @param args
      */
     public static void main(String[] args) {
-        final String[] array = {"a", "b", "c", "d", "e", "f", "g", "h", "i"};
-        BinaryTree binaryTree = new BinaryTreeImpl(array);
+//        final String[] array = {"a", "b", "c", "d", "e", "f", "g", "h", "i"};
+//        BinaryTree binaryTree = new BinaryTreeImpl(array);
 
         //System.out.println("size:" + binaryTree.size(binaryTree.getRoot()));
 
@@ -31,7 +32,8 @@ public class BinaryTreeTest {
 
         //System.out.println("onKLayCount:" + binaryTree.onKLayCount(binaryTree.getRoot(), 4));
 
-        System.out.println("overKLayCount:" + binaryTree.overKLayCount(binaryTree.getRoot(), 3));
+//        System.out.println("overKLayCount:" + binaryTree.overKLayCount(binaryTree.getRoot(), 3));
+
 
     }
 }

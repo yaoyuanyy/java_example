@@ -1,6 +1,6 @@
 package com.yy.example.data_structure_and_algorithm.binary_tree.search;
 
-import com.yy.example.data_structure_and_algorithm.binary_tree.BinaryTreeNode;
+import com.yy.example.data_structure_and_algorithm.binary_tree.TreeNode;
 
 import java.util.Objects;
 
@@ -14,43 +14,43 @@ import java.util.Objects;
  * @author skyler
  * Created by on 2020/3/26 at 10:35 上午
  */
-public class BinarySearchTreeImpl implements BinarySearchTree{
+public class BinarySearchTreeImpl implements BinarySearchTree {
 
-    BinaryTreeNode<Integer> root;
+    TreeNode<Integer> root;
 
     public BinarySearchTreeImpl(Integer data) {
-        this.root = new BinaryTreeNode<>(data);
+        this.root = new TreeNode<>(data);
     }
 
     @Override
-    public BinaryTreeNode getRoot() {
+    public TreeNode getRoot() {
         return root;
     }
 
     @Override
     public boolean insert(int data) {
-        if(root == null) {
-            root = new BinaryTreeNode<>(data);
+        if (root == null) {
+            root = new TreeNode<>(data);
             return true;
         }
 
-        BinaryTreeNode<Integer> node = root;
+        TreeNode<Integer> node = root;
 
         while (node != null) {
-            if(data < node.data) {
-                if(node.leftChild == null) {
-                    BinaryTreeNode newNode = new BinaryTreeNode<>(data);
-                    node.leftChild = newNode;
+            if (data < node.data) {
+                if (node.left == null) {
+                    TreeNode newNode = new TreeNode<>(data);
+                    node.left = newNode;
                     return true;
                 }
-                node = node.leftChild;
-            }else {
-                if(node.rightChild == null) {
-                    BinaryTreeNode newNode = new BinaryTreeNode<>(data);
-                    node.rightChild = newNode;
+                node = node.left;
+            } else {
+                if (node.right == null) {
+                    TreeNode newNode = new TreeNode<>(data);
+                    node.right = newNode;
                     return true;
                 }
-                node = node.rightChild;
+                node = node.right;
             }
         }
 
@@ -58,16 +58,16 @@ public class BinarySearchTreeImpl implements BinarySearchTree{
     }
 
     @Override
-    public BinaryTreeNode<Integer> find(int targetData) {
-        BinaryTreeNode<Integer> node = root;
+    public TreeNode<Integer> find(int targetData) {
+        TreeNode<Integer> node = root;
 
-        while (node != null){
-            if(targetData == node.data) {
+        while (node != null) {
+            if (targetData == node.data) {
                 return node;
-            }else if(targetData < node.data) {
-                node = node.leftChild;
-            }else {
-                node = node.rightChild;
+            } else if (targetData < node.data) {
+                node = node.left;
+            } else {
+                node = node.right;
             }
         }
 
@@ -75,12 +75,12 @@ public class BinarySearchTreeImpl implements BinarySearchTree{
     }
 
     @Override
-    public BinaryTreeNode findMax() {
+    public TreeNode findMax() {
         return null;
     }
 
     @Override
-    public BinaryTreeNode findMin() {
+    public TreeNode findMin() {
         return null;
     }
 
@@ -91,40 +91,43 @@ public class BinarySearchTreeImpl implements BinarySearchTree{
 
     /**
      * 前序遍历
+     *
      * @param node
      */
     @Override
-    public void infixOrder(BinaryTreeNode node){
+    public void infixOrder(TreeNode node) {
 
-        if(Objects.isNull(node)) return;
+        if (Objects.isNull(node)) return;
         System.out.println("node.data:" + node.data);
-        infixOrder(node.leftChild);
-        infixOrder(node.rightChild);
+        infixOrder(node.left);
+        infixOrder(node.right);
     }
 
     /**
      * 中序遍历
+     *
      * @param node
      */
     @Override
-    public void preOrder(BinaryTreeNode node){
-        if(Objects.isNull(node)) return;
+    public void preOrder(TreeNode node) {
+        if (Objects.isNull(node)) return;
 
-        preOrder(node.leftChild);
+        preOrder(node.left);
         System.out.println("node.data:" + node.data);
-        preOrder(node.rightChild);
+        preOrder(node.right);
     }
 
     /**
      * 后序遍历
+     *
      * @param node
      */
     @Override
-    public void postOrder(BinaryTreeNode node){
-        if(Objects.isNull(node)) return;
+    public void postOrder(TreeNode node) {
+        if (Objects.isNull(node)) return;
 
-        postOrder(node.leftChild);
-        postOrder(node.rightChild);
+        postOrder(node.left);
+        postOrder(node.right);
         System.out.println("node.data:" + node.data);
     }
 }

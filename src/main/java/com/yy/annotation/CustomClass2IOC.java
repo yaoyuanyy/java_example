@@ -1,6 +1,6 @@
 package com.yy.annotation;
 
-import com.yy.custom_spring.custom2.sub2.CustomImportBeanDefinitionRegister;
+import com.yy.example.spring.custom_spring.custom2.sub2.CustomImportBeanDefinitionRegister;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;

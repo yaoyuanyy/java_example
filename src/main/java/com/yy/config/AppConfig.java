@@ -2,10 +2,10 @@ package com.yy.config;
 
 import com.yy.annotation.CustomClass2IOC;
 
-import com.yy.custom_spring.custom2.sub1.CustomBeanDefinitionResgistryPostProcessor;
-import com.yy.custom_spring.custom2.sub2.HelloService;
-import com.yy.custom_spring.custom5.InstantiationService;
-import com.yy.custom_spring.custom6.CustomBeanFactoryPostProcessor;
+import com.yy.example.spring.custom_spring.custom2.sub1.CustomBeanDefinitionResgistryPostProcessor;
+import com.yy.example.spring.custom_spring.custom2.sub2.HelloService;
+import com.yy.example.spring.custom_spring.custom5.InstantiationService;
+import com.yy.example.spring.custom_spring.custom6.CustomBeanFactoryPostProcessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.annotation.Bean;

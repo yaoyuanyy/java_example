@@ -82,6 +82,7 @@ public class SingleLinkedListTest {
         while (current != null){
             final Node tmp = current.next;
             current.next = pre;
+
             pre = current;
             current = tmp;
         }

@@ -1,9 +1,9 @@
 package com.yy.example.data_structure_and_algorithm.sort_8big;
 
 /**
- * Description:
+ * Description: 基础类
  * <pre>
- *
+ * 来自算法4
  * </pre>
  * NB.
  *
@@ -15,6 +15,7 @@ public abstract class Example {
     public abstract void sort(Comparable[] a);
 
     /**
+     * 含义：a 小于 b 吗
      * a > b: false; a < b: true;
      * @param a
      * @param b

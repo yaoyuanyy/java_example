@@ -1,12 +1,12 @@
 package com.yy.test;
 
-import com.yy.custom_spring.custom3.HelloC;
-import com.yy.custom_spring.custom2.sub1.Hello;
-import com.yy.custom_spring.custom2.sub1.CustomBeanDefinitionResgistryPostProcessor;
+import com.yy.example.spring.custom_spring.custom3.HelloC;
+import com.yy.example.spring.custom_spring.custom2.sub1.Hello;
+import com.yy.example.spring.custom_spring.custom2.sub1.CustomBeanDefinitionResgistryPostProcessor;
+import com.yy.example.spring.custom_spring.custom3.CustomFactoryBean;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.util.Assert;
 
 /**
@@ -37,7 +37,7 @@ public class CustomSpringComponentTest extends JavaExampleAppTest {
 
     /**
      * 测试自定义的 FactoryBean
-     * {@link com.yy.custom_spring.custom3.CustomFactoryBean}}
+     * {@link CustomFactoryBean}}
      */
     @Test
     public void testCustomFactoryBean(){
