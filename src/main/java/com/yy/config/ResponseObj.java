@@ -16,6 +16,8 @@ public class ResponseObj<T> {
     public static final ResponseObj<Object> SUCCESS = new ResponseObj<Object>(AppCode.SUCCESS);
     public static final ResponseObj<Object> ERROR = new ResponseObj<Object>(AppCode.ERROR);
 
+    public ResponseObj(){}
+
     public ResponseObj(AppCode appCode){
         this.code = appCode.getCode();
         this.msg = appCode.getDescription();

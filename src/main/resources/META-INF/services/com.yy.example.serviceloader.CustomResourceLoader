@@ -1,0 +1,2 @@
+com.yy.example.serviceloader.impl.FileResourceLoader
+com.yy.example.serviceloader.impl.NetResourceLoader
