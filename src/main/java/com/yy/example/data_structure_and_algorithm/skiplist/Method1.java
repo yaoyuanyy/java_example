@@ -154,9 +154,10 @@ public class Method1 {
         }
 
         // 重新计算当前跳表的层级
-        for (int level = DEFAULT_MAX_LEVEL; level > 0; level--) {
+        for (int level = DEFAULT_MAX_LEVEL - 1; level > 0; level--) {
             if(head.next[level] != null){
-                currentLevel = level;
+                currentLevel = level + 1;
+                break;
             }
         }
 
