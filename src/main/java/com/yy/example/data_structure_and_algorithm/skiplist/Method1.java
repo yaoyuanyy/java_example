@@ -2,6 +2,9 @@ package com.yy.example.data_structure_and_algorithm.skiplist;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -22,14 +25,15 @@ public class Method1 {
 
     /**
      * 表示整个跳表的实际层数，它从1开始
+     *
+     * 跳跃列表当前的最高层
      */
     private int currentLevel = 1;
 
+    /**
+     * 跳跃列表头指针
+     */
     private SkipNode head = null;
-
-    // 辅助数据
-    private int step = 0;
-
 
     public Method1() {
         this.head = new SkipNode(0, DEFAULT_MAX_LEVEL);
@@ -51,6 +55,10 @@ public class Method1 {
      * </pre>
      */
     public void add(int value) {
+
+        // 存储搜索路径上的节点 便于验证路径是否正确，不涉及算法本身
+        LinkedList<String> searchPath = new LinkedList<>();
+
         int randomLevel = randomLevel();
         SkipNode newNode = new SkipNode(value, randomLevel);
 
@@ -62,7 +70,7 @@ public class Method1 {
         for (int i = currentLevel - 1; i >= 0; i--) {
             if (i < randomLevel) {
                 // 同一i层查找小于value的最大值的skipNode
-                oprNode = findClosestBySameLayer(oprNode, i, value);
+                oprNode = findClosestBySameLayer(oprNode, i, value, searchPath);
                 if (Objects.isNull(oprNode.next[i])) {
                     oprNode.next[i] = newNode;
                 } else {
@@ -81,6 +89,16 @@ public class Method1 {
             // 设置跳表的新层次
             currentLevel = randomLevel;
         }
+
+        outSearchPath(value, searchPath);
+    }
+
+    private void outSearchPath(int value, List<String> searchPath) {
+        System.out.println("\ntarget value:" + value + " searchPath: ");
+        for (String num : searchPath) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
     }
 
     /**
@@ -90,12 +108,15 @@ public class Method1 {
      * @param skipNode
      * @param levelIndex
      * @param value
+     * @param searchPath
      * @return
      */
-    public SkipNode findClosestBySameLayer(SkipNode skipNode, int levelIndex, int value) {
+    public SkipNode findClosestBySameLayer(SkipNode skipNode, int levelIndex, int value, List<String> searchPath) {
+        int step = levelIndex + 1;
+        searchPath.add(skipNode.value + "(" + step + ")");
         while (skipNode.next[levelIndex] != null && skipNode.next[levelIndex].value < value) {
             skipNode = skipNode.next[levelIndex];
-            step++;
+            searchPath.add(skipNode.value + "(" + step + ")");
         }
         return skipNode;
     }
@@ -128,25 +149,35 @@ public class Method1 {
     }
 
     private boolean search(int value) {
+
+        // 存储搜索路径上的节点 便于验证路径是否正确，不涉及算法本身
+        LinkedList<String> searchPath = new LinkedList();
+
         SkipNode oprNode = head;
 
         for (int i = currentLevel - 1; i >= 0; i--) {
             // 同一level层遍历查找小于value的最大值的skipNode
-            oprNode = findClosestBySameLayer(oprNode, i, value);
+            oprNode = findClosestBySameLayer(oprNode, i, value, searchPath);
             if (Objects.nonNull(oprNode.next[i]) && oprNode.next[i].value == value) {
+                outSearchPath(value, searchPath);
                 return true;
             }
         }
+        outSearchPath(value, searchPath);
         return false;
     }
 
     public boolean remove(int value) {
+
+        // 存储搜索路径上的节点 便于验证路径是否正确，不涉及算法本身
+        LinkedList<String> searchPath = new LinkedList();
+
         boolean result = false;
         SkipNode oprNode = head;
 
         for (int i = currentLevel - 1; i >= 0; i--) {
             // 同一level层遍历查找小于value的最大值的skipNode
-            oprNode = findClosestBySameLayer(oprNode, i, value);
+            oprNode = findClosestBySameLayer(oprNode, i, value, searchPath);
             if (Objects.nonNull(oprNode.next[i]) && oprNode.next[i].value == value) {
                 oprNode.next[i] = oprNode.next[i].next[i];
                 result = true;
@@ -161,6 +192,7 @@ public class Method1 {
             }
         }
 
+        outSearchPath(value, searchPath);
         return result;
     }
 
@@ -185,14 +217,14 @@ public class Method1 {
         method1.add(6);
         method1.add(8);
         method1.add(10);
-        method1.add(1);
+        method1.add(18);
 
         System.out.println("新增后的结果:");
         method1.out();
 
         System.out.println("-------------------------");
         boolean find = method1.search(10);
-        System.out.println("search 10的结果 find:" + find + " 经过" + method1.step + "步");
+        System.out.println("search 10的结果 find:" + find + " 经过" + "步");
         System.out.println("-------------------------");
 
         boolean result = method1.remove(10);
