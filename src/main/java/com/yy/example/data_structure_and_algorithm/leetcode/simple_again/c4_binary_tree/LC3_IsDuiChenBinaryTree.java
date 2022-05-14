@@ -22,7 +22,7 @@ package com.yy.example.data_structure_and_algorithm.leetcode.simple_again.c4_bin
  * @author skyler_11@163.com
  * Created by on 2022-04-17 at 20:30
  */
-public class LC3_DuiChenBinaryTree {
+public class LC3_IsDuiChenBinaryTree {
 
     public boolean isSymmetric(TreeNode root) {
         if(null == root) {
@@ -43,7 +43,7 @@ public class LC3_DuiChenBinaryTree {
 
 
     public static void main(String[] args) {
-        LC3_DuiChenBinaryTree duiChenBinaryTree = new LC3_DuiChenBinaryTree();
+        LC3_IsDuiChenBinaryTree duiChenBinaryTree = new LC3_IsDuiChenBinaryTree();
 
         /**
          *        1
@@ -66,5 +66,36 @@ public class LC3_DuiChenBinaryTree {
 
         boolean res = duiChenBinaryTree.isSymmetric(root);
         System.out.println(res);
+
+        int a = 260;
+        System.out.println((byte)(a >> 8));
+        System.out.println((byte)(a >> 16));
+        System.out.println((byte)(a >> 24));
+
+        //69314
+        System.out.println(Integer.toBinaryString(69314));
+        System.out.println(Integer.toBinaryString(69314).length());
+        //        0000 0000  0000 0000  0000 0000  0000 0000
+        // a:      0000 0000  0000 0001  0000 1110  1100 0010  ---  (byte) a: 1100 0010 => 反码：1100 0001 => 原码：1011 1110 = -(2⁵ + 2⁴ + 2³ + 2² + 2) = -62
+        //a >> 8:             0000 0000  0000 0001  0000 1110 & 0xFF = 1110 = 8 + 4 + 2 = 14
+        //a >> 16:                       0000 0000  0000 0001 & 0xFF = 1
+        //a >> 24:                                  0000 0000 & 0xFF = 0
+
+        System.out.println(Integer.parseInt("10000111011000010", 2));
+
+        System.out.println("=======");
+        byte[] bytes = toBEIntByteArray(69314);
+        for (byte b : bytes) {
+            System.out.println(b);
+        }
+    }
+
+    public static byte[] toBEIntByteArray(int value) {
+        byte[] data = new byte[4];
+        data[0] = (byte) (value); // -62
+        data[1] = (byte) (value >>> 8);
+        data[2] = (byte) (value >>> 16);
+        data[3] = (byte) (value >>> 24);
+        return data;
     }
 }

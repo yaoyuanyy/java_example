@@ -4,8 +4,7 @@ package com.yy.example.data_structure_and_algorithm.leetcode.simple_again.c4_bin
  * Description: 是否为满二叉树
  * <pre>
  *  二叉树题目递归套路：解决树形DP（树形动态规划）练习
- *
- *  https://www.bilibili.com/video/BV13g41157hK?p=7 01:10:00
+ *  refer to https://www.bilibili.com/video/BV13g41157hK?p=7 01:10:00
  *
  * </pre>
  * NB.
@@ -15,8 +14,45 @@ package com.yy.example.data_structure_and_algorithm.leetcode.simple_again.c4_bin
  */
 public class LC2_4_IsFullBinaryTree {
 
+    /**
+     * 满二叉树的条件
+     * 1. 左子树是满二叉树
+     * 2. 右子树是满二叉树
+     * 3. sum = 2^height - 1
+     *
+     * 未满足以上条件：
+     * 每个节点要给出信息：height，nodes
+     * @param root
+     * @return
+     */
     private boolean isFull(TreeNode root) {
-        return false;
+        if(null == root) {
+            return true;
+        }
+        ResultData resultData = process(root);
+        return resultData.nodes == 1 << resultData.height - 1;
+    }
+
+    private ResultData process(TreeNode root) {
+        if(null == root) {
+            return new ResultData(0, 0);
+        }
+        ResultData leftData = process(root.left);
+        ResultData rightData = process(root.right);
+        int height = Math.max(leftData.height, rightData.height) + 1;
+        int nodes = leftData.nodes + rightData.nodes + 1;
+        return new ResultData(height, nodes);
+    }
+
+    public static class ResultData {
+        private int height;
+        private int nodes;
+        public ResultData() {
+        }
+        public ResultData(int height, int nodes) {
+            this.height = height;
+            this.nodes = nodes;
+        }
     }
 
     public static void main(String[] args) {

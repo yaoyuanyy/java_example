@@ -27,10 +27,22 @@ package com.yy.example.data_structure_and_algorithm.leetcode.simple_again.c4_bin
 public class LC5_SortedArray2SearchBinaryTree {
 
     public TreeNode sortedArrayToBST(int[] nums) {
-        return null;
+        return sortedArrayToBST(nums, 0, nums.length - 1);
+    }
+
+    public TreeNode sortedArrayToBST(int[] nums, int start, int end) {
+        if(end < start) {
+            return null;
+        }
+        int mid = (start + end) >> 1;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = sortedArrayToBST(nums, start, mid - 1);
+        root.right = sortedArrayToBST(nums, mid + 1, end);
+        return root;
     }
 
     public static void main(String[] args) {
-
+        LC5_SortedArray2SearchBinaryTree sortedArray2SearchBinaryTree = new LC5_SortedArray2SearchBinaryTree();
+        TreeNode root = sortedArray2SearchBinaryTree.sortedArrayToBST(new int[]{-10,-3,0,5,9});
     }
 }

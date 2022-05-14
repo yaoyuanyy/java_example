@@ -24,8 +24,6 @@ import java.util.Stack;
  */
 public class LC2_1_IsSearchBinaryTree {
 
-
-
     /**
      * 使用二叉树题目递归套路
      * https://www.bilibili.com/video/BV13g41157hK?p=7 时间：00:46:40
