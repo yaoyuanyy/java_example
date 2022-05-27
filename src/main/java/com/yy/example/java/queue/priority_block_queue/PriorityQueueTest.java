@@ -28,6 +28,7 @@ public class PriorityQueueTest {
         priorityQueue.add(4);
         priorityQueue.add(5);
 
+        System.out.println("fisrt:" + priorityQueue.poll());
         outPretty(priorityQueue);
 
         Iterator<Integer> iterator = priorityQueue.iterator();
@@ -40,7 +41,7 @@ public class PriorityQueueTest {
     private static void outPretty(PriorityQueue<Integer> priorityQueue) {
         Integer[] array = priorityQueue.toArray(new Integer[priorityQueue.size()]);
          for (int i = 0; i < array.length; i++) {
-            System.out.println("");
+            System.out.println(i + " " + array[i]);
         }
     }
 }

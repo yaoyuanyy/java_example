@@ -29,7 +29,7 @@ public class P3_02_Merge extends Example {
         if (l == r) {
             return;
         }
-        int mid = l + ((r - l) >> 2);
+        int mid = l + ((r - l) >> 1);
         sort(a, l, mid);
         sort(a, mid + 1, r);
         merge(a, l, mid, r);
