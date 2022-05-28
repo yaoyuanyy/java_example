@@ -41,8 +41,10 @@ public class C2_04_01_MaxPQ_Impl_Heap<E extends Comparable>{
     }
 
     /**
-     * 上浮
-     * 将 k 位置的节点不断的往上移，直到遇到比它大的元素为止
+     * 如果父节点小于子节点，则互换，以使大的数上移
+     *
+     * 上浮：指的是 k 的变化趋势，是往上的
+     *
      * @param k 数组下标
      */
     private void swim(int k) {
@@ -53,8 +55,10 @@ public class C2_04_01_MaxPQ_Impl_Heap<E extends Comparable>{
     }
 
     /**
-     * 下沉
-     * 将 k 位置的节点不断的下移，直到遇到左右子节点比它小的元素位置
+     * 如果父节点小于子节点，则互换，以使大的数上移
+     *
+     * 下沉：指的是 k 的变化趋势：是往下的
+     *
      * @param k 数组下标
      */
     private void sink(int k) {
