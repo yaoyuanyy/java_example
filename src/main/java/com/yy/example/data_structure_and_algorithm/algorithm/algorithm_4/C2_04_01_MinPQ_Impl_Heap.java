@@ -1,7 +1,7 @@
 package com.yy.example.data_structure_and_algorithm.algorithm.algorithm_4;
 
 /**
- * Description: 使用二叉堆实现的有序优先队列 大顶堆
+ * Description: 使用二叉堆实现的有序优先队列 小顶堆
  * <pre>
  * </pre>
  * NB.
@@ -9,12 +9,12 @@ package com.yy.example.data_structure_and_algorithm.algorithm.algorithm_4;
  * @author skyler_11@163.com
  * Created by on 5/27/22 at 10:20 AM
  */
-public class C2_04_01_MaxPQ_Impl_Heap<E extends Comparable>{
+public class C2_04_01_MinPQ_Impl_Heap<E extends Comparable>{
 
     private E[] pq;
     private int N = 0;
 
-    public C2_04_01_MaxPQ_Impl_Heap(int MaxN) {
+    public C2_04_01_MinPQ_Impl_Heap(int MaxN) {
         pq = (E[])new Comparable[MaxN + 1];
     }
 
@@ -23,7 +23,7 @@ public class C2_04_01_MaxPQ_Impl_Heap<E extends Comparable>{
         swim(N);
     }
 
-    public E delMax() {
+    public E delMin() {
         E max = pq[1];
         exch(1, N);
         pq[N] = null;
@@ -48,7 +48,7 @@ public class C2_04_01_MaxPQ_Impl_Heap<E extends Comparable>{
      * @param k 数组下标
      */
     private void swim(int k) {
-        while (k > 1 && less(k / 2, k)) {
+        while (k > 1 && less(k, k / 2)) {
             exch(k / 2, k);
             k = k / 2;
         }
@@ -64,10 +64,10 @@ public class C2_04_01_MaxPQ_Impl_Heap<E extends Comparable>{
     private void sink(int k) {
         while (2 * k <= N) {
             int tmp = k * 2;
-            if(tmp < N && less(tmp, tmp + 1)) {
+            if(tmp < N && less(tmp + 1, tmp)) {
                 tmp++;
             }
-            if(!less(k, tmp)) {
+            if(!less(tmp, k)) {
                 break;
             }
             exch(k, tmp);
@@ -87,16 +87,16 @@ public class C2_04_01_MaxPQ_Impl_Heap<E extends Comparable>{
 
     public static void main(String[] args) {
 
-        C2_04_01_MaxPQ_Impl_Heap maxPQ_impl_heap = new C2_04_01_MaxPQ_Impl_Heap(10);
+        C2_04_01_MinPQ_Impl_Heap minPQ_impl_heap = new C2_04_01_MinPQ_Impl_Heap(10);
         Integer[] array = new Integer[]{20, 30, 90, 60, 40, 50, 70, 10};
         for (Integer key : array) {
-            maxPQ_impl_heap.insert(key);
+            minPQ_impl_heap.insert(key);
         }
 
-        System.out.println("size:" + maxPQ_impl_heap.size());
-        int size = maxPQ_impl_heap.size();
+        System.out.println("size:" + minPQ_impl_heap.size());
+        int size = minPQ_impl_heap.size();
         for (int i = 0; i < size; i++) {
-            Comparable key = maxPQ_impl_heap.delMax();
+            Comparable key = minPQ_impl_heap.delMin();
             System.out.print(key + " ");
         }
     }

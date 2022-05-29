@@ -49,7 +49,7 @@ public class C2_04_02_LogN_Heap_ZCY extends Example {
     private void sink(Comparable[] a, int i, int n) {
         while ((2*i+1) <= n) {
             int tmp = 2 * i + 1;
-            if(tmp < n && less(a[tmp], a[tmp + 1])) {
+            if(tmp <= n && less(a[tmp], a[tmp + 1])) {
                 tmp++;
             }
             if(tmp >= n || !less(a[i], a[tmp])) {
