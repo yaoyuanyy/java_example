@@ -3,7 +3,9 @@ package com.yy.example.java.mutil_thread.thread;
 import java.lang.reflect.Field;
 
 /**
- * <pre></pre>
+ * <pre>
+ * https://segmentfault.com/a/1190000023040432
+ * </pre>
  * NB.
  * Created by skyler on 2021/08/18 at 下午8:57
  */

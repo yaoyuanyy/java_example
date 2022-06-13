@@ -3,7 +3,7 @@ package com.yy.example.data_structure_and_algorithm.algorithm.zuochengyun;
 /**
  * Description: 最长回文字串长度
  * <pre>
- * https://www.bilibili.com/video/BV13g41157hK?p=13 00:00:00
+ * https://www.bilibili.com/video/BV13g41157hK?p=14 00:00:00
  *
  * 类似：
  * 回文子字符串个数：https://leetcode-cn.com/problems/palindromic-substrings/solution/hui-wen-zi-zi-fu-chuan-ge-shu-by-miki-3/

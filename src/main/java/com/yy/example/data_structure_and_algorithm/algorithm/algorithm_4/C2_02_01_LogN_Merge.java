@@ -59,7 +59,7 @@ public class C2_02_01_LogN_Merge extends Example{
             }else if(j > hi) {  // 边界判断
                 a[k] = tmpArr[i++];
             } else if(less(tmpArr[j], tmpArr[i])) { // 元素判断
-                a[k] = a[j++];
+                a[k] = tmpArr[j++];
             } else { // 元素判断
                 a[k] = tmpArr[i++];
             }

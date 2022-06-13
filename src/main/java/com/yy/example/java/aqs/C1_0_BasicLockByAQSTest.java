@@ -11,15 +11,30 @@ import java.util.concurrent.locks.ReentrantLock;
  * </pre>
  */
 public class C1_0_BasicLockByAQSTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Data data = new Data();
+
+        Thread thread0 = new Thread(() -> {
+            data.outPut("y0");
+            try {
+                Thread.sleep(100000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        thread0.start();
+
         new Thread(() -> {
             data.outPut("y1");
         }).start();
 
-        new Thread(() -> {
-            data.outPut("y2");
-        }).start();
+//        new Thread(() -> {
+//            data.outPut("y3");
+//        }).start();
+
+        Thread.sleep(1000);
+        thread0.interrupt();
+        System.out.println("1");
     }
 }
 /**

@@ -16,7 +16,14 @@ public class ThreadLocalTest {
 
     public static void main(final String[] args) {
         final ThreadLocalTest threadLocalTest = new ThreadLocalTest();
+        System.out.println("0x61c88647 的二进制为：" + Integer.toBinaryString(0x61c88647));
+        System.out.println("0x61c88647 的十进制为：" + 0x61c88647);
         threadLocalTest.test();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void test() {
@@ -47,6 +54,7 @@ public class ThreadLocalTest {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                // 这里是获取不到的
                 Person person = ptl.get();
                 if (Objects.nonNull(person)) {
                     System.out.printf("ff:%10s\n", person.getName());
