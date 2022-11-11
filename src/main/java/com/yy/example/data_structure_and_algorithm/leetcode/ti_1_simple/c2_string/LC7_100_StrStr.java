@@ -24,7 +24,7 @@ package com.yy.example.data_structure_and_algorithm.leetcode.ti_1_simple.c2_stri
  *
  * 这是经典的子字符串查找问题，参见算法4 P493
  * 方法有暴力计算、KMP
- *
+ * ＊ 符号表示重要
  * </pre>
  * NB.
  *

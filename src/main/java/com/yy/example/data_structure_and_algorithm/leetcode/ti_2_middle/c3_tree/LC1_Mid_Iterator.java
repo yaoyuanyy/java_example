@@ -52,7 +52,7 @@ public class LC1_Mid_Iterator {
         TreeNode l1 = new TreeNode(2);
         TreeNode r1 = new TreeNode(3);
 
-        TreeNode r2 = new TreeNode(1);
+        TreeNode r2 = new TreeNode(4);
         l1.right = r2;
 
         TreeNode root = new TreeNode(1);

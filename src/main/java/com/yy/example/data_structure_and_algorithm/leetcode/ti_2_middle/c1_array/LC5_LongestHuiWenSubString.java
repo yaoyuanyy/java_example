@@ -26,6 +26,8 @@ public class LC5_LongestHuiWenSubString {
     /**
      * 暴力方法
      * 核心思路：依次从每个元素开始，计算每个元素与后面的每个元素之间的子串是否为回文串，并记录一个max值下标和起始点下标，最后结果就是题解
+     *
+     * 其他方法还有动态规划
      * @param s
      * @return
      */

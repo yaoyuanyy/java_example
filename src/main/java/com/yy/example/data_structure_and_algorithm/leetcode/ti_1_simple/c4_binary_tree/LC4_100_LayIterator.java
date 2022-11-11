@@ -31,6 +31,23 @@ import java.util.List;
  * refer to:
  * https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/bfs-de-shi-yong-chang-jing-zong-jie-ceng-xu-bian-l/
  * https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/die-dai-di-gui-duo-tu-yan-shi-102er-cha-shu-de-cen/
+ *
+ * LeetCode 中还有许多层序遍历和最短路径的题目
+ * 层序遍历的一些变种题目：
+ *   LeetCode 103. Binary Tree Zigzag Level Order Traversal 之字形（锯齿形）层序遍历
+ *   LeetCode 199. Binary Tree Right Side View 找每一层的最右结点
+ *   LeetCode 515. Find Largest Value in Each Tree Row 计算每一层的最大值
+ *   LeetCode 637. Average of Levels in Binary Tree 计算每一层的平均值
+ *
+ * 对于最短路径问题，还有两道题目也是求网格结构中的最短路径，和我们讲解的距离岛屿的最远距离非常类似：
+ *   LeetCode 542. 01 Matrix
+ *   LeetCode 994. Rotting Oranges
+ *
+ * 还有一道在真正的图结构中求最短路径的问题：
+ *   LeetCode 310. Minimum Height Trees
+ *
+ * 本文作者 nettee
+ * 链接：https://leetcode.cn/problems/binary-tree-level-order-traversal/solution/bfs-de-shi-yong-chang-jing-zong-jie-ceng-xu-bian-l/
  * </pre>
  * NB.
  *

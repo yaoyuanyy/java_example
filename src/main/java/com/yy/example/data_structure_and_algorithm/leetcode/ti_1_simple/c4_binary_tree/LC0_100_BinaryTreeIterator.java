@@ -9,6 +9,12 @@ import java.util.Stack;
  * Note: 递归序的概念：左程云
  * <pre>
  *     refer to https://www.nowcoder.com/issue/tutorial?tutorialId=10016&uuid=433f30570fc0428fb41c83ea2c2bf138
+ *
+ * 这里是 4 道相关题目：
+ *   144. 二叉树的前序遍历
+ *    94. 二叉树的中序遍历
+ *   145. 二叉树的后序遍历
+ *   102. 二叉树的层序遍历
  * </pre>
  * NB.
  *
@@ -105,6 +111,7 @@ public class LC0_100_BinaryTreeIterator {
      * 非递归
      * 借助数据结构：栈
      *
+     * refer to https://www.nowcoder.com/issue/tutorial?tutorialId=10016&uuid=433f30570fc0428fb41c83ea2c2bf138
      * @param node
      * @return
      */
@@ -121,10 +128,33 @@ public class LC0_100_BinaryTreeIterator {
                 stack.push(node);
                 node = node.left;
             }else {
-                TreeNode treeNode = stack.pop();
-                System.out.print(treeNode.val + " ");
+                node = stack.pop();
+                System.out.print(node.val + " ");
                 node = node.right;
             }
+        }
+    }
+
+    /**
+     * 迭代
+     *
+     * https://leetcode.cn/problems/binary-tree-inorder-traversal/solution/jian-dan-yi-dong-javac-pythonjs-er-cha-s-w80i/
+     */
+    public void iterator_InOrder_NotDiGui2(TreeNode root) {
+        TreeNode cur = root;
+        Stack<TreeNode> stack = new Stack<>();
+        while (!stack.isEmpty() || cur != null) {
+            // 遍历左子树，一直到 null
+            while (cur != null) {
+                stack.push(cur);
+                cur = cur.left;
+            }
+            // 左子树为null，操作自己
+            TreeNode self = stack.pop();
+            System.out.print(self.val + " ");
+
+            // 操作其右子树
+            cur = self.right;
         }
     }
 
@@ -179,37 +209,43 @@ public class LC0_100_BinaryTreeIterator {
         LC0_100_BinaryTreeIterator binaryTreeIterator = new LC0_100_BinaryTreeIterator();
 
         /**
-         *     3
-         *    / \
-         *   9  20
-         *     /  \
-         *    15   7
+         *        3
+         *      /   \
+         *     9    20
+         *   / \    / \
+         *  91 92  21 22
          */
         TreeNode treeNode20 = new TreeNode(20);
-        treeNode20.left = new TreeNode(15);
-        treeNode20.right = new TreeNode(7);
+        treeNode20.left = new TreeNode(21);
+        treeNode20.right = new TreeNode(22);
+
+        TreeNode node9 = new TreeNode(9);
+        node9.left = new TreeNode(91);
+        node9.right = new TreeNode(92);
 
         TreeNode root = new TreeNode(3);
-        root.left = new TreeNode(9);
+        root.left = node9;
         root.right = treeNode20;
 
-        System.out.println("\n广度优先遍历:");
-        binaryTreeIterator.iterator_BFS(root);
-
-        System.out.println("\n前序遍历-递归:");
-        binaryTreeIterator.iterator_PreOrder_DiGui(root);
+//        System.out.println("\n广度优先遍历:");
+//        binaryTreeIterator.iterator_BFS(root);
+//
+//        System.out.println("\n前序遍历-递归:");
+//        binaryTreeIterator.iterator_PreOrder_DiGui(root);
         System.out.println("\n前序遍历-非递归:");
         binaryTreeIterator.iterator_PreOrder_NotDiGui(root);
-
-        System.out.println("\n中序遍历-递归:");
-        binaryTreeIterator.iterator_InOrder_DiGui(root);
-        System.out.println("\n中序遍历-非递归:");
-
-
-        System.out.println("\n后序遍历-递归:");
-        binaryTreeIterator.iterator_AfterOrder_DiGui(root);
-
-        System.out.println("\n后序遍历-非递归:");
-        binaryTreeIterator.iterator_AfterOrder_NotDiGui(root);
+//
+//        System.out.println("\n中序遍历-递归:");
+//        binaryTreeIterator.iterator_InOrder_DiGui(root);
+//        System.out.println("\n中序遍历-非递归:");
+//        binaryTreeIterator.iterator_InOrder_NotDiGui(root);
+//        System.out.println("\n中序遍历-非递归2:");
+//        binaryTreeIterator.iterator_InOrder_NotDiGui2(root);
+//
+//        System.out.println("\n后序遍历-递归:");
+//        binaryTreeIterator.iterator_AfterOrder_DiGui(root);
+//
+//        System.out.println("\n后序遍历-非递归:");
+//        binaryTreeIterator.iterator_AfterOrder_NotDiGui(root);
     }
 }

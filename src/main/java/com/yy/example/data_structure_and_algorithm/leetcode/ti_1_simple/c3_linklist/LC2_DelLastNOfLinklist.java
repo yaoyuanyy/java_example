@@ -40,13 +40,10 @@ public class LC2_DelLastNOfLinklist {
         if(null == head) {
             return null;
         }
-
-
         while (n != 0) {
             fNode = fNode.next;
             n--;
         }
-
         if(null == fNode) {
             return head.next;
         }

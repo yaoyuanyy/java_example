@@ -28,7 +28,7 @@ package com.yy.example.data_structure_and_algorithm.leetcode.ti_1_simple.c2_stri
  * @author skyler_11@163.com
  * Created by on 2022-03-29 at 09:12
  */
-public class LC9_LongestSamePrefix {
+public class LC9_LongestPublicPrefix {
 
     /**
      * 纵向扫描 最容易想到的方法
@@ -66,8 +66,7 @@ public class LC9_LongestSamePrefix {
                 }
             }
         }
-
-        return "";
+        return strs[0];
     }
 
     /**
@@ -129,7 +128,7 @@ public class LC9_LongestSamePrefix {
         String[] strs = {"flower","flo","floght"};
         // "flower","flow","flight"
         // "dog","racecar","car"
-        LC9_LongestSamePrefix longestSamePrefix = new LC9_LongestSamePrefix();
+        LC9_LongestPublicPrefix longestSamePrefix = new LC9_LongestPublicPrefix();
         String str = longestSamePrefix.longestCommonPrefix3(strs);
         System.out.println(str);
     }
