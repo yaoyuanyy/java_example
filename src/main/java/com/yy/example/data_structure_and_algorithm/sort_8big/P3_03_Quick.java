@@ -37,10 +37,11 @@ public class P3_03_Quick extends Example {
         int p1 = lo;
         int p2 = hi + 1;
         Integer v = a[lo];
+        // p1 指针向右走，p2 指针向左走
         while (true) {
-            // 找到小于v的
+            // 找到大于v的 那个元素下标
             while (less(a[++p1], v)) if(p1 == hi) break;
-            // 找到小于v
+            // 找到小于v的 那个元素下标
             while (less(v, a[--p2])) if(p2 == lo) break;
             if(p1 >= p2) break;
             exch(a, p1, p2);
