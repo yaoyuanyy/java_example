@@ -1,10 +1,8 @@
 package com.yy.example.data_structure_and_algorithm.sort_8big;
 
 /**
- * Description:
+ * Description: 荷兰国旗问题
  * <pre>
- *
- * 荷兰国旗问题
  *   一个数组arr，一个数num，请把小于等于num的数放在数组的左边，等于num的数放在数组的中间，大于num的数放在数组的右边。
  *   要求空间复杂度O(1)，时间复杂度O(n)
  * </pre>

@@ -12,55 +12,76 @@ package com.yy.example.data_structure_and_algorithm.sort_8big;
  */
 public class P3_02_Merge extends Example {
 
-    public static void main(String[] args) {
+    int[] temp = null;
 
+    @Override
+    public void sort(Comparable[] arr) {
+        temp = new int[arr.length];
+        sort((Integer[]) arr, 0, arr.length - 1);
+    }
+
+    /**
+     * 归并排序类似一个二叉树的后序遍历
+     * 先递归，后归并
+     * 每次递归都是等分左右数组
+     * https://labuladong.github.io/algo/2/21/41/
+     * @param arr
+     * @param lo
+     * @param hi
+     */
+    private void sort(Integer[] arr, int lo, int hi) {
+        if (lo >= hi) {
+            return;
+        }
+        int mid = ((hi - lo) / 2 + lo);
+        sort(arr, lo, mid);
+        sort(arr, mid + 1, hi);
+        merge(arr, lo, hi, mid);
+    }
+
+    /**
+     * 合并数组，将两个自数组合并成有序的一个，由于我们是一个数组，所以需要定义个临时数组
+     * 使用双指针技巧，一个从 lo -> mid；一个从 mid + 1 -> hi
+     * 所以，两个指针是同向的，从左向右
+     *
+     * @param arr
+     * @param lo
+     * @param hi
+     * @param mid
+     */
+    private void merge(Integer[] arr, int lo, int hi, int mid) {
+        for (int k = lo; k <= hi; k++) {
+            temp[k] = arr[k];
+        }
+        int i = lo;
+        int j = mid + 1;
+        int k = lo;
+        while (i <= mid && j <= hi) {
+//            if (temp[i] > temp[j]) {
+//                arr[k] = temp[j];
+//                j++;
+//            } else {
+//                arr[k] = temp[i];
+//                i++;
+//            }
+//            k++;
+            // 一行代码等于注释掉的 if else 代码
+            arr[k++] = temp[i] > temp[j] ? temp[j++] : temp[i++];
+        }
+        while (i <= mid) {
+            arr[k++] = temp[i++];
+        }
+        while (j <= hi) {
+            arr[k++] = temp[j++];
+        }
+    }
+
+
+    public static void main(String[] args) {
         P3_02_Merge merge = new P3_02_Merge();
         Integer[] array = new Integer[]{20, 30, 90, 60, 40, 50, 70, 10};
         merge.sort(array);
         show(array);
     }
 
-    @Override
-    public void sort(Comparable[] a) {
-        sort((Integer[]) a, 0, a.length - 1);
-    }
-
-    public void sort(Integer[] a, int l, int r) {
-        if (l == r) {
-            return;
-        }
-        int mid = l + ((r - l) >> 1);
-        sort(a, l, mid);
-        sort(a, mid + 1, r);
-        merge(a, l, mid, r);
-    }
-
-    /**
-     * while 的形式
-     *
-     * @param a
-     * @param l
-     * @param mid
-     * @param r
-     */
-    private void merge(Integer[] a, int l, int mid, int r) {
-        Integer[] help = new Integer[r - l + 1];
-        int i = 0;
-        // 指定两个指针：分别从两个子数组的左侧开始移动
-        int p1 = l;
-        int p2 = mid + 1;
-        while (p1 <= mid && p2 <= r) {
-            help[i++] = less(a[p1], a[p2]) ? a[p1++] : a[p2++];
-        }
-        while (p1 <= mid) {
-            help[i++] = a[p1++];
-        }
-        while (p2 <= r) {
-            help[i++] = a[p2++];
-        }
-
-        for (int k = 0; k < help.length; k++) {
-            a[l + k] = help[k];
-        }
-    }
 }
