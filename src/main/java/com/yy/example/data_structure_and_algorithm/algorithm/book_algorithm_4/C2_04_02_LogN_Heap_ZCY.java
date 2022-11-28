@@ -1,8 +1,7 @@
 package com.yy.example.data_structure_and_algorithm.algorithm.book_algorithm_4;
 
 /**
- * Description: 堆排序
- * 来自左程云算法视频
+ * Description: 堆排序 来自左程云算法视频
  * k从0开始
  * 所以：左子节点为 2k+1：右子节点为 2k+2；父节点为 (k-1)/2
  *

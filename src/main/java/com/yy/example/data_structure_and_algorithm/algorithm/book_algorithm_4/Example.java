@@ -17,10 +17,14 @@ public abstract class Example {
     /**
      * 含义：a 小于 b 吗
      * a > b: false; a < b: true;
-     * @param a
-     * @param b
+     * @param i
+     * @param j
      * @return
      */
+    public static boolean less(Comparable[] a, int i, int j) {
+        return a[i].compareTo(a[j]) < 0;
+    }
+
     public static boolean less(Comparable a, Comparable b) {
         return a.compareTo(b) < 0;
     }
@@ -40,7 +44,7 @@ public abstract class Example {
 
     public static boolean isSorted(Comparable[] a) {
         for (int i = 1; i < a.length; i++) {
-            if(less(a[i], a[i - 1])) {
+            if(less(a, i, i - 1)) {
                 return false;
             }
         }

@@ -1,10 +1,11 @@
 package com.yy.example.data_structure_and_algorithm.sort_8big;
 
 /**
- * Description: 荷兰国旗问题
+ * Description:
  * <pre>
- *   一个数组arr，一个数num，请把小于等于num的数放在数组的左边，等于num的数放在数组的中间，大于num的数放在数组的右边。
- *   要求空间复杂度O(1)，时间复杂度O(n)
+ *  一个数组arr，一个数num，请把小于等于num的数放在数组的左边，大于num的数放在数组的右边。
+ *  要求空间复杂度O(1)，时间复杂度O(n)
+ *
  * </pre>
  * NB.
  *
@@ -13,52 +14,40 @@ package com.yy.example.data_structure_and_algorithm.sort_8big;
  */
 public class P3_03_01_HeLan {
 
-    public static void main(String[] args) {
-        int[] array = new int[]{20, 60, 90, 80, 40, 60, 70, 10};
-        sort2(array, 60);
-        show(array);
-    }
-
+    /**
+     * https://static.kancloud.cn/mangomei/deepstudy/2762747
+     * https://github.com/three-body-zhangbeihai/java-summary/blob/master/%E7%AE%97%E6%B3%95%E5%92%8C%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/8.%E8%8D%B7%E5%85%B0%E5%9B%BD%E6%97%97%E9%97%AE%E9%A2%98.md
+     * @param array
+     * @param num
+     */
     private static void sort(int[] array, int num) {
-        int i = 0;
+        // 定义小于区域的下标，也可理解为区域的右边界指针
         int p1 = 0;
-        int p2 = array.length - 1;
-        while (i < p2){
-            if(array[i] < num){
-                exch(array, p1, i);
+        // i 为指针
+        for (int i = 0; i < array.length; i++) {
+            // 目标区域右移，i 指针右移
+            if (array[i] < num) {
+                exch(array, i, p1);
                 p1++;
-                i++;
-            }else if(array[i] > num) {
-                exch(array, p2, i);
-                p2--;
-            }else {
-                i++;
             }
-
-            System.out.print("i:" + i + " => ");
-            show(array);
-
         }
     }
 
-    /**
-     * 20 10 40 60 60 70 80 90
-     * @param arr
-     * @param num
-     */
-    public static void sort2(int arr[], int num) {
-        int left = -1, right = arr.length;
+    private static void sort2(int[] array, int num) {
         int i = 0;
-        while (i < right) {
-            if (arr[i] < num) {//如果被分析的数小于用来比较的数值，则把这个数与其指针left指向的下一个数值交换，因为指针指向的下一个值是被分析过的，所以交换后不需要分析直接i++
-                exch(arr, i++, ++left);
-            } else if (arr[i] > num) {
-                exch(arr, i, --right);//被交换过的数字没有被分析过，所以i指向不变
-            } else{
-                i++;//比较的两个数相等则直接跳向下一个
+        int j = array.length - 1;
+
+        while (i <= j) {
+            while (i < j && array[i] < num) {
+                i++;
             }
-            System.out.print("i:" + i + " => ");
-            show(arr);
+            while (j > i && array[j] > num) {
+                j--;
+            }
+            exch(array, i, j);
+            if (i >= j) {
+                break;
+            }
         }
     }
 
@@ -73,5 +62,11 @@ public class P3_03_01_HeLan {
             System.out.print(a[i] + " ");
         }
         System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] array = new int[]{20, 30, 90, 60, 40, 50, 70, 10};
+        sort(array, 60);
+        show(array);
     }
 }

@@ -1,12 +1,11 @@
 package com.yy.example.data_structure_and_algorithm.algorithm.book_algorithm_4;
 
 /**
- * Description: 堆排序
- * 来自算法4
+ * Description: 堆排序 来自算法4
  * k从1开始
  * 所以：左子节点为 2k：右子节点为 2k+1；父节点为 k/2
  *
- * NOTE: 此处 k 是从1开始的。从0开始的版本参加左程云算法部分 {@link C2_04_02_LogN_Heap_ZCY}
+ * NOTE: 此处 k 是从1开始的。从0开始的版本参考左程云算法部分 {@link C2_04_02_LogN_Heap_ZCY}
  *
  * <pre>
  * </pre>
@@ -40,19 +39,19 @@ public class C2_04_02_LogN_Heap extends Example {
      *
      * @param k 数组下标
      */
-    private void sink(Comparable[] a, int k, int n) {
+    private void sink(Comparable[] a, int k, int size) {
 
-        while (2 * k <= n) {
-            int tmp = k * 2;
-            if(tmp < n && less(a[tmp], a[tmp + 1])) {
-                tmp++;
+        while (2 * k <= size) {
+            int child = k * 2;
+            if(child < size && less(a[child], a[child + 1])) {
+                child++;
             }
             // 父节点小于子节点，则换
-            if(!less(a[k], a[tmp])) {
+            if(!less(a[k], a[child])) {
                 break;
             }
-            exch(a, k, tmp);
-            k = tmp;
+            exch(a, k, child);
+            k = child;
         }
     }
 

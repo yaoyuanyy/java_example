@@ -25,6 +25,7 @@ public class TopK {
     }
 
     /**
+     * 快速排序应用：
      * 使用快速选择排序实现
      * 求第 k 大的那个元素，相当于获取数组升序排序后第 array.len - k 个元素；
      * 这时，我们看看快排的逻辑：找到一个位置 p，使左边<=array[p]<=右边；
@@ -40,11 +41,11 @@ public class TopK {
         int hi = arr.length - 1;
         while (lo <= hi) {
             int p = partition(arr, lo, hi);
-            if(k2 > p) {
+            if (k2 > p) {
                 lo = p + 1;
-            }else if(k2 < p) {
+            } else if (k2 < p) {
                 hi = p - 1;
-            }else {
+            } else {
                 return arr[p];
             }
         }
@@ -53,6 +54,7 @@ public class TopK {
 
     /**
      * 找到一个位置，左侧 <= 位置元素值 <= 右侧
+     *
      * @param arr
      * @param lo
      * @param hi
@@ -71,7 +73,7 @@ public class TopK {
             while (j > lo && arr[j] > target) {
                 j--;
             }
-            if(i >= j) {
+            if (i >= j) {
                 break;
             }
             // 交换 i j 位置元素

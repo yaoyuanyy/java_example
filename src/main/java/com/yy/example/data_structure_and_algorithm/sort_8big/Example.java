@@ -25,6 +25,11 @@ public abstract class Example {
         return a.compareTo(b) < 0;
     }
 
+    public static boolean less(Comparable[] a, int i, int j) {
+        return a[i].compareTo(a[j]) < 0;
+    }
+
+
     public static void exch(Comparable[] a, int i, int j) {
         Comparable tmp = a[i];
         a[i] = a[j];

@@ -4,9 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 
 /**
- * Description:
+ * Description: 获取最大的 Top M
  * <pre>
- * 获取最大的 Top M
  * 所以使用小顶堆
  * </pre>
  * NB.

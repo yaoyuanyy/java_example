@@ -62,6 +62,7 @@ public class LC2_1_IsSearchBinaryTree {
         ResultData leftData = process(root.left);
         ResultData rightData = process(root.right);
 
+        // 左max < 父min && 右min > 父max
         boolean isSearch = true;
         if(null != leftData && (!leftData.isSearch || leftData.max >= root.val)) {
             isSearch = false;
