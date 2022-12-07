@@ -1,4 +1,4 @@
-package com.bjmashibing.system.io;
+package com.yy.example.io.mashibing.io;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -38,15 +38,17 @@ public class SocketMultiplexingSingleThreadv1 {
                 select()是啥意思：
                 1. select , poll : 其实是内核的select ( fd4 ) poll(fd4)
                 2. epoll : 其实是内核的 epoll_wait()
-                3. 头薮可以带时间：没有鬲扁：0 : 阻塞,有时间设置一个超时
+                3. 参数可以带时间：没有参数：0 : 阻塞；有时间设置一个超时
                 selector.wakeup() 结果返回。
                 */
+                // 问内核哪些路有事件了。epoll的话相当于调用了 epoll_wait
                 while (selector.select(500) > 0) {
+                    // 是从 jvm 空间把有事件的集合拷贝到 java 代码中
                     Set<SelectionKey> selectionKeys = selector.selectedKeys(); //返回的有状态的fd集合
                     Iterator<SelectionKey> iter = selectionKeys.iterator();
 
                     /**
-                    //so ,管你啥多路复用器，你呀只能给我状态，我还得一个一个的去处理他们的R/W。同步好辛苦！ ！ ！
+                    // so ,管你啥多路复用器，你呀只能给我状态，我还得一个一个的去处理他们的R/W。同步好辛苦！ ！ ！
                     // NIO 自己对着每一个fd调用系统调用，浪费资源，那么你看，这里是不是调用了一次select方法
                     // 幕兰,是不是很省力？
                     // 我前边可以强调过，socket : listen 通信R/W
@@ -64,7 +66,8 @@ public class SocketMultiplexingSingleThreadv1 {
                         } else if (key.isReadable()) {
                             readHandler(key);
                             // 在当前线程，这个方法可能会阻塞，如果阻塞了十年，其他的IO早就没电了。。O
-
+                            // 所以，为什么提出了 IO THREADS
+                            // redis 是不是用了 epoll，redis是不是有个 io threads 的概念，redis 是不是单线程的
                         }
                     }
                 }

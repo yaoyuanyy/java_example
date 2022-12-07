@@ -1,4 +1,4 @@
-package com.yy.example.data_structure_and_algorithm.again_20221026.leetcode.topic_5_dp.sequence;
+package com.yy.example.data_structure_and_algorithm.again_20221026.leetcode.topic_5_dp.lc0;
 
 /**
  * Description: 斐波那契数

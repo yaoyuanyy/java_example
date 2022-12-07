@@ -15,7 +15,7 @@ package com.yy.example.data_structure_and_algorithm.again_20221026.leetcode.topi
  * @author skyler_11@163.com
  * Created by on 10/26/22 at 9:55 AM
  */
-public class LC2_3_01ClimbStairs {
+public class LC2_3_ClimbStairs {
 
     /**
      * 根据题意，我们可以拿个具体的数画出爬楼梯的二叉树
@@ -91,7 +91,7 @@ public class LC2_3_01ClimbStairs {
     }
 
     public static void main(String[] args) {
-        int sum = new LC2_3_01ClimbStairs().climbStairs2(6);
+        int sum = new LC2_3_ClimbStairs().climbStairs2(6);
         System.out.println(sum);
     }
 }

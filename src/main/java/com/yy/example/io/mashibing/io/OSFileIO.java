@@ -1,6 +1,5 @@
-package com.bjmashibing.system.io;
+package com.yy.example.io.mashibing.io;
 
-import org.junit.Test;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -120,7 +119,6 @@ public class OSFileIO {
     }
 
 
-    @Test
     public  void whatByteBuffer(){
 
 //        ByteBuffer buffer = ByteBuffer.allocate(1024);

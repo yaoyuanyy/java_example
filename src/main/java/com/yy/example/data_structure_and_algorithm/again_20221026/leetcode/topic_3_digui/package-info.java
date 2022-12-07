@@ -12,6 +12,8 @@
  *
  *     非常好的讲递归的文章：https://leetcode.cn/circle/article/koSrVI/ 作者：https://leetcode.cn/u/gourderwa/ GourdErwa
  *
+ *     PS：[但凡遇到需要递归的问题，最好都画出递归树，这对你分析算法的复杂度，寻找算法低效的原因都有巨大帮助。](https://labuladong.github.io/algo/3/25/69/)
+ *     
  *     递归题：https://leetcode.cn/tag/recursion/problemset/ https://leetcode.cn/problemset/all/?topicSlugs=recursion
  *       21. 合并两个有序链表（多递推公式情况）simple
  *       206. 反转链表                     simple

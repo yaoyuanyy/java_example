@@ -1,13 +1,19 @@
 package com.yy.example.data_structure_and_algorithm.again_20221026.leetcode.topic_4_binary_tree;
 
 /**
- * Description: 二叉树的最大值
+ * Description: 数组的最大值
  *
  * @author skyler_11@163.com
  * Created by on 10/26/22 at 9:55 AM
  */
-public class LC6_1_MaxValue {
+public class LC6_2_MaxValueOfArray {
 
+    /**
+     * 递归实现
+     *
+     * @param root
+     * @return
+     */
     public int maxValue(TreeNode root) {
         return 0;
     }
@@ -32,7 +38,7 @@ public class LC6_1_MaxValue {
         root.left = node9;
         root.right = treeNode20;
 
-        int maxDepth = new LC6_1_MaxValue().maxValue(root);
+        int maxDepth = new LC6_2_MaxValueOfArray().maxValue(root);
         System.out.println(maxDepth);
     }
 }

@@ -14,7 +14,7 @@ package com.yy.example.data_structure_and_algorithm.again_20221026.leetcode.topi
  * @author skyler_11@163.com
  * Created by on 10/26/22 at 9:55 AM
  */
-public class LC2_4_01BeiBao {
+public class LC2_4_01BeiBaoBase {
 
     /**
      * 1. 确定状态
@@ -45,6 +45,9 @@ public class LC2_4_01BeiBao {
                     dp[i][w] = dp[i - 1][w];
                 }else {
                     System.out.println(i + " " + w);
+                    // 疑问：dp[i][remainW] 这里为什么是 i 而不是 i-1 呢？
+                    // 答案：完全背包中第 i 个物品是可以重复的，而 01背包中第 i 个物品是不能重复的
+                    // 所以，完全背包中是dp[i][remainW]，而 01背包中是dp[i-1][remainW]
                     dp[i][w] = Math.max(dp[i-1][remainW] + valArr[i-1] , dp[i-1][w]);
                 }
             }
@@ -60,7 +63,7 @@ public class LC2_4_01BeiBao {
     public static void main(String[] args) {
         int[] wArr = {2, 1, 3};
         int[] valArr = {4, 2, 3};
-        int sum = new LC2_4_01BeiBao().knapsack(3, wArr, valArr, 4);
+        int sum = new LC2_4_01BeiBaoBase().knapsack(3, wArr, valArr, 4);
         System.out.println(sum);
     }
 }

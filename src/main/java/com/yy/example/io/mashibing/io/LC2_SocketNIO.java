@@ -7,8 +7,16 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.LinkedList;
 
-public class SocketNIO {
+public class LC2_SocketNIO {
 
+    /**
+     * 缺点：虽然不阻塞了，但是要时刻拿所有的客户端去看看有没有客户端返回了数据
+     * 假如有 1000个客户端，只有一个返回了数据，那999个都白判断了
+     * 解决方法：多路复用器 select poll epoll 他们都是同步非阻塞io
+     * 同步的意思是得自己去内核取数据
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
         LinkedList<SocketChannel> clients = new LinkedList<>();
@@ -26,8 +34,6 @@ public class SocketNIO {
 //        StandardSocketOptions.SO_REUSEADDR
 
 
-
-
         while (true) {
             Thread.sleep(1000);
             SocketChannel client = ss.accept(); //不会阻塞 -1 NULL
@@ -40,6 +46,8 @@ public class SocketNIO {
                 System.out.println("client...port: " + port);
                 clients.add(client);
             }
+
+            // while 做两个事情，本行以上代码为接受客户端；本行代码以下为处理客户端的数据
 
             ByteBuffer buffer = ByteBuffer.allocateDirect(4096);  //可以在堆里   堆外
 

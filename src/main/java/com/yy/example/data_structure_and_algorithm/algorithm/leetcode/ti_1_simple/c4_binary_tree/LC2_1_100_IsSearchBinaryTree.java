@@ -22,7 +22,7 @@ import java.util.Stack;
  * @author skyler_11@163.com
  * Created by on 2022-04-10 at 08:20
  */
-public class LC2_1_IsSearchBinaryTree {
+public class LC2_1_100_IsSearchBinaryTree {
 
     /**
      * 使用二叉树题目递归套路
@@ -166,7 +166,7 @@ public class LC2_1_IsSearchBinaryTree {
 
 
     public static void main(String[] args) {
-        LC2_1_IsSearchBinaryTree searchErChaTree = new LC2_1_IsSearchBinaryTree();
+        LC2_1_100_IsSearchBinaryTree searchErChaTree = new LC2_1_100_IsSearchBinaryTree();
 
         /**
          *     10

@@ -1,4 +1,4 @@
-package com.yy.example.data_structure_and_algorithm.again_20221026.leetcode.topic_5_dp.sequence;
+package com.yy.example.data_structure_and_algorithm.again_20221026.leetcode.topic_5_dp.lc1_sequence;
 
 /**
  * Description: 最长回文子序列

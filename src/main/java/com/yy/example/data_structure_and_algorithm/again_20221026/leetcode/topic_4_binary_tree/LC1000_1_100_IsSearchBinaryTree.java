@@ -1,4 +1,4 @@
-package com.yy.example.data_structure_and_algorithm.algorithm.leetcode.ti_1_simple.c4_binary_tree;
+package com.yy.example.data_structure_and_algorithm.again_20221026.leetcode.topic_4_binary_tree;
 
 import java.util.Stack;
 
@@ -22,7 +22,7 @@ import java.util.Stack;
  * @author skyler_11@163.com
  * Created by on 2022-04-10 at 08:20
  */
-public class LC2_1_100_IsSearchBinaryTree {
+public class LC1000_1_100_IsSearchBinaryTree {
 
     /**
      * 使用二叉树题目递归套路
@@ -87,7 +87,8 @@ public class LC2_1_100_IsSearchBinaryTree {
 
     /**
      * 递归
-     *
+     * 限定以 root 为根的子树节点必须满足 min < root.val < max；min为左子树的最小值，max为右子树的最大值
+     * https://labuladong.github.io/algo/2/21/43/
      * @param root
      * @return
      */
@@ -96,16 +97,14 @@ public class LC2_1_100_IsSearchBinaryTree {
         return isValidBST(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
     }
 
-    private boolean isValidBST(TreeNode treeNode, int minValue, int maxValue) {
+    private boolean isValidBST(TreeNode treeNode, int minValueLeft, int maxValueRight) {
         if(null == treeNode) {
             return true;
         }
-
-        if(treeNode.val > maxValue || treeNode.val < minValue) {
+        if(treeNode.val > maxValueRight || treeNode.val < minValueLeft) {
             return false;
         }
-
-        return isValidBST(treeNode.left, minValue, treeNode.val) && isValidBST(treeNode.right, treeNode.val, maxValue);
+        return isValidBST(treeNode.left, minValueLeft, treeNode.val) && isValidBST(treeNode.right, treeNode.val, maxValueRight);
     }
 
     TreeNode pre;
@@ -166,7 +165,7 @@ public class LC2_1_100_IsSearchBinaryTree {
 
 
     public static void main(String[] args) {
-        LC2_1_100_IsSearchBinaryTree searchErChaTree = new LC2_1_100_IsSearchBinaryTree();
+        LC1000_1_100_IsSearchBinaryTree searchErChaTree = new LC1000_1_100_IsSearchBinaryTree();
 
         /**
          *     10

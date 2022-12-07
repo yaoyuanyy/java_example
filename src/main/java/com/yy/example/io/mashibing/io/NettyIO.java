@@ -1,4 +1,4 @@
-package com.bjmashibing.system.io;
+package com.yy.example.io.mashibing.io;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.ByteBuf;
