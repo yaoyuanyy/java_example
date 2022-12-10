@@ -1,6 +1,8 @@
 /**
  * Description: 数据结构 - 链表
  * <pre>
+ *  动态规划的意义：https://www.zhihu.com/question/23995189
+ *
  *  refer to
  *  1. https://leetcode.cn/leetbook/read/linked-list/x6ybqh/ 链表专题
  *  2. https://leetcode.cn/leetbook/read/top-interview-questions-easy/x2t7vj/ easy系列链表
