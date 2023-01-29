@@ -32,7 +32,6 @@
  *  完全背包题目：1449. 数位成本和为目标值的最大数字 322. 零钱兑换 518. 零钱兑换 II 279. 完全平方数
  *
  *  题库：https://leetcode.cn/tag/dynamic-programming/problemset/
- *  DP 路径问题：https://leetcode.cn/leetbook/detail/path-problems-in-dynamic-programming/
  *  背包问题题目：https://leetcode.cn/problems/coin-change/solution/by-flix-su7s/
  *
  *  背包问题讲解大牛：

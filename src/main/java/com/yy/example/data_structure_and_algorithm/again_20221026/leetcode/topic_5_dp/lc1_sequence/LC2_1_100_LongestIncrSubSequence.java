@@ -14,7 +14,7 @@ import java.util.Arrays;
  * @author skyler_11@163.com
  * Created by on 10/26/22 at 9:55 AM
  */
-public class LC2_1_LongestIncrSubSequence {
+public class LC2_1_100_LongestIncrSubSequence {
 
     /**
      * 迭代 - 自底向上
@@ -58,7 +58,7 @@ public class LC2_1_LongestIncrSubSequence {
         // 10,9,2,5,3,7,101,18 - 4
         // 0,1,0,3,2,3 - 4
         int[] coins = new int[]{0,1,0,3,2,3};
-        int sum = new LC2_1_LongestIncrSubSequence().lengthOfLIS(coins);
+        int sum = new LC2_1_100_LongestIncrSubSequence().lengthOfLIS(coins);
         System.out.println(sum);
     }
 }

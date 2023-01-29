@@ -68,7 +68,8 @@ public class LC2_6_1_BuySellStock1 {
      * 一次遍历
      */
     public int maxProfit2(int[] prices) {
-        // 定义一个最小值，和数组的每个元素比较大小，保持最小值
+        /// ****** 求最大 最小题型时，特别是遇到数组时，可以考虑定义一个数组以外的值 ***
+        // 定义一个最小值(这个最小值不是数组中的)，和数组的每个元素比较大小，保持最小值
         // 数组指针右移，如果当前值大于最小值，求差值，与最大值比较，保持最大值
         int minValue = Integer.MAX_VALUE;
         int maxDuration = 0;

@@ -34,7 +34,7 @@ public class LC2_2_MaxSumSubArray {
      * 2. 确定状态：所谓状态为原问题与子问题之间变化的变量。也可理解为如何定义子问题。dp[i] 与 dp[i-1] 的关系
      * 3. 确定选择：「状态」变化的「行为」。dp[i] 与 dp[i-1] 之间如何变化的
      * 4. 确定状态转移方程：如上定义
-     * 5. 确定状态转移方程的数组形式：dp[i] = max(dp[i], nums[i] + dp[i-1])，条件：nums[i] > 0
+     * 5. 确定状态转移方程的数组形式：dp[i] = max(nums[i], nums[i] + dp[i-1])
      * @param nums
      * @return
      */
@@ -43,7 +43,12 @@ public class LC2_2_MaxSumSubArray {
         // base case
         dp[0] = nums[0];
         for (int i = 1; i < nums.length; i++) {
-            dp[i] = Math.max(nums[i], nums[i] + dp[i-1]);
+            if (dp[i - 1] > 0) {
+                dp[i] = dp[i - 1] + nums[i];
+            } else {
+                dp[i] = nums[i];
+            }
+//            dp[i] = Math.max(nums[i], nums[i] + dp[i-1]);
         }
 
         int max = Integer.MIN_VALUE;
