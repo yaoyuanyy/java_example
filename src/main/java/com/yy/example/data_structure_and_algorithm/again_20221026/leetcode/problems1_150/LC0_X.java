@@ -10,7 +10,7 @@ package com.yy.example.data_structure_and_algorithm.again_20221026.leetcode.prob
  * @author skyler_11@163.com
  * Created by on 10/26/22 at 9:55 AM
  */
-public class LC1_X {
+public class LC0_X {
 
     /**
      * @param nums
@@ -23,7 +23,7 @@ public class LC1_X {
 
     public static void main(String[] args) {
         int[] arr = new int[]{1, 2, 3};
-        int targetIndex = new LC1_X().pivotIndex(arr);
+        int targetIndex = new LC0_X().pivotIndex(arr);
         System.out.println("targetIndex:" + targetIndex);
     }
 }

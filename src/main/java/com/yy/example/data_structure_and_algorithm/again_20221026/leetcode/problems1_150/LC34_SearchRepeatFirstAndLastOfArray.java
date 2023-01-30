@@ -37,7 +37,7 @@ public class LC34_SearchRepeatFirstAndLastOfArray {
     }
 
     /**
-     * 搜索左侧边界:找到元素第一次出现的位置
+     * 搜索左侧边界:找到元素第一次出现的位置 - 字节一面面试题20221026
      *
      * @param sortedNums
      * @return
@@ -91,7 +91,7 @@ public class LC34_SearchRepeatFirstAndLastOfArray {
                 left = mid + 1;
             }
         }
-        // 当 target 大于所有元素时，条件成立
+        // 当 target 小于所有元素时，条件成立
         if (right < 0) {
             return -1;
         }
