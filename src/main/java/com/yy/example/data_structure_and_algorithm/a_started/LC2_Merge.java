@@ -54,6 +54,7 @@ public class LC2_Merge extends Example {
      * 先递归，后归并
      * 每次递归都是等分左右数组
      * https://labuladong.github.io/algo/2/21/41/
+     *
      * @param arr
      * @param lo
      * @param hi
@@ -72,9 +73,10 @@ public class LC2_Merge extends Example {
      * 合并数组，将两个自数组合并成有序的一个，由于我们是一个数组，所以需要定义个临时数组
      * 使用双指针技巧，一个从 lo -> mid；一个从 mid + 1 -> hi
      * 所以，两个指针是同向的，从左向右
-     *
+     * <p>
      * 为了和快速排序一起关联记忆，我用的是 while 条件，这个和左神的视频一致，算法4 用的是 for 条件
      * 左神：https://www.bilibili.com/video/BV1kQ4y1h7ok?p=3&vd_source=c3e9801497e408c0e02a3ddb59c2d64e 35分00秒
+     *
      * @param arr
      * @param lo
      * @param hi
@@ -106,7 +108,6 @@ public class LC2_Merge extends Example {
             arr[position++] = temp[j++];
         }
     }
-
 
     public static void main(String[] args) {
         LC2_Merge merge = new LC2_Merge();
