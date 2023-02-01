@@ -1,4 +1,6 @@
-package com.yy.example.data_structure_and_algorithm.sort_8big;
+package com.yy.example.data_structure_and_algorithm.a_started;
+
+import com.yy.example.data_structure_and_algorithm.sort_8big.Example;
 
 /**
  * Description: 归并排序
@@ -9,9 +11,9 @@ package com.yy.example.data_structure_and_algorithm.sort_8big;
  * NB.
  *
  * @author skyler_11@163.com
- * Created by on 2021-09-28 at 10:24
+ * Created by on 1/2/23 at 10:26 AM
  */
-public class P3_02_Merge extends Example {
+public class LC2_Merge extends Example {
 
     int[] temp = null;
 
@@ -107,7 +109,7 @@ public class P3_02_Merge extends Example {
 
 
     public static void main(String[] args) {
-        P3_02_Merge merge = new P3_02_Merge();
+        LC2_Merge merge = new LC2_Merge();
         Integer[] array = new Integer[]{20, 30, 90, 60, 40, 50, 70, 10};
         merge.sort(array);
         show(array);

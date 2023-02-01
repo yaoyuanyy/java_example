@@ -30,9 +30,9 @@ public class P3_03_Quick extends Example {
         if (lo >= hi) {
             return;
         }
-        int p = partition(arr, lo, hi);
-        sort(arr, lo, p - 1);
-        sort(arr, p + 1, hi);
+        int position = partition(arr, lo, hi);
+        sort(arr, lo, position - 1);
+        sort(arr, position + 1, hi);
     }
 
     /**
@@ -50,11 +50,11 @@ public class P3_03_Quick extends Example {
         int i = lo + 1;
         int j = hi;
         while (i <= j) {
-            // 找到大于 target 位置的元素位置
+            // 找到大于 target 位置的位置
             while (i < hi && less(arr[i], target)) {
                 i++;
             }
-            // 找到小于 target 位置的元素位置
+            // 找到小于 target 位置的位置
             while (j > lo && less(target, arr[j])) {
                 j--;
             }
