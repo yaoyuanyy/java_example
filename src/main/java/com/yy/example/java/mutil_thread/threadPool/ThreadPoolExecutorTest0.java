@@ -146,7 +146,8 @@ public class ThreadPoolExecutorTest0 {
         System.out.println("workerCountOf(100): " + workerCountOf(100) + " -> toBinaryString: " + Integer.toBinaryString(workerCountOf(100)) + " -> Binary size: " + Integer.toBinaryString(workerCountOf(100)).length());
         System.out.println("-536870911: " + workerCountOf(-536870911) + " -> toBinaryString: " + Integer.toBinaryString(-536870911) + " -> Binary size: " + Integer.toBinaryString(-536870911).length());
 
-        System.out.println("-136870911 & -536870912:" + (-136870911 & -536870912));
+        System.out.println("536870911 | -536870912:" + (536870911 | -536870912));
+        System.out.println("ctlOf(0,-536870912):" + ctlOf(0,-536870912));
         System.out.println("3 | 2 = " + (3 | 2));
         System.out.println("5 | 2 = " + (5 | 2));
         System.out.println();

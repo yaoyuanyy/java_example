@@ -45,7 +45,8 @@ public class LC2_LongestHuiWenSubString {
                 // 这是一个优化的点，对核心思路没有影响
                 if(j - i > len && isPalindrome(s, i, j)) {
                     begin = i;
-                    len = Math.max(len, j - i);
+                    len = j - i;
+//                  len = Math.max(len, j - i);
                 }
             }
         }
@@ -84,7 +85,7 @@ public class LC2_LongestHuiWenSubString {
         int maxLen = 0;
         int start = 0;
         char[] chars = s.toCharArray();
-        for (int i = 0; i < chars.length - 1; i++) {
+        for (int i = 0; i < chars.length; i++) {
             // 因为中心位置可能是一个字符，也可能是两个相邻的字符，即奇偶子串，所以，每个位置都要看奇偶的情况
             int len = palindrome(chars, i, i); // 奇数
             int len2 = palindrome(chars, i, i + 1); // 偶数

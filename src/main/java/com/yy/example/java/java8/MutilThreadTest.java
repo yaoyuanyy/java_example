@@ -23,7 +23,7 @@ public class MutilThreadTest {
     public static void main(String[] args) throws InterruptedException, ExecutionException, TimeoutException {
         MutilThreadTest test = new MutilThreadTest();
 
-        List<PersonBo> personList = test.personService(1000);
+        List<PersonBo> personList = test.personService(2);
 
         // 方法一 76ms
 //        long start1 = System.currentTimeMillis();

@@ -23,7 +23,9 @@ public class LC0_X {
 
     public static void main(String[] args) {
         int[] arr = new int[]{1, 2, 3};
-        int targetIndex = new LC0_X().pivotIndex(arr);
-        System.out.println("targetIndex:" + targetIndex);
+        int res = new LC0_X().pivotIndex(arr);
+        System.out.println("res:" + res);
+        
+
     }
 }
