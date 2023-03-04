@@ -17,17 +17,16 @@ public class DelayQueueTest {
      * @param args
      */
     public static void main(String[] args) {
-        DelayQueue<DelayedElement>  dq=new DelayQueue<>();
+        DelayQueue<DelayedElement> delayQueue =new DelayQueue<>();
         long now = System.currentTimeMillis();
 
         System.out.println("current time in ms: " + now);
         DelayedElement ob1=new DelayedElement("e1", now + 1000*60*10);
-        DelayedElement ob2=new DelayedElement("e2", now + 5000*60*20);
-        DelayedElement ob3=new DelayedElement("e3", now + 1500*60*20);
-
-        dq.add(ob1);
-        dq.add(ob2);
-        dq.add(ob3);
+        DelayedElement ob2=new DelayedElement("e2", now + 1000*60*20);
+        DelayedElement ob3=new DelayedElement("e3", now + 1000*60*10);
+        delayQueue.offer(ob1);
+        delayQueue.offer(ob2);
+        delayQueue.offer(ob3);
 
         try {
             Thread.sleep(1);
@@ -36,9 +35,9 @@ public class DelayQueueTest {
         }
 
 
-        while(dq.size() > 0){
+        while(delayQueue.size() > 0){
             try {
-                DelayedElement e = dq.take();
+                DelayedElement e = delayQueue.take();
                 System.out.println("current time in ms: " + System.currentTimeMillis() + ", element:" + e.name);
 
             } catch (InterruptedException e) {
@@ -56,6 +55,7 @@ public class DelayQueueTest {
             this.name = name;
             this.time = time;
         }
+        // 返回值是正数：当前对象大于传入参数(指定对象)
         @Override
         public int compareTo(Delayed o) {
             if(o == this) {

@@ -39,9 +39,12 @@ public class LinkedBlockingQueueTest {
                     String value2 = queue.take();
                     String value3 = queue.take();
                     String value4 = queue.take();
-
-                    System.out.printf("%10s\n", value1);
-                    System.out.format("%5s", value1);
+                    System.out.println("value1:" + value1);
+                    System.out.println("value2:" + value2);
+                    System.out.println("value3:" + value3);
+                    System.out.println("value4:" + value4);
+//                    System.out.printf("%10s\n", value1);
+//                    System.out.format("%5s", value2);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
