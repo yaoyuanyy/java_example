@@ -1,12 +1,9 @@
 package com.yy.example.java.mutil_thread.threadPool.with_timeout;
 
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
-import sun.jvm.hotspot.debugger.cdbg.LoadObjectComparator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.List;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.RejectedExecutionHandler;
 import java.util.concurrent.ThreadPoolExecutor;
