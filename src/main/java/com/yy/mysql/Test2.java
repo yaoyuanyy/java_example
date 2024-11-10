@@ -1,13 +1,8 @@
 package com.yy.mysql;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.sql.*;
-import java.util.Map;
 
 public class Test2 {
     public static void main(String args[]) throws NumberFormatException, InterruptedException, ClassNotFoundException {
@@ -17,7 +12,7 @@ public class Test2 {
             System.out.println("开始执行---");
             int i = System.in.read();
             System.out.println("read input result:" + i);
-        }catch (Exception exception){
+        } catch (Exception exception) {
             System.err.println("执行异常---");
         }
 
@@ -27,9 +22,9 @@ public class Test2 {
         String url = args[0];
         String user = args[1];
         String pass = args[2];
-        String sql = args [3];
+        String sql = args[3];
         // sql 参数
-        String interval = args [4];
+        String interval = args[4];
 
         try {
             Connection conn = DriverManager.getConnection(url, user, pass);
@@ -47,10 +42,10 @@ public class Test2 {
                 stmt2.setString(1, interval);
                 rs = stmt2.executeQuery();
 
-                Thread. sleep(60000);
+                Thread.sleep(60000);
 
-                while (rs. next()) {
-                    System.out. println("fine");
+                while (rs.next()) {
+                    System.out.println("fine");
                 }
                 rs.close();
                 stmt2.close();
@@ -68,25 +63,5 @@ public class Test2 {
         System.out.println(runtimeMXBean.getVmVendor());
         String pid = runtimeMXBean.getName().split("@")[0];
         System.out.println("Pid is:" + pid);
-
-        Map<String, String> map = runtimeMXBean.getSystemProperties();
-        map.forEach((k,v) -> System.out.println("system properties:" + k + " => " + v));
-    }
-
-    public static int getPort(String pid) {
-        String filePath = "/proc/" + pid + "/net/tcp";
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))){
-            String line;
-            while ((line = reader.readLine()) != null) {
-                System.out.println("line:" + line);
-            }
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        return 0;
     }
 }

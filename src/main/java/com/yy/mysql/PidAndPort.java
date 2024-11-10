@@ -1,10 +1,9 @@
 package com.yy.mysql;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
+import java.util.Map;
 
 public class PidAndPort {
     public static void main(String[] args) {
@@ -25,9 +24,6 @@ public class PidAndPort {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-//        Map<String, String> map = runtimeMXBean.getSystemProperties();
-//        map.forEach((k,v) -> System.out.println("system properties:" + k + " => " + v));
     }
 
     /**
@@ -57,5 +53,28 @@ public class PidAndPort {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static int getPort2(String pid) {
+        String filePath = "/proc/" + pid + "/net/tcp";
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))){
+            String line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println("line:" + line);
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        return 0;
+    }
+
+    public void outSystemProperties(){
+        RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+        Map<String, String> map = runtimeMXBean.getSystemProperties();
+        map.forEach((k,v) -> System.out.println("system properties:" + k + " => " + v));
     }
 }
