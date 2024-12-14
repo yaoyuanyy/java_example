@@ -1,4 +1,4 @@
-package com.yy.mysql;
+package com.yy.mysql_manual;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;

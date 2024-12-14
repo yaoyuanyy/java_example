@@ -1,9 +1,7 @@
-package com.yy;
+package com.yy.util;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.yy.example.data_structure_and_algorithm.algorithm.book_algorithm_4.C2_04_01_TopM;
 import org.apache.commons.io.FileUtils;
 
 import java.io.BufferedReader;
@@ -17,7 +15,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-public class ReadFile {
+public class ReadFileUtil {
     public static void main(String[] args) throws Exception {
         String path = getFilePath();
 //        getDataWithBufferedReader(path);
@@ -38,7 +36,7 @@ public class ReadFile {
     }
     public static String getFilePath() throws Exception {
         // 读取一个文件：classpath下的文件
-        String classPath = ReadFile.class.getResource("/").getPath();
+        String classPath = ReadFileUtil.class.getResource("/").getPath();
         String resource = "common/data.txt";
         String path = classPath + resource;
         return path;
@@ -46,7 +44,7 @@ public class ReadFile {
 
     public static String getFilePathWithArray() throws Exception {
         // 读取一个文件：classpath下的文件
-        String classPath = ReadFile.class.getResource("/").getPath();
+        String classPath = ReadFileUtil.class.getResource("/").getPath();
         String resource = "common/dataWithArray.txt";
         String path = classPath + resource;
         return path;

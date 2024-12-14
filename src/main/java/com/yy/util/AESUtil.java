@@ -13,7 +13,7 @@ import java.security.SecureRandom;
  * NB.
  * Created by skyler on 2018/7/9 at 下午12:23
  */
-public class Test {
+public class AESUtil {
 
     public static String encrypt(String seed, String content)
             throws Exception {

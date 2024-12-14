@@ -1,10 +1,10 @@
-package com.yy.mysql;
+package com.yy.mysql_manual;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.sql.*;
 
-public class Test {
+public class Test2 {
     public static void main(String args[]) throws NumberFormatException, InterruptedException, ClassNotFoundException {
         try {
             outPutPid();
@@ -12,18 +12,19 @@ public class Test {
             System.out.println("开始执行---");
             int i = System.in.read();
             System.out.println("read input result:" + i);
-        }catch (Exception exception){
+        } catch (Exception exception) {
             System.err.println("执行异常---");
         }
 
+        System.out.println("开始执行---");
         Class.forName("com.mysql.jdbc.Driver");
 
         String url = args[0];
         String user = args[1];
         String pass = args[2];
-        String sql = args [3];
+        String sql = args[3];
         // sql 参数
-        String interval = args [4];
+        String interval = args[4];
 
         try {
             Connection conn = DriverManager.getConnection(url, user, pass);
@@ -41,8 +42,10 @@ public class Test {
                 stmt2.setString(1, interval);
                 rs = stmt2.executeQuery();
 
-                while (rs. next()) {
-                    System.out. println("fine");
+                Thread.sleep(60000);
+
+                while (rs.next()) {
+                    System.out.println("fine");
                 }
                 rs.close();
                 stmt2.close();
